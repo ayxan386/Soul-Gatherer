@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxisRaw("Vertical") != 0)
         {
             cc.SimpleMove(transform.forward * (speed * Input.GetAxisRaw("Vertical")));
-            if (Random.value >= stepFrequency) playerEffectSource.PlayOneShot(footSteps);
+            // if (Random.value >= stepFrequency) playerEffectSource.PlayOneShot(footSteps);
         }
     }
 

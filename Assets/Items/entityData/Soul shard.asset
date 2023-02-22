@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e72f72bbc9473ab8a62f7f371a2f2c, type: 3}
-  m_Name: TestEnt1 3
+  m_Name: Soul shard
   m_EditorClassIdentifier: 
-  name: World
+  name: Sould shard

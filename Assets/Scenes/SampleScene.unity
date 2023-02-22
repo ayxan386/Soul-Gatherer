@@ -1824,6 +1824,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5319608052755097235, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: interactionBehaviors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319608052755097235, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: interactionBehaviors.Array.data[2]
+      value: 
+      objectReference: {fileID: 5319608051420960661}
     - target: {fileID: 5319608052755097449, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
       propertyPath: m_Name

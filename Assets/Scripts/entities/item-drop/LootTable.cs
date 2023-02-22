@@ -33,6 +33,15 @@ public class LootTable : ScriptableObject
         item.quantity = Random.Range(item.quantityRange.x, item.quantityRange.y);
         return item;
     }
+
+    public void ResetTable()
+    {
+        foreach (var item in items)
+        {
+            item.quantity = 0;
+            item.alreadyObtained = false;
+        }
+    }
 }
 
 [Serializable]
