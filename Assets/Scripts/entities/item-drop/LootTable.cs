@@ -13,14 +13,20 @@ public class LootTable : ScriptableObject
     {
         int currentIndex = 0;
         var item = items[currentIndex];
+        int iterationCount = 0;
         while (roll > 0)
         {
-            if (item.canGetMultipleTimes ^ item.alreadyObtained)
+            item = items[currentIndex];
+            if ((item.alreadyObtained && item.canGetMultipleTimes)
+                || !item.alreadyObtained)
             {
                 roll -= item.dropChance;
             }
 
+            iterationCount++;
             currentIndex = (currentIndex + 1) % items.Count;
+
+            if (iterationCount > 99) break;
         }
 
         item.alreadyObtained = true;

@@ -7,9 +7,10 @@ public class ItemDropBehavior : ItemInteractionBehavior
     [SerializeField] private bool useRange;
     [SerializeField] private Vector2Int countRange;
 
+    [ContextMenu("Get items")]
     public override void Interact(InteractionPassData data)
     {
-        // if(data.WasInteractedBefore) return;
+        if(data.WasInteractedBefore) return;
         var count = numberOfItems;
         if (useRange)
         {

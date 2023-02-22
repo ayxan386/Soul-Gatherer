@@ -32,6 +32,7 @@ public abstract class ItemInteractionBehavior : MonoBehaviour
     public float DelayAfter;
     public bool Complete;
 
+    [ContextMenu("Get items")]
     public abstract void Interact(InteractionPassData data);
 }
 
