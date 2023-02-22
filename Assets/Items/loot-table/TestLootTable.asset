@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0eb77cfa247c99192e7921567c067, type: 3}
+  m_Name: TestLootTable
+  m_EditorClassIdentifier: 
+  items:
+  - entity: {fileID: 11400000, guid: e7ffff3e1a9b11a4f9f4ac634742f057, type: 2}
+    dropChance: 0.612
+    quantity: 0
+    quantityRange: {x: 3, y: 7}
+    canGetMultipleTimes: 0
+    alreadyObtained: 0
+  - entity: {fileID: 11400000, guid: d5f5466a8072b1643b0a4672fa3a7229, type: 2}
+    dropChance: 0.194
+    quantity: 0
+    quantityRange: {x: 1, y: 2}
+    canGetMultipleTimes: 1
+    alreadyObtained: 0
+  - entity: {fileID: 11400000, guid: 9c5d9d854aae9234eb06111dc0a79164, type: 2}
+    dropChance: 0.928
+    quantity: 0
+    quantityRange: {x: 1, y: 3}
+    canGetMultipleTimes: 1
+    alreadyObtained: 0
