@@ -10,8 +10,8 @@ public class InteractableItem : MonoBehaviour
     [ContextMenu("Interact")]
     public void Interact()
     {
-        print("Interacting");
         StartCoroutine(Interaction(new InteractionPassData(wasInteracted)));
+        wasInteracted = true;
     }
 
     private IEnumerator Interaction(InteractionPassData data)
