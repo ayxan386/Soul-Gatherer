@@ -9,6 +9,7 @@ public class ChestController : ItemInteractionBehavior
 
     public override void Interact(InteractionPassData data)
     {
+        if (data.WasInteractedBefore) return;
         StartCoroutine(OpenLid());
     }
 
