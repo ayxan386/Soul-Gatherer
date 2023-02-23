@@ -10,6 +10,23 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
     private List<ObtainedEntity> obtainedEntities;
 
+    private void Start()
+    {
+        EventStore.Instance.OnEntityObtainedClick += OnOnEntityObtainedClick;
+    }
+
+    private void OnDisable()
+    {
+        EventStore.Instance.OnEntityObtainedClick -= OnOnEntityObtainedClick;
+    }
+
+    private void OnOnEntityObtainedClick(object sender, ObtainedEntity e)
+    {
+        print("TODO add to the inventory...");
+        var index = obtainedEntities.FindIndex((temp) => temp.data.id == e.data.id);
+        obtainedEntities.RemoveAt(index);
+    }
+
     [ContextMenu("Get items")]
     public override void Interact(InteractionPassData data)
     {
@@ -25,7 +42,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
     {
         foreach (var entity in obtainedEntities)
         {
-            print(entity.data.name + " " + entity.count);
+            EventStore.Instance.PublishEntityObtainedDisplay(entity);
         }
     }
 
@@ -42,7 +59,8 @@ public class ItemDropBehavior : ItemInteractionBehavior
         for (int i = 0; i < count; i++)
         {
             var item = lootTable.GetItem(Random.value);
-            obtainedEntities.Add(new ObtainedEntity(item));
+            var obtainedEntity = new ObtainedEntity(item);
+            obtainedEntities.Add(obtainedEntity);
         }
 
         lootTable.ResetTable();
