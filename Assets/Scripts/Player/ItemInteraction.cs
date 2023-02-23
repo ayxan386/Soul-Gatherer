@@ -13,6 +13,7 @@ public class ItemInteraction : MonoBehaviour
 
     void Update()
     {
+        if (GlobalStateManager.Instance.CurrentState != GameState.Running) return;
         if (Physics.Raycast(origin.position, direction.forward, out RaycastHit hit, reachDistance, interactionLayer))
         {
             if (hit.collider.TryGetComponent(out InteractableItem item))

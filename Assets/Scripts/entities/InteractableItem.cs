@@ -6,10 +6,14 @@ public class InteractableItem : MonoBehaviour
 {
     [SerializeField] protected List<ItemInteractionBehavior> interactionBehaviors;
     protected bool wasInteracted;
+    private bool inProgress;
 
     [ContextMenu("Interact")]
     public void Interact()
     {
+        if (inProgress) return;
+        print("Interacting");
+        inProgress = true;
         StartCoroutine(Interaction(new InteractionPassData(wasInteracted)));
         wasInteracted = true;
     }
@@ -23,6 +27,8 @@ public class InteractableItem : MonoBehaviour
             yield return new WaitUntil(() => behavior.Complete);
             yield return new WaitForSeconds(behavior.DelayAfter);
         }
+
+        inProgress = false;
     }
 }
 
