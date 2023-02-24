@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class BasicAbilityController : MonoBehaviour
+public class PlayerProjectileAbilityController : MonoBehaviour
 {
-    [SerializeField] private BasicAbility basicAbilityDetails;
+    [FormerlySerializedAs("basicAbilityDetails")] [SerializeField] private ProjectileAbility projectileAbilityDetails;
     [SerializeField] private Transform launchPoint;
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioClip launchSound;
@@ -15,13 +16,13 @@ public class BasicAbilityController : MonoBehaviour
             yield return new WaitUntil(() => GlobalStateManager.Instance.CurrentState == GameState.Running);
             yield return new WaitUntil(() => Input.GetButton("Fire1"));
 
-            basicAbilityDetails.LaunchAttack(launchPoint);
+            projectileAbilityDetails.LaunchAttack(launchPoint);
             if (launchSound && soundSource)
             {
                 soundSource.PlayOneShot(launchSound);
             }
 
-            yield return new WaitForSeconds(basicAbilityDetails.GetCooldown());
+            yield return new WaitForSeconds(projectileAbilityDetails.GetCooldown());
         }
     }
 }
