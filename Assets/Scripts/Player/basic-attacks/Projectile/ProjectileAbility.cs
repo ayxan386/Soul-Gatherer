@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ProjectileAbility : MonoBehaviour
 {
-    [SerializeField] private ProjectileAbilityApplier attackPrefab;
+    [SerializeField] private BaseProjectileAbility attackPrefab;
     [SerializeField] private float cooldown;
     [SerializeField] private ProjectileParams projectileParams;
 
@@ -32,7 +32,7 @@ public class ProjectileParams
     public LayerMask collisionMask;
 }
 
-public abstract class ProjectileAbilityApplier : MonoBehaviour
+public abstract class BaseProjectileAbility : MonoBehaviour
 {
     public abstract void ApplyParams(ProjectileParams details);
 }

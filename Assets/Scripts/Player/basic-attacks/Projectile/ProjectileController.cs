@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ProjectileController : ProjectileAbilityApplier
+public class ProjectileController : BaseProjectileAbility
 {
     private Rigidbody rb;
     private ProjectileParams details;
@@ -23,7 +23,6 @@ public class ProjectileController : ProjectileAbilityApplier
         var colliders = Physics.OverlapSphere(transform.position, details.radius, details.collisionMask);
         if (colliders.Length > 0)
         {
-            print("Collided with stuff");
             if (details.isExplosive)
             {
                 var affectedEnt =

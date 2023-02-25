@@ -8,7 +8,8 @@ public class PolygonMeshGenerator : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float innerRadius;
     [SerializeField] private float height;
-    [SerializeField] private MeshFilter walls;
+    [SerializeField] [Range(0, 1f)] private float angleFraction;
+    [SerializeField] private float yRotationRadians;
     private Mesh mesh;
 
     void Start()
@@ -17,13 +18,20 @@ public class PolygonMeshGenerator : MonoBehaviour
         UpdateMesh();
     }
 
+    public void SetParams(AOEParams par)
+    {
+        radius = innerRadius + par.thickness;
+        height = par.height;
+        angleFraction = par.converageFraction;
+    }
+
     private Vector3[] GenerateVertices(int sides, float radi, float yOffset = 0)
     {
         var res = new Vector3[sides];
-        var angleStep = 2 * Mathf.PI / sides;
+        var angleStep = 2 * Mathf.PI / sides * angleFraction;
         for (int i = 0; i < sides; i++)
         {
-            var angle = i * angleStep;
+            var angle = i * angleStep + yRotationRadians;
             res[i] = new Vector3(Mathf.Cos(angle) * radi, yOffset, Mathf.Sin(angle) * radi);
         }
 
@@ -49,12 +57,12 @@ public class PolygonMeshGenerator : MonoBehaviour
             .ToArray();
         var triangleList = new List<int>();
 
-        var upperIndex = 2 * numberOfSides;
+        var upperConversion = 2 * numberOfSides;
         for (int i = 0; i < outerVertices.Length; i++)
         {
             var neighbourIndex = (i + 1) % numberOfSides;
-            var upperInnerNeigh = neighbourIndex + upperIndex + numberOfSides; 
-            var upper = i + upperIndex;
+            var upperInnerNeigh = neighbourIndex + upperConversion + numberOfSides;
+            var upper = i + upperConversion;
             var inner = i + numberOfSides;
 
             triangleList.Add(i);
@@ -66,7 +74,7 @@ public class PolygonMeshGenerator : MonoBehaviour
             triangleList.Add(neighbourIndex);
 
             //Top part
-            var upperNeig = neighbourIndex + upperIndex;
+            var upperNeig = neighbourIndex + upperConversion;
             var upperInner = upper + numberOfSides;
 
             triangleList.Add(upperInner);
@@ -75,6 +83,14 @@ public class PolygonMeshGenerator : MonoBehaviour
 
             triangleList.Add(numberOfSides + upperNeig);
             triangleList.Add(upperInner);
+            triangleList.Add(upperNeig);
+
+            triangleList.Add(upper);
+            triangleList.Add(upperInner);
+            triangleList.Add(upperNeig);
+
+            triangleList.Add(upperInner);
+            triangleList.Add(numberOfSides + upperNeig);
             triangleList.Add(upperNeig);
 
             // Outer Walls
@@ -96,11 +112,31 @@ public class PolygonMeshGenerator : MonoBehaviour
             triangleList.Add(neighbourIndex + numberOfSides);
         }
 
+        //Start side
+        triangleList.Add(0);
+        triangleList.Add(numberOfSides);
+        triangleList.Add(numberOfSides + upperConversion);
+
+        triangleList.Add(upperConversion);
+        triangleList.Add(0);
+        triangleList.Add(numberOfSides + upperConversion);
+
+        //End side
+        triangleList.Add(numberOfSides - 1 + numberOfSides);
+        triangleList.Add(numberOfSides - 1);
+        triangleList.Add(numberOfSides - 1 + numberOfSides + upperConversion);
+
+        triangleList.Add(numberOfSides - 1);
+        triangleList.Add(numberOfSides - 1 + upperConversion);
+        triangleList.Add(numberOfSides - 1 + upperConversion + numberOfSides);
+
         mesh.Clear();
         mesh.name = "DynamicPolygonMesh";
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangleList.ToArray();
         mesh.RecalculateNormals();
         GetComponent<MeshFilter>().mesh = mesh;
+        Destroy(gameObject.GetComponent<MeshCollider>());
+        gameObject.AddComponent(typeof(MeshCollider));
     }
 }
