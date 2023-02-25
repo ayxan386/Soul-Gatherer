@@ -1,21 +1,20 @@
 using UnityEngine;
 
-public class AOEAbilityController : BaseAOEAbility
+public class AOEAbilityController : BaseParamAcceptingEntity
 {
     [SerializeField] private PolygonMeshGenerator meshGenerator;
     private AOEParams details;
     private MeshCollider coll;
 
-    public override void ApplyParams(AOEParams details)
+    public override void ApplyParams(AbilityParam generalParam)
     {
-        this.details = details;
-        meshGenerator.SetParams(this.details);
+        details = generalParam as AOEParams;
+        meshGenerator.SetParams(details);
         meshGenerator.UpdateMesh();
-        
         Destroy(gameObject, details.lifespan);
     }
 
-    public AOEParams GetParams()
+    public override AbilityParam GetParams()
     {
         return details;
     }

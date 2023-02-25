@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AdjustableMobController : MonoBehaviour
 {
-    // [SerializeField] private Transform areaCenter;
     [Header("Player detection")] [SerializeField]
     private float playerSeeDistance;
 
@@ -30,7 +29,6 @@ public class AdjustableMobController : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 lastSawPosition;
 
-
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -38,27 +36,37 @@ public class AdjustableMobController : MonoBehaviour
 
     private void Update()
     {
+        CheckIfCanSeePlayer();
+        CheckIfCanReachPlayer();
+        ApplyActionForCurrentState();
+    }
+
+    private void CheckIfCanSeePlayer()
+    {
         var entInVision = Physics.OverlapSphere(transform.position, playerSeeDistance, playerDetectionLayer);
         currentState = MobStates.Idle;
         foreach (var collider in entInVision)
         {
             if (collider.CompareTag("Player"))
             {
-                print("Can see player");
                 currentState = MobStates.CanSeePlayer;
                 lastSawPosition = collider.transform.position;
                 break;
             }
-
         }
+    }
 
+    private void CheckIfCanReachPlayer()
+    {
         var entInReach = Physics.OverlapSphere(transform.position, playerReachDistance, playerOnlyLayer);
         if (currentState == MobStates.CanSeePlayer && entInReach.Length > 0)
         {
-            print("Can reach player");
             currentState = MobStates.CanReachPlayer;
         }
+    }
 
+    private void ApplyActionForCurrentState()
+    {
         foreach (var behavior in behaviors)
         {
             if (behavior.currentState == currentState)

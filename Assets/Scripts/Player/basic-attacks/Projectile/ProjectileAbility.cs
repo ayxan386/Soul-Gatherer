@@ -1,26 +1,19 @@
 ﻿using System;
 using UnityEngine;
 
-public class ProjectileAbility : MonoBehaviour
+public class ProjectileAbility : BaseAbility
 {
-    [SerializeField] private BaseProjectileAbility attackPrefab;
-    [SerializeField] private float cooldown;
     [SerializeField] private ProjectileParams projectileParams;
 
-    public void LaunchAttack(Transform attackPoint)
+    public override void CastAbility(Transform centerPoint)
     {
-        Instantiate(attackPrefab, attackPoint.position, Quaternion.LookRotation(attackPoint.forward))
+        Instantiate(abilityPrefab, centerPoint.position, Quaternion.LookRotation(centerPoint.forward))
             .ApplyParams(projectileParams);
-    }
-
-    public float GetCooldown()
-    {
-        return cooldown;
     }
 }
 
 [Serializable]
-public class ProjectileParams
+public class ProjectileParams : AbilityParam
 {
     public float speed;
     public float radius;
@@ -30,9 +23,4 @@ public class ProjectileParams
     public float explosionRadius;
     public float explosionForce;
     public LayerMask collisionMask;
-}
-
-public abstract class BaseProjectileAbility : MonoBehaviour
-{
-    public abstract void ApplyParams(ProjectileParams details);
 }

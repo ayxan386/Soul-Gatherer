@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ProjectileController : BaseProjectileAbility
+public class ProjectileController : BaseParamAcceptingEntity
 {
     private Rigidbody rb;
     private ProjectileParams details;
@@ -55,8 +55,13 @@ public class ProjectileController : BaseProjectileAbility
         }
     }
 
-    public override void ApplyParams(ProjectileParams details)
+    public override void ApplyParams(AbilityParam generalParam)
     {
-        this.details = details;
+        this.details = generalParam as ProjectileParams;
+    }
+
+    public override AbilityParam GetParams()
+    {
+        return details;
     }
 }
