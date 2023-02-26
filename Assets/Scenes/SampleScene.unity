@@ -8100,18 +8100,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1763701984}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1791611441 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6536491434019824484, guid: 54efb0b32ff4cb541a4d923e318846ab,
-    type: 3}
-  m_PrefabInstance: {fileID: 3386393979156441043}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531c10eba11b3c64da38abce2144f5f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1893831704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9952,84 +9940,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3386393978170679097, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: ability
-      value: 
-      objectReference: {fileID: 1791611441}
-    - target: {fileID: 6536491434019824484, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: id
-      value: shock_wave
-      objectReference: {fileID: 0}
-    - target: {fileID: 6536491434019824484, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 21300000, guid: 14a0f66a7be165c4ba476e3d7c40e390,
-        type: 3}
-    - target: {fileID: 6536491434019824484, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: description
-      value: Wedge of destruction
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: id
-      value: sphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 21300000, guid: cdec13907ffc75749ab2ed436bec6b14,
-        type: 3}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: description
-      value: Simple attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: details.speed
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: details.radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: details.lifespan
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: currentNumberOfSlots
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: soulShards.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: details.collisionMask.m_Bits
-      value: 960
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: soulShards.Array.data[0].icon
-      value: 
-      objectReference: {fileID: 21300000, guid: 4029a9cfeb86f134c9c5af05993eaac8,
-        type: 3}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: soulShards.Array.data[0].description
-      value: Shoots stuff
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}

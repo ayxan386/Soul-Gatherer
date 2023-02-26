@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &725817239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 725817240}
+  m_Layer: 3
+  m_Name: AOEPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &725817240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725817239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3386393978170679095}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3386393978170679090
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +71,7 @@ Transform:
   - {fileID: 3386393978259794100}
   - {fileID: 6551191615278385340}
   - {fileID: 6536491434019824485}
+  - {fileID: 725817240}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -271,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e412adc93523ddd4b8e989c10a5c6cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 8379135338300590543, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4, type: 3}
-  launchPoint: {fileID: 3386393979353851428}
+  ability: {fileID: 6536491434019824484}
+  launchPoint: {fileID: 725817240}
   soundSource: {fileID: 3386393978170679098}
   launchSound: {fileID: 0}
   buttonName: Fire2
@@ -607,8 +639,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8379135338300590543, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4,
+        type: 3}
+      propertyPath: description
+      value: Wedge of destruction
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4, type: 3}
+--- !u!114 &6536491434019824484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8379135338300590543, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3386393978910206635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531c10eba11b3c64da38abce2144f5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6536491434019824485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8379135338300590542, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4,
@@ -629,10 +678,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
+      propertyPath: id
+      value: sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: cdec13907ffc75749ab2ed436bec6b14,
+        type: 3}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: description
+      value: Simple attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
       propertyPath: abilityPrefab
       value: 
       objectReference: {fileID: 3488950328323795802, guid: 0a4ba337b5fec544282bad821d456503,
         type: 3}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: details.speed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: details.radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: details.lifespan
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: currentNumberOfSlots
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: details.collisionMask.m_Bits
+      value: 960
+      objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763775, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: m_RootOrder
