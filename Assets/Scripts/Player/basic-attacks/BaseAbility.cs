@@ -20,6 +20,9 @@ public abstract class BaseAbility : MonoBehaviour
     public string Desc => description;
     public string Id => id;
 
+    public int AvailableSlots => currentNumberOfSlots;
+    public List<SoulShard> InstalledShards => soulShards;
+
     public abstract void CastAbility(Transform centerPoint);
 
     public float GetCooldown()
@@ -33,6 +36,7 @@ public abstract class BaseAbility : MonoBehaviour
     {
         currentNumberOfSlots++;
         soulShards.Add(soulShard);
+        soulShard.attachedAbility = this;
         EventStore.Instance.PublishPlayerAbilityModified(this);
     }
 
@@ -40,6 +44,7 @@ public abstract class BaseAbility : MonoBehaviour
     {
         currentNumberOfSlots--;
         soulShards.Remove(soulShard);
+        soulShard.attachedAbility = null;
         EventStore.Instance.PublishPlayerAbilityModified(this);
     }
 
@@ -84,6 +89,7 @@ public abstract class BaseParamAcceptingEntity : MonoBehaviour
 [Serializable]
 public class SoulShard
 {
+    public BaseAbility attachedAbility;
     public Sprite icon;
     public SoulShardType type;
     public SoulShardEffectRule effectRule;

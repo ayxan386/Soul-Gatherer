@@ -13,6 +13,8 @@ public class EventStore : MonoBehaviour
     public event AbilityPassingEvent OnPlayerAbilityDisplayerClick;
 
     public event AbilityPassingEvent OnPlayerAbilityAdd;
+    public event ShardPassingEvent OnShardAdd;
+    public event ShardPassingEvent OnShardRemove;
 
     private void Awake()
     {
@@ -44,5 +46,18 @@ public class EventStore : MonoBehaviour
         OnPlayerAbilityAdd?.Invoke(ability);
     }
 
+    public void PublishShardAdd(SoulShard shard)
+    {
+        OnShardAdd?.Invoke(shard);
+    }
+
+    public void PublishShardRemove(SoulShard shard)
+    {
+        OnShardRemove?.Invoke(shard);
+    }
+
     public delegate void AbilityPassingEvent(BaseAbility ability);
+
+    public delegate void ShardPassingEvent(SoulShard soulShard);
+
 }

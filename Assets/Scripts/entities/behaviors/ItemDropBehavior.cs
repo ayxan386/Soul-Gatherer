@@ -12,17 +12,16 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
     private void Start()
     {
-        EventStore.Instance.OnEntityObtainedClick += OnOnEntityObtainedClick;
+        EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
     }
 
     private void OnDisable()
     {
-        EventStore.Instance.OnEntityObtainedClick -= OnOnEntityObtainedClick;
+        EventStore.Instance.OnEntityObtainedClick -= OnEntityObtainedClick;
     }
 
-    private void OnOnEntityObtainedClick(object sender, ObtainedEntity e)
+    private void OnEntityObtainedClick(object sender, ObtainedEntity e)
     {
-        print("TODO add to the inventory...");
         var index = obtainedEntities.FindIndex((temp) => temp.data.id == e.data.id);
         obtainedEntities.RemoveAt(index);
     }

@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: TestLootTable
   m_EditorClassIdentifier: 
   items:
+  - entity: {fileID: 11400000, guid: e7ffff3e1a9b11a4f9f4ac634742f057, type: 2}
+    dropChance: 0.784
+    quantity: 0
+    quantityRange: {x: 1, y: 2}
+    canGetMultipleTimes: 1
+    alreadyObtained: 0
   - entity: {fileID: 11400000, guid: 9c5d9d854aae9234eb06111dc0a79164, type: 2}
     dropChance: 0.6
     quantity: 0
     quantityRange: {x: 3, y: 7}
-    canGetMultipleTimes: 1
-    alreadyObtained: 0
-  - entity: {fileID: 11400000, guid: e7ffff3e1a9b11a4f9f4ac634742f057, type: 2}
-    dropChance: 0.2
-    quantity: 0
-    quantityRange: {x: 1, y: 2}
     canGetMultipleTimes: 1
     alreadyObtained: 0
   - entity: {fileID: 11400000, guid: d5f5466a8072b1643b0a4672fa3a7229, type: 2}

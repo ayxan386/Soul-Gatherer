@@ -15,3 +15,4 @@ MonoBehaviour:
   id: gold
   name: Gold
   smallDisplayIcon: {fileID: 1774430930, guid: ecef211f45010e946a8831aed03eab56, type: 3}
+  type: 1
