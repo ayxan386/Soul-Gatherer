@@ -8,17 +8,26 @@ public class SoulShardDisplayController : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI desc;
     private SoulShardDisplayer[] cells;
+    private BaseAbility currentSelectedAbility;
 
     private void Start()
     {
         EventStore.Instance.OnPlayerAbilityDisplayerClick += OnPlayerAbilityDisplayerClick;
+        EventStore.Instance.OnPlayerAbilityModify += OnPlayerAbilityModify;
         ToggleElements(false);
         cells = cellHolder.GetComponentsInChildren<SoulShardDisplayer>();
+    }
+
+    private void OnPlayerAbilityModify(BaseAbility ability)
+    {
+        if (currentSelectedAbility != null && currentSelectedAbility.Id == ability.Id)
+            UpdateCells(ability);
     }
 
     private void OnDestroy()
     {
         EventStore.Instance.OnPlayerAbilityDisplayerClick -= OnPlayerAbilityDisplayerClick;
+        EventStore.Instance.OnPlayerAbilityModify -= OnPlayerAbilityModify;
     }
 
     private void ToggleElements(bool state)
@@ -30,8 +39,14 @@ public class SoulShardDisplayController : MonoBehaviour
     private void OnPlayerAbilityDisplayerClick(BaseAbility ability)
     {
         ToggleElements(true);
+        currentSelectedAbility = ability;
         icon.sprite = ability.Icon;
         desc.text = ability.Desc;
+        UpdateCells(ability);
+    }
+
+    private void UpdateCells(BaseAbility ability)
+    {
         for (int i = 0; i < cells.Length; i++)
         {
             if (i < ability.InstalledShards.Count)
@@ -48,4 +63,5 @@ public class SoulShardDisplayController : MonoBehaviour
             }
         }
     }
+
 }

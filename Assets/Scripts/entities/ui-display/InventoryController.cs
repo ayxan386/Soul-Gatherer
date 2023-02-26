@@ -78,12 +78,17 @@ public class InventoryController : MonoBehaviour
         if (soulShard != null && currentSelectedAbility != null)
         {
             currentSelectedAbility.ApplySoulShard(soulShard);
+            DisplayOwnedShards();
         }
     }
 
     private void OnShardRemove(SoulShard soulShard)
     {
-        if (soulShard != null && currentSelectedAbility != null) currentSelectedAbility.RemoveSoulShard(soulShard);
+        if (soulShard != null && currentSelectedAbility != null)
+        {
+            currentSelectedAbility.RemoveSoulShard(soulShard);
+            DisplayOwnedShards();
+        }
     }
 
     private SoulShard RandomShard()

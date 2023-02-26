@@ -34,7 +34,7 @@ public abstract class BaseAbility : MonoBehaviour
 
     public virtual void ApplySoulShard(SoulShard soulShard)
     {
-        currentNumberOfSlots++;
+        if (soulShards.Count + 1 > currentNumberOfSlots) return;
         soulShards.Add(soulShard);
         soulShard.attachedAbility = this;
         EventStore.Instance.PublishPlayerAbilityModified(this);
@@ -42,7 +42,7 @@ public abstract class BaseAbility : MonoBehaviour
 
     public virtual void RemoveSoulShard(SoulShard soulShard)
     {
-        currentNumberOfSlots--;
+        if (soulShards.Count == 0) return;
         soulShards.Remove(soulShard);
         soulShard.attachedAbility = null;
         EventStore.Instance.PublishPlayerAbilityModified(this);
