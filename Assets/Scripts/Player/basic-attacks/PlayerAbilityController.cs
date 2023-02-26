@@ -19,10 +19,13 @@ public class PlayerAbilityController : MonoBehaviour
             yield return new WaitUntil(() => GlobalStateManager.Instance.CurrentState == GameState.Running);
             yield return new WaitUntil(() => Input.GetButton(buttonName));
 
-            ability.CastAbility(launchPoint);
-            if (launchSound && soundSource)
+            if (GlobalStateManager.Instance.CurrentState == GameState.Running)
             {
-                soundSource.PlayOneShot(launchSound);
+                ability.CastAbility(launchPoint);
+                if (launchSound && soundSource)
+                {
+                    soundSource.PlayOneShot(launchSound);
+                }
             }
 
             yield return new WaitForSeconds(ability.GetCooldown());
