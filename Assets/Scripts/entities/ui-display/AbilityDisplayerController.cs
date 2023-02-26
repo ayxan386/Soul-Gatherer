@@ -8,7 +8,6 @@ public class AbilityDisplayerController : MonoBehaviour
     {
         foreach (var abilityKey in PlayerAbilityReferenceKeeper.PlayerAbilities.Keys)
         {
-            print("Ability key: " + abilityKey);
             Instantiate(displayerPrefab, transform).id = abilityKey;
         }
     }

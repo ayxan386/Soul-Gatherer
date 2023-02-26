@@ -13,7 +13,6 @@ public class PlayerAbilityReferenceKeeper : MonoBehaviour
 
     private void OnPlayerAbilityAdd(BaseAbility ability)
     {
-        print("Event received: " + ability.Id);
         PlayerAbilities.Add(ability.Id, ability);
     }
 
