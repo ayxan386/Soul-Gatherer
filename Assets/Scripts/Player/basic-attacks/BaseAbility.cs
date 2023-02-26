@@ -1,9 +1,24 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 public abstract class BaseAbility : MonoBehaviour
 {
+    [SerializeField] protected string id;
     [SerializeField] protected float cooldown;
     [SerializeField] protected BaseParamAcceptingEntity abilityPrefab;
+    [SerializeField] protected int currentNumberOfSlots;
+    [SerializeField] protected List<SoulShard> soulShards;
+
+    [Header("For UI display")] [SerializeField]
+    protected Sprite icon;
+
+    [SerializeField] protected string description;
+
+    public Sprite Icon => icon;
+    public string Desc => description;
+    public string Id => id;
 
     public abstract void CastAbility(Transform centerPoint);
 
@@ -11,7 +26,49 @@ public abstract class BaseAbility : MonoBehaviour
     {
         return cooldown;
     }
+
+    public abstract bool CanApplySoulShard(SoulShard soulShard);
+
+    public virtual void ApplySoulShard(SoulShard soulShard)
+    {
+        currentNumberOfSlots++;
+        soulShards.Add(soulShard);
+        EventStore.Instance.PublishPlayerAbilityModified(this);
+    }
+
+    public virtual void RemoveSoulShard(SoulShard soulShard)
+    {
+        currentNumberOfSlots--;
+        soulShards.Remove(soulShard);
+        EventStore.Instance.PublishPlayerAbilityModified(this);
+    }
+
+
+    protected void RemoveFromFloat(float decrement, SoulShardEffectRule effectRule, ref float par)
+    {
+        if (effectRule == SoulShardEffectRule.Add)
+        {
+            par -= decrement;
+        }
+        else
+        {
+            par /= decrement;
+        }
+    }
+
+    protected void ApplyToFloat(float increment, SoulShardEffectRule effectRule, ref float par)
+    {
+        if (effectRule == SoulShardEffectRule.Add)
+        {
+            par += increment;
+        }
+        else
+        {
+            par *= increment;
+        }
+    }
 }
+
 
 public interface AbilityParam
 {
@@ -22,4 +79,35 @@ public abstract class BaseParamAcceptingEntity : MonoBehaviour
     public abstract void ApplyParams(AbilityParam generalParam);
 
     public abstract AbilityParam GetParams();
+}
+
+[Serializable]
+public class SoulShard
+{
+    public Sprite icon;
+    public SoulShardType type;
+    public SoulShardEffectRule effectRule;
+    public string description;
+    public Vector3 force;
+    public float size;
+    public float lifespan;
+    public float speed;
+    public bool explosive;
+    public bool explosionRadius;
+}
+
+public enum SoulShardType
+{
+    Vector,
+    Size,
+    Lifespan,
+    Speed,
+    Explosive,
+    ExplosiveRadius,
+}
+
+public enum SoulShardEffectRule
+{
+    Add,
+    Multiply
 }
