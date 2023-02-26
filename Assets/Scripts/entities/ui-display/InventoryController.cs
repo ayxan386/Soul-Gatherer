@@ -16,7 +16,7 @@ public class InventoryController : MonoBehaviour
     private SoulShardDisplayer[] cells;
     private BaseAbility currentSelectedAbility;
 
-    private void Start()
+    private void Awake()
     {
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtained;
         EventStore.Instance.OnPlayerAbilityDisplayerClick += OnAbilityDisplayerClick;

@@ -16,14 +16,17 @@ public class MapGeneraator : MonoBehaviour
     {
         GenerateMap();
     }
-    
-    void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
             GenerateMap();
         }
     }
 
-    private void GenerateMap()
+    [ContextMenu("Generate")]
+    public void GenerateMap()
     {
         map = new int[width, height];
         FillMapRandom();
@@ -33,15 +36,19 @@ public class MapGeneraator : MonoBehaviour
         }
 
         int borderSize = 1;
-        int[,] borderedMap = new int[width + borderSize * 2,height + borderSize * 2];
+        int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
 
-        for (int x = 0; x < borderedMap.GetLength(0); x ++) {
-            for (int y = 0; y < borderedMap.GetLength(1); y ++) {
-                if (x >= borderSize && x < width + borderSize && y >= borderSize && y < height + borderSize) {
-                    borderedMap[x,y] = map[x-borderSize,y-borderSize];
+        for (int x = 0; x < borderedMap.GetLength(0); x++)
+        {
+            for (int y = 0; y < borderedMap.GetLength(1); y++)
+            {
+                if (x >= borderSize && x < width + borderSize && y >= borderSize && y < height + borderSize)
+                {
+                    borderedMap[x, y] = map[x - borderSize, y - borderSize];
                 }
-                else {
-                    borderedMap[x,y] =1;
+                else
+                {
+                    borderedMap[x, y] = 1;
                 }
             }
         }

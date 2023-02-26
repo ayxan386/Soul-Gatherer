@@ -21,7 +21,7 @@ public class PauseMenuController : MonoBehaviour
         }
     }
 
-    private void ContinueGame()
+    public void ContinueGame()
     {
         Time.timeScale = 1;
         pauseMenuRef.SetActive(false);

@@ -10,7 +10,7 @@ public class SoulShardDisplayController : MonoBehaviour
     private SoulShardDisplayer[] cells;
     private BaseAbility currentSelectedAbility;
 
-    private void Start()
+    private void Awake()
     {
         EventStore.Instance.OnPlayerAbilityDisplayerClick += OnPlayerAbilityDisplayerClick;
         EventStore.Instance.OnPlayerAbilityModify += OnPlayerAbilityModify;
