@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Vector3 = System.Numerics.Vector3;
 
 public abstract class BaseAbility : MonoBehaviour
 {
@@ -75,8 +74,10 @@ public abstract class BaseAbility : MonoBehaviour
 }
 
 
-public interface AbilityParam
+public class AbilityParam
 {
+    public float damage;
+    public Vector3 force;
 }
 
 public abstract class BaseParamAcceptingEntity : MonoBehaviour

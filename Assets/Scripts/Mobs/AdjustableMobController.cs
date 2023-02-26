@@ -90,12 +90,14 @@ public class AdjustableMobController : MonoBehaviour
                                       new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * maxWanderDistance;
         }
 
-        agent.destination = lastSelectedPatrolPoint;
+        if (agent.enabled)
+            agent.destination = lastSelectedPatrolPoint;
     }
 
     public void ChasePlayer()
     {
-        agent.destination = lastSawPosition;
+        if (agent.enabled)
+            agent.destination = lastSawPosition;
     }
 }
 

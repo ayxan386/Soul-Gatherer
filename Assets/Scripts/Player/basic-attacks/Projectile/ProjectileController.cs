@@ -42,12 +42,10 @@ public class ProjectileController : BaseParamAcceptingEntity
             {
                 foreach (var collider in colliders)
                 {
-                    if (collider.TryGetComponent(out Rigidbody rb))
+                    if (collider.TryGetComponent(out AbilityAffectedEntity entity))
                     {
-                        rb.AddForce(details.force, ForceMode.Impulse);
+                        entity.ApplyAbility(details);
                     }
-
-                    // For enemies add damage here
                 }
             }
 

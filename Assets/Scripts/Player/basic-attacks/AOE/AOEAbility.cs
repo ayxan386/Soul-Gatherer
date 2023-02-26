@@ -48,5 +48,4 @@ public class AOEParams : AbilityParam
     public float height;
     [Range(0, 1f)] public float converageFraction;
     public float lifespan;
-    public Vector3 force;
 }
