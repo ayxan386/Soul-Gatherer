@@ -95,10 +95,15 @@ public class InventoryController : MonoBehaviour
     private SoulShard RandomShard()
     {
         var res = new SoulShard();
+        Random.InitState(Time.time.ToString().GetHashCode());
         var range = Random.Range(0, 5);
-        print("Random number is: " + range);
+        for (int i = 0; i < Random.Range(10, 50); i++)
+        {
+            range = Random.Range(0, 5);
+        }
+
         var soulShardType = (SoulShardType)range;
-        
+
         print("Random type is: " + soulShardType);
         var shardDropData = possibleShards.Find(data => data.type == soulShardType);
         if (shardDropData == null) throw new ArgumentException("Type not found");

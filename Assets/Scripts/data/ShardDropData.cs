@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShardDrop", order = 1)]
@@ -13,6 +11,7 @@ public class ShardDropData : ScriptableObject
     public Vector3 vectorMin;
     public Vector3 vectorMax;
     public string desc;
+    private string changeVal;
 
     public void ApplyTo(SoulShard shard)
     {
@@ -32,20 +31,28 @@ public class ShardDropData : ScriptableObject
         {
             case SoulShardType.Size:
                 shard.size = Random.Range(floatRange.x, floatRange.y);
+                changeVal = shard.size.ToString("N1");
                 break;
             case SoulShardType.Lifespan:
                 shard.lifespan = Random.Range(floatRange.x, floatRange.y);
+                changeVal = shard.lifespan.ToString("N1");
                 break;
             case SoulShardType.Speed:
                 shard.speed = Random.Range(floatRange.x, floatRange.y);
+                changeVal = shard.speed.ToString("N1");
                 break;
             case SoulShardType.ExplosiveRadius:
                 shard.explosive = true;
                 shard.explosionRadius = Random.Range(floatRange.x, floatRange.y);
+                changeVal = shard.explosionRadius.ToString("N1");
                 break;
             case SoulShardType.Vector:
                 shard.force = Vector3.Lerp(vectorMin, vectorMax, Random.value);
+                changeVal = $"{shard.force.x}, {shard.force.y} , {shard.force.z}";
                 break;
         }
+
+        shard.description += shard.effectRule == SoulShardEffectRule.Add ? " by " : " x";
+        shard.description += changeVal;
     }
 }

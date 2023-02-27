@@ -5,7 +5,8 @@ using UnityEngine;
 public class MeshGenerator : MonoBehaviour
 {
     [SerializeField] private SquareGrid squareGrid;
-    [SerializeField] public MeshFilter walls;
+    [SerializeField] private MeshFilter walls;
+    [SerializeField] private float wallHeight;
 
     List<Vector3> vertices;
     List<int> triangles;
@@ -20,7 +21,7 @@ public class MeshGenerator : MonoBehaviour
         outlines.Clear();
         checkedVertices.Clear();
 
-        squareGrid = new SquareGrid(map, squareSize);
+        squareGrid = new SquareGrid(map, squareSize, wallHeight);
 
         vertices = new List<Vector3>();
         triangles = new List<int>();
@@ -40,6 +41,13 @@ public class MeshGenerator : MonoBehaviour
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
 
+        if (TryGetComponent(out MeshCollider coll))
+        {
+            Destroy(coll);
+        }
+
+        gameObject.AddComponent<MeshCollider>();
+
         CreateWallMesh();
     }
 
@@ -50,7 +58,6 @@ public class MeshGenerator : MonoBehaviour
         List<Vector3> wallVertices = new List<Vector3>();
         List<int> wallTriangles = new List<int>();
         Mesh wallMesh = new Mesh();
-        float wallHeight = 5;
 
         foreach (List<int> outline in outlines)
         {
@@ -76,7 +83,7 @@ public class MeshGenerator : MonoBehaviour
         wallMesh.triangles = wallTriangles.ToArray();
         walls.mesh = wallMesh;
         // var meshCollider = new MeshCollider();
-        Destroy(walls.GetComponent<MeshCollider>());
+        DestroyImmediate(walls.GetComponent<MeshCollider>());
         walls.gameObject.AddComponent<MeshCollider>();
     }
 
@@ -317,7 +324,7 @@ public class MeshGenerator : MonoBehaviour
     {
         public Square[,] squares;
 
-        public SquareGrid(int[,] map, float squareSize)
+        public SquareGrid(int[,] map, float squareSize, float height)
         {
             int nodeCountX = map.GetLength(0);
             int nodeCountY = map.GetLength(1);
@@ -330,7 +337,7 @@ public class MeshGenerator : MonoBehaviour
             {
                 for (int y = 0; y < nodeCountY; y++)
                 {
-                    Vector3 pos = new Vector3(-mapWidth / 2 + x * squareSize + squareSize / 2, 0,
+                    Vector3 pos = new Vector3(-mapWidth / 2 + x * squareSize + squareSize / 2, height,
                         -mapHeight / 2 + y * squareSize + squareSize / 2);
                     controlNodes[x, y] = new ControlNode(pos, map[x, y] == 1, squareSize);
                 }

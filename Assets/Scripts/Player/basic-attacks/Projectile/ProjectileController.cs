@@ -18,11 +18,12 @@ public class ProjectileController : BaseParamAcceptingEntity
         Destroy(gameObject, details.lifespan);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         var colliders = Physics.OverlapSphere(transform.position, details.radius, details.collisionMask);
         if (colliders.Length > 0)
         {
+            print("Collided with stuff");
             if (details.isExplosive)
             {
                 var affectedEnt =
@@ -42,6 +43,7 @@ public class ProjectileController : BaseParamAcceptingEntity
             {
                 foreach (var collider in colliders)
                 {
+                    print("Collider: " + collider.name);
                     if (collider.TryGetComponent(out AbilityAffectedEntity entity))
                     {
                         entity.ApplyAbility(details);

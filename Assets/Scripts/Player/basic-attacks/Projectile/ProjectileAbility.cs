@@ -23,6 +23,19 @@ public class ProjectileAbility : BaseAbility
             case SoulShardType.Size:
                 ApplyToFloat(soulShard.size, soulShard.effectRule, ref details.radius);
                 break;
+            case SoulShardType.Lifespan:
+                ApplyToFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                break;
+            case SoulShardType.Vector:
+                ApplyToVector(soulShard.force, ref details.force);
+                break;
+            case SoulShardType.Speed:
+                ApplyToFloat(soulShard.speed, soulShard.effectRule, ref details.speed);
+                break;
+            case SoulShardType.ExplosiveRadius:
+                ApplyToFloat(soulShard.explosionRadius, soulShard.effectRule, ref details.explosionRadius);
+                details.isExplosive = true;
+                break;
         }
 
         base.ApplySoulShard(soulShard);
@@ -35,7 +48,21 @@ public class ProjectileAbility : BaseAbility
             case SoulShardType.Size:
                 RemoveFromFloat(soulShard.size, soulShard.effectRule, ref details.radius);
                 break;
+            case SoulShardType.Lifespan:
+                RemoveFromFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                break;
+            case SoulShardType.Vector:
+                RemoveFromVector(soulShard.force, ref details.force);
+                break;
+            case SoulShardType.Speed:
+                RemoveFromFloat(soulShard.speed, soulShard.effectRule, ref details.speed);
+                break;
+            case SoulShardType.ExplosiveRadius:
+                RemoveFromFloat(soulShard.explosionRadius, soulShard.effectRule, ref details.explosionRadius);
+                details.isExplosive = true;
+                break;
         }
+
         base.RemoveSoulShard(soulShard);
     }
 }

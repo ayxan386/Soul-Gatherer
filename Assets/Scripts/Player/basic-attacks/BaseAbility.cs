@@ -71,6 +71,16 @@ public abstract class BaseAbility : MonoBehaviour
             par *= increment;
         }
     }
+
+    protected void ApplyToVector(Vector3 increament, ref Vector3 par)
+    {
+        par += increament;
+    }
+
+    protected void RemoveFromVector(Vector3 decrement, ref Vector3 par)
+    {
+        par -= decrement;
+    }
 }
 
 
