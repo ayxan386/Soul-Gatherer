@@ -5,17 +5,35 @@ using UnityEngine.AI;
 public class AbilityAffectedEntity : MonoBehaviour
 {
     [SerializeField] private LayerMask abilityCheckLayer;
-    [SerializeField] private bool applyForce = true;
+
+    [Header("Force&Gravity params")] [SerializeField]
+    private bool applyForce = true;
+
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundMaxDistance = 0.01f;
-    [SerializeField] private bool takeFallDamage;
+
+    [Header("Fall damage")] [SerializeField]
+    private bool takeFallDamage;
+
     [SerializeField] private float fallDamageConversionFactor;
+    [Header("Health")] [SerializeField] private float maxHealth;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private bool xScaleBasedHealthDisplay;
+    [SerializeField] private Transform scaleBasedHealth;
+    [SerializeField] private AudioSource effectSource;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private ParticleSystem bloodParticles;
+    [Header("Death")] [SerializeField] private InteractableItem afterDeathInteraction;
+    [SerializeField] private Behaviour[] toDisableOnDeath;
+
     private Rigidbody rb;
     private NavMeshAgent agent;
 
     void Start()
     {
+        afterDeathInteraction.enabled = false;
+        currentHealth = maxHealth;
         TryGetComponent(out rb);
         TryGetComponent(out agent);
     }
@@ -28,7 +46,7 @@ public class AbilityAffectedEntity : MonoBehaviour
 
     public void ApplyAbility(AbilityParam ability)
     {
-        print("Applying damage to: " + ability.damage);
+        TakeDamage(ability.damage);
         if (applyForce && ability.force.magnitude > 0)
         {
             if (agent != null)
@@ -52,8 +70,10 @@ public class AbilityAffectedEntity : MonoBehaviour
         {
             var fallDamage = rb.velocity.y * fallDamageConversionFactor;
             print("Took " + fallDamage + " fall damage");
+            TakeDamage(-fallDamage);
         }
-        agent.enabled = true;
+
+        agent.enabled = currentHealth > 0;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -63,5 +83,36 @@ public class AbilityAffectedEntity : MonoBehaviour
         {
             ApplyAbility(abilityController.GetParams());
         }
+    }
+
+    private void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (damage > 0)
+        {
+            effectSource?.PlayOneShot(damageSound);
+            bloodParticles.Play();
+        }
+
+        if (xScaleBasedHealthDisplay)
+        {
+            scaleBasedHealth.localScale = new Vector3(Mathf.Clamp01(currentHealth / maxHealth), 1, 1);
+        }
+
+        if (currentHealth <= 0)
+        {
+            ApplyDeathEffects();
+        }
+    }
+
+    private void ApplyDeathEffects()
+    {
+        agent.enabled = false;
+        foreach (var comp in toDisableOnDeath)
+        {
+            comp.enabled = false;
+        }
+
+        afterDeathInteraction.enabled = true;
     }
 }

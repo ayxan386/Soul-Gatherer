@@ -10,11 +10,6 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
     private List<ObtainedEntity> obtainedEntities;
 
-    private void Start()
-    {
-        EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
-    }
-
     private void OnDisable()
     {
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtainedClick;
@@ -22,8 +17,11 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
     private void OnEntityObtainedClick(object sender, ObtainedEntity e)
     {
+        if (obtainedEntities == null || obtainedEntities.Count == 0) return;
+        
         var index = obtainedEntities.FindIndex((temp) => temp.data.id == e.data.id);
-        obtainedEntities.RemoveAt(index);
+        if (index >= 0)
+            obtainedEntities.RemoveAt(index);
     }
 
     [ContextMenu("Get items")]
@@ -34,6 +32,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
             GenerateItemFromLootTable();
 
         DisplayItems();
+        EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
         Complete = true;
     }
 

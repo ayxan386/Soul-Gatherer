@@ -4941,6 +4941,37 @@ PrefabInstance:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 806661117}
+    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: abilityPrefab
+      value: 
+      objectReference: {fileID: 3488950328323795802, guid: 0a4ba337b5fec544282bad821d456503,
+        type: 3}
+    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: details.speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: details.damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: details.radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: details.lifespan
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: details.collisionMask.m_Bits
+      value: 904
+      objectReference: {fileID: 0}
     - target: {fileID: 9132878360110504262, guid: e290136a093997049af82eda60c51623,
         type: 3}
       propertyPath: m_RootOrder
@@ -4954,7 +4985,7 @@ PrefabInstance:
     - target: {fileID: 9132878360110504262, guid: e290136a093997049af82eda60c51623,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5640306
+      value: -3.45
       objectReference: {fileID: 0}
     - target: {fileID: 9132878360110504262, guid: e290136a093997049af82eda60c51623,
         type: 3}
@@ -5000,6 +5031,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simple Shooting Mob
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132878360110504266, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e290136a093997049af82eda60c51623, type: 3}
@@ -6487,7 +6523,6 @@ GameObject:
   - component: {fileID: 1553907196}
   - component: {fileID: 1553907195}
   - component: {fileID: 1553907194}
-  - component: {fileID: 1553907197}
   m_Layer: 5
   m_Name: ShardInventory
   m_TagString: Untagged
@@ -6598,25 +6633,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553907192}
   m_CullTransparentMesh: 0
---- !u!114 &1553907197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553907192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd256d21f52975e4c8a5f18500a9602c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellHolder: {fileID: 1553907193}
-  expCounter: {fileID: 1332732592}
-  goldCounter: {fileID: 455243865}
-  ownedShards: []
-  currentExp: 0
-  gold: 0
-  tempSprite: {fileID: 21300000, guid: c890dd06d4a350946ab11e4778bf47d8, type: 3}
 --- !u!1001 &1566078654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7518,6 +7534,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3896771027830752950, guid: 897a7768e53e1bc4dbbe5abfe859f217,
+        type: 3}
+      propertyPath: maxHealth
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4610583877920713538, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}
       propertyPath: m_RootOrder
@@ -7582,6 +7603,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simple Chasing Mob Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896657734216989102, guid: 897a7768e53e1bc4dbbe5abfe859f217,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 897a7768e53e1bc4dbbe5abfe859f217, type: 3}
@@ -8658,7 +8684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1985949803
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8769,13 +8795,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   applyForce: 1
-  groundCheckPoint: {fileID: 0}
+  groundCheckPoint: {fileID: 1985949807}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  groundMaxDistance: 0.01
-  takeFallDamage: 0
-  fallDamageConversionFactor: 0
+    m_Bits: 256
+  groundMaxDistance: 0.5
+  takeFallDamage: 1
+  fallDamageConversionFactor: 1
+  maxHealth: 10
+  currentHealth: 0
+  xScaleBasedHealthDisplay: 0
+  scaleBasedHealth: {fileID: 0}
+  effectSource: {fileID: 0}
+  damageSound: {fileID: 0}
+  bloodParticles: {fileID: 0}
+  afterDeathInteraction: {fileID: 0}
+  toDisableOnDeath: []
 --- !u!1001 &2009297606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9807,6 +9842,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: cellHolder
+      value: 
+      objectReference: {fileID: 1553907193}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: expCounter
+      value: 
+      objectReference: {fileID: 1332732592}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: goldCounter
+      value: 
+      objectReference: {fileID: 455243865}
     - target: {fileID: 3386393978170679090, guid: 54efb0b32ff4cb541a4d923e318846ab,
         type: 3}
       propertyPath: m_Name
@@ -9817,11 +9864,6 @@ PrefabInstance:
       propertyPath: interactableDisplay
       value: 
       objectReference: {fileID: 1104296667}
-    - target: {fileID: 3386393978170679093, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: m_StepOffset
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 3386393978170679095, guid: 54efb0b32ff4cb541a4d923e318846ab,
         type: 3}
       propertyPath: m_RootOrder
@@ -9876,11 +9918,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6551191615278385341, guid: 54efb0b32ff4cb541a4d923e318846ab,
-        type: 3}
-      propertyPath: details.force.y
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
@@ -10258,6 +10295,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest
       objectReference: {fileID: 0}
+    - target: {fileID: 5319608052755097452, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: speed
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 5319608052755097453, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
       propertyPath: m_RootOrder
@@ -10361,6 +10403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simple Casting Mob
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598499140302109686, guid: 2311dfd55d379fa42939d9ae1b6f78ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6598499140302109690, guid: 2311dfd55d379fa42939d9ae1b6f78ad,
         type: 3}
