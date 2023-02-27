@@ -100,7 +100,7 @@ public class SoulShard
     public float lifespan;
     public float speed;
     public bool explosive;
-    public bool explosionRadius;
+    public float explosionRadius;
 }
 
 public enum SoulShardType
@@ -109,8 +109,8 @@ public enum SoulShardType
     Size,
     Lifespan,
     Speed,
-    Explosive,
     ExplosiveRadius,
+    Explosive,
 }
 
 public enum SoulShardEffectRule

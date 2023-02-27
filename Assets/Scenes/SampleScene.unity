@@ -9854,6 +9854,30 @@ PrefabInstance:
       propertyPath: goldCounter
       value: 
       objectReference: {fileID: 455243865}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: aeddc14b914105f4d8493c8fce2009fd,
+        type: 2}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: bb02de34494206a4b8dbe03f1db2ca2b,
+        type: 2}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 23f4c18420140194b91f4d04764916e5,
+        type: 2}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8,
+        type: 2}
     - target: {fileID: 3386393978170679090, guid: 54efb0b32ff4cb541a4d923e318846ab,
         type: 3}
       propertyPath: m_Name
@@ -10270,6 +10294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1904701697, guid: d3329c11cb867de43ab99aec9b5810a7, type: 3}
+      propertyPath: MaxDistance
+      value: 10.634642
+      objectReference: {fileID: 0}
     - target: {fileID: 4279413263724076905, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
       propertyPath: m_NavMeshLayer
@@ -10308,7 +10336,7 @@ PrefabInstance:
     - target: {fileID: 5319608052755097453, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 5319608052755097453, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
@@ -10318,7 +10346,7 @@ PrefabInstance:
     - target: {fileID: 5319608052755097453, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.46
+      value: -13.83
       objectReference: {fileID: 0}
     - target: {fileID: 5319608052755097453, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}

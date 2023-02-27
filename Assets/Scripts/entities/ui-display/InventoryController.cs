@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InventoryController : MonoBehaviour
 {
@@ -11,7 +13,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private float currentExp;
     [SerializeField] private int gold;
 
-    [SerializeField] private Sprite tempSprite;
+    [SerializeField] private List<ShardDropData> possibleShards;
 
     private SoulShardDisplayer[] cells;
     private BaseAbility currentSelectedAbility;
@@ -45,7 +47,6 @@ public class InventoryController : MonoBehaviour
 
     private void OnEntityObtained(object sender, ObtainedEntity e)
     {
-        print("Event received: " + e.data.name);
         if (e.data.type == EntityType.Exp)
         {
             currentExp += e.count;
@@ -94,8 +95,14 @@ public class InventoryController : MonoBehaviour
     private SoulShard RandomShard()
     {
         var res = new SoulShard();
-        res.description = "Some shard";
-        res.icon = tempSprite;
+        var range = Random.Range(0, 5);
+        print("Random number is: " + range);
+        var soulShardType = (SoulShardType)range;
+        
+        print("Random type is: " + soulShardType);
+        var shardDropData = possibleShards.Find(data => data.type == soulShardType);
+        if (shardDropData == null) throw new ArgumentException("Type not found");
+        shardDropData.ApplyTo(res);
         return res;
     }
 
