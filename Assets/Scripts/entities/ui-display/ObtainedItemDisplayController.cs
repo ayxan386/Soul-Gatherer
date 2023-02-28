@@ -10,7 +10,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
     private List<ObtainedItemDisplayer> currentDisplayers;
     private List<string> currentDisplayerIds;
 
-    void Start()
+    void OnEnable()
     {
         EventStore.Instance.OnEntityObtainedDisplay += OnOnEntityObtainedDisplay;
         EventStore.Instance.OnEntityObtainedClick += OnOnEntityObtainedClick;

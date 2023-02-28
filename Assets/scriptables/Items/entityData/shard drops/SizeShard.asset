@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a951e127a993fa643aa1366370e7c58c, type: 3}
   m_Name: SizeShard
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 5d61fcb292e194943be9b15e3e6fa241, type: 3}
+  icon: {fileID: 934977674, guid: 489eafc03ad7469479507d3217cbdf0f, type: 3}
   type: 1
   effectRuleRandom: 0
   effectRule: 1

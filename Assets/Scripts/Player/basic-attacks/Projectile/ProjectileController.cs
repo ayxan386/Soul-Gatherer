@@ -1,25 +1,15 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class ProjectileController : BaseParamAcceptingEntity
 {
-    private Rigidbody rb;
     private ProjectileParams details;
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private void Start()
-    {
-        rb.velocity = transform.forward * details.speed;
-        transform.localScale *= (details.radius / 0.5f);
-        Destroy(gameObject, details.lifespan);
-    }
+    private float startSpeed;
 
     private void FixedUpdate()
     {
+        transform.Translate(transform.InverseTransformDirection(transform.forward) *
+                            (startSpeed * Time.fixedDeltaTime));
         var colliders = Physics.OverlapSphere(transform.position, details.radius, details.collisionMask);
         if (colliders.Length > 0)
         {
@@ -30,13 +20,8 @@ public class ProjectileController : BaseParamAcceptingEntity
                     Physics.OverlapSphere(transform.position, details.explosionRadius, details.collisionMask);
                 foreach (var entity in affectedEnt)
                 {
-                    if (entity.TryGetComponent(out Rigidbody rb))
-                    {
-                        rb.AddExplosionForce(details.explosionForce, transform.position, details.explosionRadius,
-                            details.force.y);
-                    }
-
-                    // For enemies add damage here
+                    print("Collider: " + GetComponent<Collider>().name);
+                    CheckForAffectedEntityAndApply(entity);
                 }
             }
             else
@@ -44,10 +29,7 @@ public class ProjectileController : BaseParamAcceptingEntity
                 foreach (var collider in colliders)
                 {
                     print("Collider: " + collider.name);
-                    if (collider.TryGetComponent(out AbilityAffectedEntity entity))
-                    {
-                        entity.ApplyAbility(details);
-                    }
+                    CheckForAffectedEntityAndApply(collider);
                 }
             }
 
@@ -55,9 +37,20 @@ public class ProjectileController : BaseParamAcceptingEntity
         }
     }
 
+    private void CheckForAffectedEntityAndApply(Collider collider)
+    {
+        if (collider.TryGetComponent(out AbilityAffectedEntity entity))
+        {
+            entity.ApplyAbility(details);
+        }
+    }
+
     public override void ApplyParams(AbilityParam generalParam)
     {
         this.details = generalParam as ProjectileParams;
+        transform.localScale *= (details.radius / 0.5f);
+        startSpeed = details.speed;
+        Destroy(gameObject, details.lifespan);
     }
 
     public override AbilityParam GetParams()

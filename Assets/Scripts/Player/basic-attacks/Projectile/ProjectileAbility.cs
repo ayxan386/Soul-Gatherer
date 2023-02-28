@@ -59,7 +59,7 @@ public class ProjectileAbility : BaseAbility
                 break;
             case SoulShardType.ExplosiveRadius:
                 RemoveFromFloat(soulShard.explosionRadius, soulShard.effectRule, ref details.explosionRadius);
-                details.isExplosive = true;
+                details.isExplosive = false;
                 break;
         }
 

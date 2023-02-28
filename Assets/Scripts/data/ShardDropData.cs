@@ -48,7 +48,8 @@ public class ShardDropData : ScriptableObject
                 break;
             case SoulShardType.Vector:
                 shard.force = Vector3.Lerp(vectorMin, vectorMax, Random.value);
-                changeVal = $"{shard.force.x}, {shard.force.y} , {shard.force.z}";
+                changeVal =
+                    $"{shard.force.x:N1}, {shard.force.y:N1} , {shard.force.z:N1}";
                 break;
         }
 
