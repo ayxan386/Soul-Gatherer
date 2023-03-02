@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 4610583877920713538, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4610583877920713538, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}
@@ -217,12 +217,12 @@ PrefabInstance:
     - target: {fileID: 4610583877920713550, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}
       propertyPath: m_Name
-      value: Simple Casting Mob Variant
+      value: Simple Casting Mob
       objectReference: {fileID: 0}
     - target: {fileID: 5544832365753676075, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7185245416226142451, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}

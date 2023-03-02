@@ -9,6 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8599211702053287090, guid: e290136a093997049af82eda60c51623,
         type: 3}
+      propertyPath: maxHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599211702053287090, guid: e290136a093997049af82eda60c51623,
+        type: 3}
       propertyPath: groundMaxDistance
       value: 0.13
       objectReference: {fileID: 0}
@@ -60,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 9132878360110504262, guid: e290136a093997049af82eda60c51623,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.49
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9132878360110504262, guid: e290136a093997049af82eda60c51623,
         type: 3}
@@ -130,5 +135,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0

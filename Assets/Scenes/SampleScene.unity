@@ -4914,6 +4914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayerPrefab: {fileID: 6236883037470911348, guid: 8860c682bcc54d14984eaa453c9b9c44,
     type: 3}
+  uiHolder: {fileID: 1097341257}
 --- !u!4 &1218127330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4246317397002971015, guid: 79d17d2c7b3b2f047a9c9cc94f8fb36c,
@@ -5020,37 +5021,6 @@ PrefabInstance:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 806661117}
-    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: abilityPrefab
-      value: 
-      objectReference: {fileID: 3488950328323795802, guid: 0a4ba337b5fec544282bad821d456503,
-        type: 3}
-    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: details.speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: details.damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: details.radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: details.lifespan
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132878360110504258, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: details.collisionMask.m_Bits
-      value: 904
-      objectReference: {fileID: 0}
     - target: {fileID: 9132878360110504262, guid: e290136a093997049af82eda60c51623,
         type: 3}
       propertyPath: m_RootOrder
@@ -5110,11 +5080,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simple Shooting Mob
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132878360110504266, guid: e290136a093997049af82eda60c51623,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e290136a093997049af82eda60c51623, type: 3}
@@ -7628,11 +7593,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3896771027830752950, guid: 897a7768e53e1bc4dbbe5abfe859f217,
-        type: 3}
-      propertyPath: maxHealth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4610583877920713538, guid: 897a7768e53e1bc4dbbe5abfe859f217,
         type: 3}
       propertyPath: m_RootOrder
@@ -7697,11 +7657,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simple Chasing Mob Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896657734216989102, guid: 897a7768e53e1bc4dbbe5abfe859f217,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 897a7768e53e1bc4dbbe5abfe859f217, type: 3}
@@ -10514,11 +10469,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simple Casting Mob
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598499140302109686, guid: 2311dfd55d379fa42939d9ae1b6f78ad,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6598499140302109690, guid: 2311dfd55d379fa42939d9ae1b6f78ad,
         type: 3}

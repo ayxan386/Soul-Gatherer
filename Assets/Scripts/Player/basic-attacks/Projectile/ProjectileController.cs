@@ -39,7 +39,9 @@ public class ProjectileController : BaseParamAcceptingEntity
 
     private void CheckForAffectedEntityAndApply(Collider collider)
     {
-        if (collider.TryGetComponent(out AbilityAffectedEntity entity))
+        AbilityAffectedEntity entity;
+        if (collider.TryGetComponent(out entity)
+            || (collider.transform.parent != null && collider.transform.parent.TryGetComponent(out entity)))
         {
             entity.ApplyAbility(details);
         }
