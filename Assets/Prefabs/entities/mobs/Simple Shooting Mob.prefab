@@ -41,6 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8553457216048813486}
   - component: {fileID: 1239869995044793331}
+  - component: {fileID: 8985237877491208977}
+  - component: {fileID: 2397695782613980107}
   m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
@@ -77,6 +79,39 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8985237877491208977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456547585021170074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa41dd8d463d004d9a3b836fb3ba5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionBehaviors:
+  - {fileID: 2397695782613980107}
+--- !u!114 &2397695782613980107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456547585021170074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c43013e4150b845acdd8cf25bbf02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBefore: 0
+  DelayAfter: 0
+  Complete: 0
+  lootTable: {fileID: 11400000, guid: e0d77f9971acee0498c38554c5fe40f7, type: 2}
+  numberOfItems: 9
+  useRange: 1
+  countRange: {x: 1, y: 5}
 --- !u!1 &9132878358711565983
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +154,6 @@ GameObject:
   - component: {fileID: 9132878360110504262}
   - component: {fileID: 9132878360110504261}
   - component: {fileID: 9132878360110504260}
-  - component: {fileID: 9132878360110504267}
   - component: {fileID: 9132878360110504263}
   - component: {fileID: 9132878360110504256}
   - component: {fileID: 9132878360110504258}
@@ -127,8 +161,6 @@ GameObject:
   - component: {fileID: 8599211702053287090}
   - component: {fileID: 3230213154612857770}
   - component: {fileID: 2519072682294627063}
-  - component: {fileID: 7424245991689622140}
-  - component: {fileID: 2514221919365468984}
   m_Layer: 6
   m_Name: Simple Shooting Mob
   m_TagString: Untagged
@@ -206,20 +238,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &9132878360110504267
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9132878360110504266}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &9132878360110504263
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -405,7 +423,7 @@ MonoBehaviour:
   effectSource: {fileID: 2519072682294627063}
   damageSound: {fileID: 8300000, guid: 4838e37551b3dd945b0d1b4b2ec11439, type: 3}
   bloodParticles: {fileID: 986752629028700968}
-  afterDeathInteraction: {fileID: 7424245991689622140}
+  afterDeathInteraction: {fileID: 8985237877491208977}
   toDisableOnDeath:
   - {fileID: 9132878360110504263}
   - {fileID: 9132878360110504256}
@@ -424,7 +442,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!82 &2519072682294627063
 AudioSource:
   m_ObjectHideFlags: 0
@@ -521,39 +539,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7424245991689622140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9132878360110504266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa41dd8d463d004d9a3b836fb3ba5cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionBehaviors:
-  - {fileID: 2514221919365468984}
---- !u!114 &2514221919365468984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9132878360110504266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c43013e4150b845acdd8cf25bbf02e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DelayBefore: 0
-  DelayAfter: 0
-  Complete: 0
-  lootTable: {fileID: 11400000, guid: e0d77f9971acee0498c38554c5fe40f7, type: 2}
-  numberOfItems: 9
-  useRange: 1
-  countRange: {x: 1, y: 5}
 --- !u!1001 &2456155579844396345
 PrefabInstance:
   m_ObjectHideFlags: 0

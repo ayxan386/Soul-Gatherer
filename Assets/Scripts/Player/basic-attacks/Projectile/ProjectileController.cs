@@ -6,7 +6,7 @@ public class ProjectileController : BaseParamAcceptingEntity
 
     private float startSpeed;
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         transform.Translate(transform.InverseTransformDirection(transform.forward) *
                             (startSpeed * Time.fixedDeltaTime));
@@ -20,7 +20,7 @@ public class ProjectileController : BaseParamAcceptingEntity
                     Physics.OverlapSphere(transform.position, details.explosionRadius, details.collisionMask);
                 foreach (var entity in affectedEnt)
                 {
-                    print("Collider: " + GetComponent<Collider>().name);
+                    print("Collider: " + entity.name);
                     CheckForAffectedEntityAndApply(entity);
                 }
             }

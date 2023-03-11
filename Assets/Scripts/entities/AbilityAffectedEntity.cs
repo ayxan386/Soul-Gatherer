@@ -32,10 +32,13 @@ public class AbilityAffectedEntity : MonoBehaviour
 
     void Start()
     {
-        afterDeathInteraction.enabled = false;
+        afterDeathInteraction.Interactable = false;
         currentHealth = maxHealth;
         TryGetComponent(out rb);
-        TryGetComponent(out agent);
+        if (TryGetComponent(out agent))
+        {
+            rb.isKinematic = true;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -61,6 +64,7 @@ public class AbilityAffectedEntity : MonoBehaviour
     private IEnumerator ApplyForceToAgent(AbilityParam ability)
     {
         agent.enabled = false;
+        rb.isKinematic = false;
         rb.AddForce(ability.force, ForceMode.Impulse);
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
@@ -73,6 +77,7 @@ public class AbilityAffectedEntity : MonoBehaviour
             TakeDamage(-fallDamage);
         }
 
+        rb.isKinematic = true;
         agent.enabled = currentHealth > 0;
     }
 
@@ -113,6 +118,6 @@ public class AbilityAffectedEntity : MonoBehaviour
             comp.enabled = false;
         }
 
-        afterDeathInteraction.enabled = true;
+        afterDeathInteraction.Interactable = true;
     }
 }

@@ -5,12 +5,14 @@ using UnityEngine;
 public class InteractableItem : MonoBehaviour
 {
     [SerializeField] protected List<ItemInteractionBehavior> interactionBehaviors;
+    public bool Interactable { get; set; }
     protected bool wasInteracted;
     private bool inProgress;
 
     [ContextMenu("Interact")]
     public void Interact()
     {
+        if (!Interactable) return;
         if (inProgress) return;
         print("Interacting");
         inProgress = true;
