@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractableItem : MonoBehaviour
 {
     [SerializeField] protected List<ItemInteractionBehavior> interactionBehaviors;
-    public bool Interactable { get; set; }
+    public bool Interactable { get; set; } = true;
     protected bool wasInteracted;
     private bool inProgress;
 

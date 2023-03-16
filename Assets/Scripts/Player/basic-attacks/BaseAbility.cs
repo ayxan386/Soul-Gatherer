@@ -87,6 +87,7 @@ public abstract class BaseAbility : MonoBehaviour
 public class AbilityParam
 {
     public float damage;
+    public float lifespan;
     public Vector3 force;
 }
 

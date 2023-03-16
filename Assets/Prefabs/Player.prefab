@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &356601863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 356601865}
+  - component: {fileID: 356601864}
+  m_Layer: 0
+  m_Name: RightDashAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &356601865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356601863}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.076268, y: 2.6679344, z: 24.818726}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3386393978170679095}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356601864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356601863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdd83217af437746aaaf2e7ba83a833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: right_dash
+  cooldown: 1
+  abilityPrefab: {fileID: 7869102818518305, guid: 59c15edf2f522e043968e8244e689100,
+    type: 3}
+  currentNumberOfSlots: 1
+  soulShards: []
+  icon: {fileID: 21300000, guid: c46be55a65cb30e44b7c89e3c0d531da, type: 3}
+  description: Apply some effects to player
+  details:
+    damage: 0
+    lifespan: 0
+    force: {x: 5, y: 0, z: 0}
 --- !u!1 &725817239
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +137,12 @@ MonoBehaviour:
   ownedShards: []
   currentExp: 0
   gold: 0
-  tempSprite: {fileID: 21300000, guid: c890dd06d4a350946ab11e4778bf47d8, type: 3}
+  possibleShards:
+  - {fileID: 11400000, guid: aeddc14b914105f4d8493c8fce2009fd, type: 2}
+  - {fileID: 11400000, guid: bb02de34494206a4b8dbe03f1db2ca2b, type: 2}
+  - {fileID: 11400000, guid: 23f4c18420140194b91f4d04764916e5, type: 2}
+  - {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8, type: 2}
+  - {fileID: 11400000, guid: 2a92c5fe3339ed24799dd78c2a49849c, type: 2}
 --- !u!1 &3386393978170679090
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +160,7 @@ GameObject:
   - component: {fileID: 3386393978170679099}
   - component: {fileID: 3386393978170679098}
   - component: {fileID: 3386393978170679097}
+  - component: {fileID: 3386393979156441047}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -124,6 +186,7 @@ Transform:
   - {fileID: 6536491434019824485}
   - {fileID: 725817240}
   - {fileID: 1452606273}
+  - {fileID: 356601865}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -360,6 +423,23 @@ MonoBehaviour:
   soundSource: {fileID: 3386393978170679098}
   launchSound: {fileID: 0}
   buttonName: Fire2
+--- !u!114 &3386393979156441047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386393978170679090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e412adc93523ddd4b8e989c10a5c6cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 356601864}
+  launchPoint: {fileID: 3386393978170679095}
+  soundSource: {fileID: 3386393978170679098}
+  launchSound: {fileID: 8300000, guid: 4838e37551b3dd945b0d1b4b2ec11439, type: 3}
+  buttonName: Jump
 --- !u!1 &3386393978259794101
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +838,7 @@ PrefabInstance:
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: details.speed
-      value: 9
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
@@ -773,7 +853,7 @@ PrefabInstance:
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: details.force.y
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}

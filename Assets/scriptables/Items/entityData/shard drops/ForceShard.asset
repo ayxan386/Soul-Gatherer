@@ -17,6 +17,6 @@ MonoBehaviour:
   effectRuleRandom: 0
   effectRule: 0
   floatRange: {x: 0, y: 0}
-  vectorMin: {x: -10, y: 0.1, z: -10}
-  vectorMax: {x: 10, y: 10, z: 10}
+  vectorMin: {x: -2, y: 0.1, z: -2}
+  vectorMax: {x: 2, y: 2, z: 2}
   desc: Applies force to the target

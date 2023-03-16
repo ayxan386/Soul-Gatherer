@@ -72,7 +72,6 @@ public class ProjectileParams : AbilityParam
 {
     public float speed;
     public float radius;
-    public float lifespan;
     public bool isExplosive;
     public float explosionRadius;
     public float explosionForce;
