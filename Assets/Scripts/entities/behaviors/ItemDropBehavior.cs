@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class ItemDropBehavior : ItemInteractionBehavior
 {
@@ -7,6 +10,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
     [SerializeField] private int numberOfItems;
     [SerializeField] private bool useRange;
     [SerializeField] private Vector2Int countRange;
+    [SerializeField] private UnityEvent afterLootAction;
 
     private List<ObtainedEntity> obtainedEntities;
 
@@ -18,10 +22,16 @@ public class ItemDropBehavior : ItemInteractionBehavior
     private void OnEntityObtainedClick(object sender, ObtainedEntity e)
     {
         if (obtainedEntities == null || obtainedEntities.Count == 0) return;
-        
+
         var index = obtainedEntities.FindIndex((temp) => temp.data.id == e.data.id);
         if (index >= 0)
             obtainedEntities.RemoveAt(index);
+
+        if (obtainedEntities.Count <= 0)
+        {
+            afterLootAction?.Invoke();
+            Destroy(this);
+        }
     }
 
     [ContextMenu("Get items")]
@@ -65,6 +75,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
     }
 }
 
+[Serializable]
 public class ObtainedEntity
 {
     public EntityData data;

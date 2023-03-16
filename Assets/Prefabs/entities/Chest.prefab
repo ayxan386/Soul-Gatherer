@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5319608052755097452}
   - component: {fileID: 1904701697}
   - component: {fileID: 1904701698}
+  - component: {fileID: 5319608051420960661}
   m_Layer: 6
   m_Name: Chest
   m_TagString: Untagged
@@ -65,6 +66,7 @@ MonoBehaviour:
   interactionBehaviors:
   - {fileID: 1904701698}
   - {fileID: 5319608052755097452}
+  - {fileID: 5319608051420960661}
 --- !u!114 &5319608052755097452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,11 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cf8b301c91a2546be0926129ab5a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DelayBefore: 0.1
+  DelayBefore: 0
   DelayAfter: 0
   Complete: 0
   lidTransform: {fileID: 1896324970929380579}
-  speed: -25
+  speed: -50
   maxAngle: 50
 --- !u!82 &1904701697
 AudioSource:
@@ -104,7 +106,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 15
+  MaxDistance: 10.634642
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -224,6 +226,28 @@ MonoBehaviour:
   audioSource: {fileID: 1904701697}
   audioClip: {fileID: 0}
   useClip: 0
+--- !u!114 &5319608051420960661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5319608052755097449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c43013e4150b845acdd8cf25bbf02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBefore: 0
+  DelayAfter: 0
+  Complete: 0
+  lootTable: {fileID: 11400000, guid: e0d77f9971acee0498c38554c5fe40f7, type: 2}
+  numberOfItems: 3
+  useRange: 0
+  countRange: {x: 0, y: 0}
+  afterLootAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5319608052059348992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -316,6 +340,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2926320452223950100, guid: a40d7854b2bdd6047966a327dc7d335f,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926320452223950100, guid: a40d7854b2bdd6047966a327dc7d335f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6017392758992207075, guid: a40d7854b2bdd6047966a327dc7d335f,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -340,6 +374,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264260236098961257, guid: a40d7854b2bdd6047966a327dc7d335f,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264260236098961257, guid: a40d7854b2bdd6047966a327dc7d335f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a40d7854b2bdd6047966a327dc7d335f, type: 3}

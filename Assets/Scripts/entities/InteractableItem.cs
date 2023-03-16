@@ -20,6 +20,11 @@ public class InteractableItem : MonoBehaviour
         wasInteracted = true;
     }
 
+    public void SelfDestruct(GameObject target)
+    {
+        Destroy(target);
+    }
+
     private IEnumerator Interaction(InteractionPassData data)
     {
         foreach (var behavior in interactionBehaviors)
