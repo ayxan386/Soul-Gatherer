@@ -49,7 +49,8 @@ public class AbilityAffectedEntity : MonoBehaviour
 
     public void ApplyAbility(AbilityParam ability)
     {
-        TakeDamage(ability.damage);
+        TakeDamage(ability.damage * (ability.tickDamage ? Time.deltaTime : 1));
+        
         if (applyForce && ability.force.magnitude > 0)
         {
             if (agent != null)

@@ -13,14 +13,12 @@ public class ProjectileController : BaseParamAcceptingEntity
         var colliders = Physics.OverlapSphere(transform.position, details.radius, details.collisionMask);
         if (colliders.Length > 0)
         {
-            print("Collided with stuff");
             if (details.isExplosive)
             {
                 var affectedEnt =
                     Physics.OverlapSphere(transform.position, details.explosionRadius, details.collisionMask);
                 foreach (var entity in affectedEnt)
                 {
-                    print("Collider: " + entity.name);
                     CheckForAffectedEntityAndApply(entity);
                 }
             }
@@ -28,7 +26,6 @@ public class ProjectileController : BaseParamAcceptingEntity
             {
                 foreach (var collider in colliders)
                 {
-                    print("Collider: " + collider.name);
                     CheckForAffectedEntityAndApply(collider);
                 }
             }
@@ -39,6 +36,12 @@ public class ProjectileController : BaseParamAcceptingEntity
 
     private void CheckForAffectedEntityAndApply(Collider collider)
     {
+        if (collider.CompareTag("Player"))
+        {
+            EventStore.Instance.PublishPlayerAbilityAffected(GetParams());
+            return;
+        }
+
         AbilityAffectedEntity entity;
         if (collider.TryGetComponent(out entity)
             || (collider.transform.parent != null && collider.transform.parent.TryGetComponent(out entity)))

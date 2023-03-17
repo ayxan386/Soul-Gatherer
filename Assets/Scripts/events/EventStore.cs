@@ -16,6 +16,10 @@ public class EventStore : MonoBehaviour
     public event ShardPassingEvent OnShardAdd;
     public event ShardPassingEvent OnShardRemove;
 
+    public event AbilityParamPassingEvent OnPlayerAbilityAffected;
+
+    public event Action<float> OnPlayerHealthChange;
+
     private void Awake()
     {
         Instance = this;
@@ -34,6 +38,11 @@ public class EventStore : MonoBehaviour
     public void PublishPlayerAbilityModified(BaseAbility ability)
     {
         OnPlayerAbilityModify?.Invoke(ability);
+    }
+
+    public void PublishPlayerAbilityAffected(AbilityParam abilityParam)
+    {
+        OnPlayerAbilityAffected?.Invoke(abilityParam);
     }
 
     public void PublishPlayerAbilityDisplayerClick(BaseAbility ability)
@@ -56,8 +65,14 @@ public class EventStore : MonoBehaviour
         OnShardRemove?.Invoke(shard);
     }
 
+    public void PublishPlayerHealthChange(float currentHealth)
+    {
+        OnPlayerHealthChange?.Invoke(currentHealth);
+    }
+
     public delegate void AbilityPassingEvent(BaseAbility ability);
 
-    public delegate void ShardPassingEvent(SoulShard soulShard);
+    public delegate void AbilityParamPassingEvent(AbilityParam ability);
 
+    public delegate void ShardPassingEvent(SoulShard soulShard);
 }

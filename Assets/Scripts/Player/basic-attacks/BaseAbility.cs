@@ -87,8 +87,10 @@ public abstract class BaseAbility : MonoBehaviour
 public class AbilityParam
 {
     public float damage;
+    public bool tickDamage;
     public float lifespan;
     public Vector3 force;
+    public bool canAffectPlayer;
 }
 
 public abstract class BaseParamAcceptingEntity : MonoBehaviour

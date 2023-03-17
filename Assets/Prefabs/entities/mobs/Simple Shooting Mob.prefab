@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1239869995044793331}
   - component: {fileID: 8985237877491208977}
   - component: {fileID: 2397695782613980107}
+  - component: {fileID: 814460131635519262}
   m_Layer: 6
   m_Name: item-loot
   m_TagString: Untagged
@@ -127,6 +128,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &814460131635519262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456547585021170074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456866d907e02ff4b855102490b052bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsuleCollider: {fileID: 1239869995044793331}
+  aoeLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  afterDetectionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8599211702053287090}
+        m_TargetAssemblyTypeName: AbilityAffectedEntity, Assembly-CSharp
+        m_MethodName: ApplyAbility
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isAttachedToPlayer: 0
 --- !u!1 &9132878358711565983
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +417,7 @@ MonoBehaviour:
     damage: 1
     lifespan: 3
     force: {x: 0, y: 0, z: 0}
+    canAffectPlayer: 0
     speed: 5
     radius: 0.5
     isExplosive: 0
