@@ -10451,6 +10451,15 @@ PrefabInstance:
       propertyPath: goldCounter
       value: 
       objectReference: {fileID: 455243865}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452606274, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
+      propertyPath: possibleShards.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 831e9c9870c81e945b10935e8ca04563,
+        type: 2}
     - target: {fileID: 3386393978170679090, guid: 54efb0b32ff4cb541a4d923e318846ab,
         type: 3}
       propertyPath: m_Name

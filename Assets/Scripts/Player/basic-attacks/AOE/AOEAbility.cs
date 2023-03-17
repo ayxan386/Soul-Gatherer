@@ -21,13 +21,16 @@ public class AOEAbility : BaseAbility
         switch (soulShard.type)
         {
             case SoulShardType.Size:
-                ApplyToFloat(soulShard.size, soulShard.effectRule, ref details.thickness);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.thickness);
                 break;
             case SoulShardType.Lifespan:
-                ApplyToFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.lifespan);
                 break;
             case SoulShardType.Vector:
                 ApplyToVector(soulShard.force, ref details.force);
+                break;
+            case SoulShardType.Damage:
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.damage);
                 break;
         }
 
@@ -39,13 +42,16 @@ public class AOEAbility : BaseAbility
         switch (soulShard.type)
         {
             case SoulShardType.Size:
-                RemoveFromFloat(soulShard.size, soulShard.effectRule, ref details.thickness);
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.thickness);
                 break;
             case SoulShardType.Lifespan:
-                RemoveFromFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.lifespan);
                 break;
             case SoulShardType.Vector:
                 RemoveFromVector(soulShard.force, ref details.force);
+                break;
+            case SoulShardType.Damage:
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.damage);
                 break;
         }
 

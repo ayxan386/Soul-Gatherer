@@ -21,20 +21,23 @@ public class ProjectileAbility : BaseAbility
         switch (soulShard.type)
         {
             case SoulShardType.Size:
-                ApplyToFloat(soulShard.size, soulShard.effectRule, ref details.radius);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.radius);
                 break;
             case SoulShardType.Lifespan:
-                ApplyToFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.lifespan);
                 break;
             case SoulShardType.Vector:
                 ApplyToVector(soulShard.force, ref details.force);
                 break;
             case SoulShardType.Speed:
-                ApplyToFloat(soulShard.speed, soulShard.effectRule, ref details.speed);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.speed);
                 break;
             case SoulShardType.ExplosiveRadius:
-                ApplyToFloat(soulShard.explosionRadius, soulShard.effectRule, ref details.explosionRadius);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.explosionRadius);
                 details.isExplosive = true;
+                break;
+            case SoulShardType.Damage:
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.damage);
                 break;
         }
 
@@ -46,20 +49,23 @@ public class ProjectileAbility : BaseAbility
         switch (soulShard.type)
         {
             case SoulShardType.Size:
-                RemoveFromFloat(soulShard.size, soulShard.effectRule, ref details.radius);
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.radius);
                 break;
             case SoulShardType.Lifespan:
-                RemoveFromFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.lifespan);
                 break;
             case SoulShardType.Vector:
                 RemoveFromVector(soulShard.force, ref details.force);
                 break;
             case SoulShardType.Speed:
-                RemoveFromFloat(soulShard.speed, soulShard.effectRule, ref details.speed);
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.speed);
                 break;
             case SoulShardType.ExplosiveRadius:
-                RemoveFromFloat(soulShard.explosionRadius, soulShard.effectRule, ref details.explosionRadius);
-                details.isExplosive = false;
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.explosionRadius);
+                details.isExplosive = false; // TODO Add check for other shards
+                break;
+            case SoulShardType.Damage:
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.damage);
                 break;
         }
 

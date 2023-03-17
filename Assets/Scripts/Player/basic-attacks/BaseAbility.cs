@@ -109,11 +109,8 @@ public class SoulShard
     public SoulShardEffectRule effectRule;
     public string description;
     public Vector3 force;
-    public float size;
-    public float lifespan;
-    public float speed;
+    public float value;
     public bool explosive;
-    public float explosionRadius;
 }
 
 public enum SoulShardType
@@ -123,6 +120,7 @@ public enum SoulShardType
     Lifespan,
     Speed,
     ExplosiveRadius,
+    Damage,
     Explosive,
 }
 

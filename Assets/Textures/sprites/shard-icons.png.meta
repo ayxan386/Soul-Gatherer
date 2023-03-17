@@ -200,6 +200,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: shard-icons_4
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 254
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51cea32cf07eb1a4c863d62d837a250c
+      internalID: 1801017146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -212,6 +233,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       shard-icons_0: 934977674
+      shard-icons_4: 1801017146
       shard-icons_1: 1163166708
       shard-icons_2: -1721277962
       shard-icons_3: -1467000470

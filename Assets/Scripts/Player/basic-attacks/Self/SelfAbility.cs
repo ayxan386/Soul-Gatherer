@@ -21,7 +21,7 @@ public class SelfAbility : BaseAbility
         switch (soulShard.type)
         {
             case SoulShardType.Lifespan:
-                ApplyToFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.lifespan);
                 break;
             case SoulShardType.Vector:
                 ApplyToVector(soulShard.force, ref details.force);
@@ -36,7 +36,7 @@ public class SelfAbility : BaseAbility
         switch (soulShard.type)
         {
             case SoulShardType.Lifespan:
-                RemoveFromFloat(soulShard.lifespan, soulShard.effectRule, ref details.lifespan);
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.lifespan);
                 break;
             case SoulShardType.Vector:
                 RemoveFromVector(soulShard.force, ref details.force);

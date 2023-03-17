@@ -29,27 +29,15 @@ public class ShardDropData : ScriptableObject
 
         switch (type)
         {
-            case SoulShardType.Size:
-                shard.size = Random.Range(floatRange.x, floatRange.y);
-                changeVal = shard.size.ToString("N1");
-                break;
-            case SoulShardType.Lifespan:
-                shard.lifespan = Random.Range(floatRange.x, floatRange.y);
-                changeVal = shard.lifespan.ToString("N1");
-                break;
-            case SoulShardType.Speed:
-                shard.speed = Random.Range(floatRange.x, floatRange.y);
-                changeVal = shard.speed.ToString("N1");
-                break;
-            case SoulShardType.ExplosiveRadius:
-                shard.explosive = true;
-                shard.explosionRadius = Random.Range(floatRange.x, floatRange.y);
-                changeVal = shard.explosionRadius.ToString("N1");
-                break;
             case SoulShardType.Vector:
                 shard.force = Vector3.Lerp(vectorMin, vectorMax, Random.value);
                 changeVal =
                     $"{shard.force.x:N1}, {shard.force.y:N1} , {shard.force.z:N1}";
+                break;
+            default:
+                shard.value = Random.Range(floatRange.x, floatRange.y);
+                shard.explosive = type == SoulShardType.Explosive;
+                changeVal = shard.value.ToString("N1");
                 break;
         }
 

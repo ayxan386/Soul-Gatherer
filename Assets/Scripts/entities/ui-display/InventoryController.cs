@@ -99,12 +99,11 @@ public class InventoryController : MonoBehaviour
         var range = Random.Range(0, 5);
         for (int i = 0; i < Random.Range(10, 50); i++)
         {
-            range = Random.Range(0, 5);
+            range = Random.Range(0, 6);
         }
 
         var soulShardType = (SoulShardType)range;
 
-        print("Random type is: " + soulShardType);
         var shardDropData = possibleShards.Find(data => data.type == soulShardType);
         if (shardDropData == null) throw new ArgumentException("Type not found");
         shardDropData.ApplyTo(res);
