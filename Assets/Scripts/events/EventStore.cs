@@ -20,6 +20,8 @@ public class EventStore : MonoBehaviour
 
     public event Action<float> OnPlayerHealthChange;
 
+    public event Action<int> OnPlayerLevelUp;
+
     private void Awake()
     {
         Instance = this;
@@ -68,6 +70,11 @@ public class EventStore : MonoBehaviour
     public void PublishPlayerHealthChange(float currentHealth)
     {
         OnPlayerHealthChange?.Invoke(currentHealth);
+    }
+
+    public void PublishPlayerLevelUp(int currentLevel)
+    {
+        OnPlayerLevelUp?.Invoke(currentLevel);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

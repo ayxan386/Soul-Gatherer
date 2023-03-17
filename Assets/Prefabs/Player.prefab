@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: right_dash
-  cooldown: 1
+  cooldown: 0.5
   abilityPrefab: {fileID: 7869102818518305, guid: 59c15edf2f522e043968e8244e689100,
     type: 3}
   currentNumberOfSlots: 1
@@ -54,8 +54,10 @@ MonoBehaviour:
   description: Apply some effects to player
   details:
     damage: 0
+    tickDamage: 0
     lifespan: 0
     force: {x: 5, y: 0, z: 0}
+    canAffectPlayer: 0
 --- !u!1 &725817239
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,6 +145,53 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23f4c18420140194b91f4d04764916e5, type: 2}
   - {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8, type: 2}
   - {fileID: 11400000, guid: 2a92c5fe3339ed24799dd78c2a49849c, type: 2}
+  - {fileID: 11400000, guid: 831e9c9870c81e945b10935e8ca04563, type: 2}
+--- !u!1 &2079661734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079661735}
+  - component: {fileID: 2079661736}
+  m_Layer: 3
+  m_Name: PlayerHealthManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2079661735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079661734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3386393978170679095}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2079661736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079661734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f0d27c5e2e1e742aa904d9c52f1439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
 --- !u!1 &3386393978170679090
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +236,7 @@ Transform:
   - {fileID: 725817240}
   - {fileID: 1452606273}
   - {fileID: 356601865}
+  - {fileID: 2079661735}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,6 +324,10 @@ MonoBehaviour:
   playerEffectSource: {fileID: 0}
   footSteps: {fileID: 0}
   stepFrequency: 0
+  solidLayers:
+    serializedVersion: 2
+    m_Bits: 384
+  gravity: 15
 --- !u!114 &3386393978170679092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3386393978259794100}
   - component: {fileID: 3386393978259794107}
+  - component: {fileID: 268741789}
   m_Layer: 3
   m_Name: Detection
   m_TagString: Player
@@ -486,6 +541,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.28, z: 0}
+--- !u!114 &268741789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386393978259794101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456866d907e02ff4b855102490b052bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsuleCollider: {fileID: 3386393978259794107}
+  aoeLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  afterDetectionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  isAttachedToPlayer: 1
 --- !u!1 &3386393978911879700
 GameObject:
   m_ObjectHideFlags: 0
