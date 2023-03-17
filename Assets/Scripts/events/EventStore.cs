@@ -10,7 +10,7 @@ public class EventStore : MonoBehaviour
     public event EventHandler<ObtainedEntity> OnEntityObtainedClick;
 
     public event AbilityPassingEvent OnPlayerAbilityModify;
-    public event AbilityPassingEvent OnPlayerAbilityDisplayerClick;
+    public event Action<AbilityDisplayer> OnPlayerAbilityDisplayerClick;
 
     public event AbilityPassingEvent OnPlayerAbilityAdd;
     public event ShardPassingEvent OnShardAdd;
@@ -47,9 +47,9 @@ public class EventStore : MonoBehaviour
         OnPlayerAbilityAffected?.Invoke(abilityParam);
     }
 
-    public void PublishPlayerAbilityDisplayerClick(BaseAbility ability)
+    public void PublishPlayerAbilityDisplayerClick(AbilityDisplayer abilityDisplayer)
     {
-        OnPlayerAbilityDisplayerClick?.Invoke(ability);
+        OnPlayerAbilityDisplayerClick?.Invoke(abilityDisplayer);
     }
 
     public void PublishPlayerAbilityAdd(BaseAbility ability)

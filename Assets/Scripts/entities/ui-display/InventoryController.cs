@@ -37,14 +37,17 @@ public class InventoryController : MonoBehaviour
         EventStore.Instance.OnShardAdd -= OnShardAdd;
     }
 
-    private void OnAbilityDisplayerClick(BaseAbility ability)
+    private void OnAbilityDisplayerClick(AbilityDisplayer displayer)
     {
+        if (displayer.type != AbilityDisplayType.ModificationMenu)
+            return;
+        var ability = PlayerAbilityReferenceKeeper.PlayerAbilities[displayer.id];
         currentSelectedAbility = ability;
     }
 
     private void OnEntityObtained(object sender, ObtainedEntity e)
     {
-      if (e.data.type == EntityType.Gold)
+        if (e.data.type == EntityType.Gold)
         {
             gold += e.count;
             UpdateGoldCounter();

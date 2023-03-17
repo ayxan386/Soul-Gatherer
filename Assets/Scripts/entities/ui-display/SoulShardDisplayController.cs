@@ -36,8 +36,11 @@ public class SoulShardDisplayController : MonoBehaviour
         desc.enabled = state;
     }
 
-    private void OnPlayerAbilityDisplayerClick(BaseAbility ability)
+    private void OnPlayerAbilityDisplayerClick(AbilityDisplayer displayer)
     {
+        if (displayer.type != AbilityDisplayType.ModificationMenu)
+            return;
+        var ability = PlayerAbilityReferenceKeeper.PlayerAbilities[displayer.id];
         ToggleElements(true);
         currentSelectedAbility = ability;
         icon.sprite = ability.Icon;
