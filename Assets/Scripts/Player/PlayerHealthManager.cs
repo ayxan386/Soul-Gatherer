@@ -12,19 +12,18 @@ public class PlayerHealthManager : MonoBehaviour
     private void OnEnable()
     {
         EventStore.Instance.OnPlayerAbilityAffected += OnPlayerAbilityAffected;
-        EventStore.Instance.OnPlayerHealthChange += OnPlayerHealthChange;
+        EventStore.Instance.OnPlayerHealingApplied += OnPlayerHealingApplied;
+        EventStore.Instance.OnPlayerMaxHealthChange += OnPlayerMaxHealthChange;
     }
+
 
     private void OnDisable()
     {
         EventStore.Instance.OnPlayerAbilityAffected -= OnPlayerAbilityAffected;
-        EventStore.Instance.OnPlayerHealthChange -= OnPlayerHealthChange;
+        EventStore.Instance.OnPlayerHealingApplied -= OnPlayerHealingApplied;
+        EventStore.Instance.OnPlayerMaxHealthChange -= OnPlayerMaxHealthChange;
     }
 
-    private void OnPlayerHealthChange(float obj)
-    {
-        UpdateUI();
-    }
 
     private void OnPlayerAbilityAffected(AbilityParam ability)
     {
@@ -41,6 +40,7 @@ public class PlayerHealthManager : MonoBehaviour
     private void UpdateHealth(float newHealth)
     {
         currentHealth = Mathf.Clamp(newHealth, 0, maxHealth);
+        UpdateUI();
         EventStore.Instance.PublishPlayerHealthChange(currentHealth);
     }
 
@@ -48,5 +48,21 @@ public class PlayerHealthManager : MonoBehaviour
     {
         healthImage.fillAmount = 1f * currentHealth / maxHealth;
         healthDisplayText.text = $"{currentHealth:0}/{maxHealth:0}";
+    }
+
+
+    private void OnPlayerHealingApplied(float amount, bool isFraction)
+    {
+        UpdateHealth(currentHealth + (isFraction ? maxHealth * amount : amount));
+    }
+
+
+    private void OnPlayerMaxHealthChange(float amount, bool isFraction)
+    {
+        var diff = (isFraction ? maxHealth * amount : amount);
+        maxHealth += diff;
+        print("Added " + diff);
+        if (diff > 0) EventStore.Instance.PublishPlayerHealingApplied(diff, false);
+        else UpdateUI();
     }
 }
