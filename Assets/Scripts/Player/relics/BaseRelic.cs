@@ -7,7 +7,9 @@ public class BaseRelic : MonoBehaviour
     [SerializeField] private bool canHaveMultiple;
     [SerializeField] private List<TickBasedRelicEffect> tickBasedRelicEffects;
     [SerializeField] private List<OneTimeRelicEffect> oneTimeRelicEffects;
+    [Ser]
 
+    public Sprite Icon;
     public bool CanHaveMultiple => canHaveMultiple;
     public string Name => name;
 
@@ -22,4 +24,8 @@ public class BaseRelic : MonoBehaviour
         tickBasedRelicEffects.ForEach(tickBasedRelicEffect => tickBasedRelicEffect.RelicDestroyed());
         oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.RelicDestroyed());
     }
+}
+
+public class RelicDisplayData
+{
 }

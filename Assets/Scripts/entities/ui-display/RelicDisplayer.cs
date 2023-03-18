@@ -10,7 +10,7 @@ public class RelicDisplayer : MonoBehaviour
 
     public string relicName;
     
-    private Relic
+    private 
 
     void UpdateUi()
     {
