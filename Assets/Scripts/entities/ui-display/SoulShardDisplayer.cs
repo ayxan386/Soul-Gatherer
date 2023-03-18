@@ -28,6 +28,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
         if (inventoryCell && state == 3)
         {
             EventStore.Instance.PublishShardAdd(soulShard);
