@@ -22,6 +22,11 @@ public class EventStore : MonoBehaviour
 
     public event Action<int> OnPlayerLevelUp;
 
+    public event Action<BaseRelic> OnRelicObtained;
+
+    public event Action<float, bool> OnPlayerHealingApplied;
+    public event Action<float, bool> OnPlayerMaxHealthChange;
+
     private void Awake()
     {
         Instance = this;
@@ -75,6 +80,21 @@ public class EventStore : MonoBehaviour
     public void PublishPlayerLevelUp(int currentLevel)
     {
         OnPlayerLevelUp?.Invoke(currentLevel);
+    }
+
+    public void PublishRelicObtained(BaseRelic relic)
+    {
+        OnRelicObtained?.Invoke(relic);
+    }
+
+    public void PublishPlayerHealingApplied(float amount, bool isFraction)
+    {
+        OnPlayerHealingApplied?.Invoke(amount, isFraction);
+    }
+
+    public void PublishPlayerMaxHealthChange(float amount, bool isFraction)
+    {
+        OnPlayerMaxHealthChange?.Invoke(amount, isFraction);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

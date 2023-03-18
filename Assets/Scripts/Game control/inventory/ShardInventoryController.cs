@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class InventoryController : MonoBehaviour
+public class ShardInventoryController : MonoBehaviour
 {
     [SerializeField] private Transform cellHolder;
     [SerializeField] private TextMeshProUGUI goldCounter;
@@ -35,6 +35,7 @@ public class InventoryController : MonoBehaviour
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtained;
         EventStore.Instance.OnPlayerAbilityDisplayerClick -= OnAbilityDisplayerClick;
         EventStore.Instance.OnShardAdd -= OnShardAdd;
+        EventStore.Instance.OnShardRemove -= OnShardRemove;
     }
 
     private void OnAbilityDisplayerClick(AbilityDisplayer displayer)
@@ -115,4 +116,5 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
+
 }
