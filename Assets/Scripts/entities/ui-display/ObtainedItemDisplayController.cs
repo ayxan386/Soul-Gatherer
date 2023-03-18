@@ -9,6 +9,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private List<ObtainedItemDisplayer> currentDisplayers;
     private List<string> currentDisplayerIds;
+    private string attachedId;
 
     void OnEnable()
     {
@@ -18,6 +19,8 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private void OnOnEntityObtainedClick(object sender, ObtainedEntity e)
     {
+        if (e.attachedId != attachedId) return;
+        
         var findIndex = currentDisplayerIds.FindIndex((temp) => temp == e.data.id);
         if (findIndex >= 0)
         {
@@ -40,10 +43,11 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private void OnOnEntityObtainedDisplay(object sender, ObtainedEntity entity)
     {
-        if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf)
+        if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf || entity.attachedId != attachedId)
         {
             GlobalStateManager.Instance.PausedGame();
             obtainedMenu.SetActive(true);
+            attachedId = entity.attachedId;
             currentDisplayers = new List<ObtainedItemDisplayer>();
             currentDisplayerIds = new List<string>();
             for (int i = 0; i < displayParent.childCount; i++)

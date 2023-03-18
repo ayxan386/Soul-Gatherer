@@ -13,6 +13,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
     [SerializeField] private UnityEvent afterLootAction;
 
     private List<ObtainedEntity> obtainedEntities;
+    private string attachedId;
 
     private void OnDisable()
     {
@@ -21,9 +22,10 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
     private void OnEntityObtainedClick(object sender, ObtainedEntity e)
     {
-        if (obtainedEntities == null || obtainedEntities.Count == 0) return;
+        if (obtainedEntities == null || obtainedEntities.Count == 0 || e.attachedId != attachedId) return;
 
-        var index = obtainedEntities.FindIndex((temp) => temp.data.id == e.data.id);
+        var index = obtainedEntities.FindIndex((temp) =>
+            temp.data.id == e.data.id && temp.count == e.count);
         if (index >= 0)
             obtainedEntities.RemoveAt(index);
 
@@ -56,6 +58,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
     private void GenerateItemFromLootTable()
     {
+        Random.InitState(Time.time.ToString().GetHashCode());
         var count = numberOfItems;
         if (useRange)
         {
@@ -64,10 +67,12 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
         obtainedEntities = new List<ObtainedEntity>(count);
 
+        attachedId = Time.time.ToString();
         for (int i = 0; i < count; i++)
         {
             var item = lootTable.GetItem(Random.value);
             var obtainedEntity = new ObtainedEntity(item);
+            obtainedEntity.attachedId = attachedId;
             obtainedEntities.Add(obtainedEntity);
         }
 
@@ -81,6 +86,7 @@ public class ObtainedEntity
     public EntityData data;
     public int count;
     public bool consumed;
+    public string attachedId;
 
     public ObtainedEntity(EntityData data, int count)
     {

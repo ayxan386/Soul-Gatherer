@@ -2790,6 +2790,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 806661117}
     m_Modifications:
+    - target: {fileID: 2397695782613980107, guid: e290136a093997049af82eda60c51623,
+        type: 3}
+      propertyPath: numberOfItems
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3230213154612857770, guid: e290136a093997049af82eda60c51623,
         type: 3}
       propertyPath: m_Interpolate
