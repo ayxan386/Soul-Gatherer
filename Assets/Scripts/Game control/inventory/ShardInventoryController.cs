@@ -4,13 +4,11 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class InventoryController : MonoBehaviour
+public class ShardInventoryController : MonoBehaviour
 {
     [SerializeField] private Transform cellHolder;
-    [SerializeField] private TextMeshProUGUI expCounter;
     [SerializeField] private TextMeshProUGUI goldCounter;
     [SerializeField] private List<SoulShard> ownedShards;
-    [SerializeField] private float currentExp;
     [SerializeField] private int gold;
 
     [SerializeField] private List<ShardDropData> possibleShards;
@@ -28,7 +26,6 @@ public class InventoryController : MonoBehaviour
         if (ownedShards == null) ownedShards = new List<SoulShard>();
         cells = cellHolder.GetComponentsInChildren<SoulShardDisplayer>();
         DisplayOwnedShards();
-        UpdateExpCounter();
         UpdateGoldCounter();
     }
 
@@ -38,21 +35,20 @@ public class InventoryController : MonoBehaviour
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtained;
         EventStore.Instance.OnPlayerAbilityDisplayerClick -= OnAbilityDisplayerClick;
         EventStore.Instance.OnShardAdd -= OnShardAdd;
+        EventStore.Instance.OnShardRemove -= OnShardRemove;
     }
 
-    private void OnAbilityDisplayerClick(BaseAbility ability)
+    private void OnAbilityDisplayerClick(AbilityDisplayer displayer)
     {
+        if (displayer.type != AbilityDisplayType.ModificationMenu)
+            return;
+        var ability = PlayerAbilityReferenceKeeper.PlayerAbilities[displayer.id];
         currentSelectedAbility = ability;
     }
 
     private void OnEntityObtained(object sender, ObtainedEntity e)
     {
-        if (e.data.type == EntityType.Exp)
-        {
-            currentExp += e.count;
-            UpdateExpCounter();
-        }
-        else if (e.data.type == EntityType.Gold)
+        if (e.data.type == EntityType.Gold)
         {
             gold += e.count;
             UpdateGoldCounter();
@@ -67,11 +63,6 @@ public class InventoryController : MonoBehaviour
     private void UpdateGoldCounter()
     {
         goldCounter.text = "Gold: " + gold;
-    }
-
-    private void UpdateExpCounter()
-    {
-        expCounter.text = "Exp: " + currentExp.ToString("N0");
     }
 
     private void OnShardAdd(SoulShard soulShard)
@@ -125,4 +116,5 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
+
 }

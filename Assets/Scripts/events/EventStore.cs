@@ -10,7 +10,7 @@ public class EventStore : MonoBehaviour
     public event EventHandler<ObtainedEntity> OnEntityObtainedClick;
 
     public event AbilityPassingEvent OnPlayerAbilityModify;
-    public event AbilityPassingEvent OnPlayerAbilityDisplayerClick;
+    public event Action<AbilityDisplayer> OnPlayerAbilityDisplayerClick;
 
     public event AbilityPassingEvent OnPlayerAbilityAdd;
     public event ShardPassingEvent OnShardAdd;
@@ -19,6 +19,13 @@ public class EventStore : MonoBehaviour
     public event AbilityParamPassingEvent OnPlayerAbilityAffected;
 
     public event Action<float> OnPlayerHealthChange;
+
+    public event Action<int> OnPlayerLevelUp;
+
+    public event Action<BaseRelic> OnRelicObtained;
+
+    public event Action<float, bool> OnPlayerHealingApplied;
+    public event Action<float, bool> OnPlayerMaxHealthChange;
 
     private void Awake()
     {
@@ -45,9 +52,9 @@ public class EventStore : MonoBehaviour
         OnPlayerAbilityAffected?.Invoke(abilityParam);
     }
 
-    public void PublishPlayerAbilityDisplayerClick(BaseAbility ability)
+    public void PublishPlayerAbilityDisplayerClick(AbilityDisplayer abilityDisplayer)
     {
-        OnPlayerAbilityDisplayerClick?.Invoke(ability);
+        OnPlayerAbilityDisplayerClick?.Invoke(abilityDisplayer);
     }
 
     public void PublishPlayerAbilityAdd(BaseAbility ability)
@@ -68,6 +75,26 @@ public class EventStore : MonoBehaviour
     public void PublishPlayerHealthChange(float currentHealth)
     {
         OnPlayerHealthChange?.Invoke(currentHealth);
+    }
+
+    public void PublishPlayerLevelUp(int currentLevel)
+    {
+        OnPlayerLevelUp?.Invoke(currentLevel);
+    }
+
+    public void PublishRelicObtained(BaseRelic relic)
+    {
+        OnRelicObtained?.Invoke(relic);
+    }
+
+    public void PublishPlayerHealingApplied(float amount, bool isFraction)
+    {
+        OnPlayerHealingApplied?.Invoke(amount, isFraction);
+    }
+
+    public void PublishPlayerMaxHealthChange(float amount, bool isFraction)
+    {
+        OnPlayerMaxHealthChange?.Invoke(amount, isFraction);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

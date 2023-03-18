@@ -14,7 +14,6 @@ public class InteractableItem : MonoBehaviour
     {
         if (!Interactable) return;
         if (inProgress) return;
-        print("Interacting");
         inProgress = true;
         StartCoroutine(Interaction(new InteractionPassData(wasInteracted)));
         wasInteracted = true;

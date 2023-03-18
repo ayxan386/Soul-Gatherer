@@ -5,12 +5,13 @@ using UnityEngine.UI;
 public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler
 {
     public string id;
+    public AbilityDisplayType type;
     [SerializeField] private Image icon;
 
     private void Start()
     {
         DisplayAbility(PlayerAbilityReferenceKeeper.PlayerAbilities[id]);
-        EventStore.Instance.OnPlayerAbilityModify += OnPlayerAbilityModify;
+        // EventStore.Instance.OnPlayerAbilityModify += OnPlayerAbilityModify;
     }
 
     private void OnPlayerAbilityModify(BaseAbility ability)
@@ -27,11 +28,17 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        EventStore.Instance.PublishPlayerAbilityDisplayerClick(PlayerAbilityReferenceKeeper.PlayerAbilities[id]);
+        EventStore.Instance.PublishPlayerAbilityDisplayerClick(this);
     }
 
     private void OnDisable()
     {
-        EventStore.Instance.OnPlayerAbilityModify -= OnPlayerAbilityModify;
+        // EventStore.Instance.OnPlayerAbilityModify -= OnPlayerAbilityModify;
     }
+}
+
+public enum AbilityDisplayType
+{
+    ModificationMenu,
+    RewardMenu
 }

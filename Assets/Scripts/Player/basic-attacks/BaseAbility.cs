@@ -29,6 +29,11 @@ public abstract class BaseAbility : MonoBehaviour
         return cooldown;
     }
 
+    public void ExpandSlotCount()
+    {
+        currentNumberOfSlots++;
+    }
+
     public abstract bool CanApplySoulShard(SoulShard soulShard);
 
     public virtual void ApplySoulShard(SoulShard soulShard)

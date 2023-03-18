@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - entity: {fileID: 11400000, guid: e7ffff3e1a9b11a4f9f4ac634742f057, type: 2}
-    dropChance: 0.784
+    dropChance: 0.265
     quantity: 0
     quantityRange: {x: 1, y: 2}
-    canGetMultipleTimes: 1
+    canGetMultipleTimes: 0
     alreadyObtained: 0
   - entity: {fileID: 11400000, guid: 9c5d9d854aae9234eb06111dc0a79164, type: 2}
-    dropChance: 0.6
+    dropChance: 0.544
     quantity: 0
     quantityRange: {x: 3, y: 7}
     canGetMultipleTimes: 1
