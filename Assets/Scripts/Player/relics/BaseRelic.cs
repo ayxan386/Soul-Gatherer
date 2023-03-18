@@ -9,7 +9,7 @@ public class BaseRelic : MonoBehaviour
     [SerializeField] private List<OneTimeRelicEffect> oneTimeRelicEffects;
     [SerializeField] private Sprite icon;
 
-    public Sprite Icon;
+    public Sprite Icon => icon;
     public bool CanHaveMultiple => canHaveMultiple;
     public string Name => name;
 
@@ -27,7 +27,7 @@ public class BaseRelic : MonoBehaviour
 
     public string GetDescription()
     {
-        var res = "";
+        var res = name + "\n";
         foreach (var oneTimeRelicEffect in oneTimeRelicEffects)
         {
             res += oneTimeRelicEffect.GetDescription() + "\n";
