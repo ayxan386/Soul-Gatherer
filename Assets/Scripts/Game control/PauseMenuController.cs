@@ -3,6 +3,7 @@ using UnityEngine;
 public class PauseMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuRef;
+    [SerializeField] private GameObject playerHealthUI;
     private bool isPaused;
 
     void Update()
@@ -24,6 +25,7 @@ public class PauseMenuController : MonoBehaviour
     public void ContinueGame()
     {
         Time.timeScale = 1;
+        playerHealthUI.SetActive(true);
         pauseMenuRef.SetActive(false);
         GlobalStateManager.Instance.RunningGame();
     }
@@ -31,6 +33,7 @@ public class PauseMenuController : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0;
+        playerHealthUI.SetActive(false);
         pauseMenuRef.SetActive(true);
         GlobalStateManager.Instance.PausedGame();
     }

@@ -8715,6 +8715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuRef: {fileID: 1948500457}
+  playerHealthUI: {fileID: 311966981}
 --- !u!114 &1737228086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11480,6 +11481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041566206130667148, guid: 352650c107230884ba7076a0cc402d40,
+        type: 3}
+      propertyPath: m_Spacing
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352650c107230884ba7076a0cc402d40, type: 3}
