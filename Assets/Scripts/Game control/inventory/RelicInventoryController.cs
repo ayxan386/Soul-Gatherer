@@ -5,9 +5,18 @@ public class RelicInventoryController : MonoBehaviour
 {
     [SerializeField] private List<BaseRelic> ownedRelics;
 
+    public static RelicInventoryController Instance { get; private set; }
+
+    public List<BaseRelic> OwnedRelics => ownedRelics;
+
+    private void Awake()
+    {
+        Instance = this;
+        ownedRelics = new List<BaseRelic>();
+    }
+
     private void Start()
     {
-        ownedRelics = new List<BaseRelic>();
         EventStore.Instance.OnRelicObtained += OnRelicObtained;
     }
 

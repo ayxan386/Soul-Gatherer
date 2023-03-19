@@ -67,7 +67,9 @@ public class ShardInventoryController : MonoBehaviour
 
     private void OnShardAdd(SoulShard soulShard)
     {
-        if (soulShard != null && currentSelectedAbility != null)
+        if (soulShard != null && currentSelectedAbility != null
+                              && currentSelectedAbility.CanBeModified
+                              && currentSelectedAbility.CanApplySoulShard(soulShard))
         {
             currentSelectedAbility.ApplySoulShard(soulShard);
             DisplayOwnedShards();
@@ -116,5 +118,4 @@ public class ShardInventoryController : MonoBehaviour
             }
         }
     }
-
 }

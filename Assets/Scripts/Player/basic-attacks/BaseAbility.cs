@@ -9,6 +9,7 @@ public abstract class BaseAbility : MonoBehaviour
     [SerializeField] protected BaseParamAcceptingEntity abilityPrefab;
     [SerializeField] protected int currentNumberOfSlots;
     [SerializeField] protected List<SoulShard> soulShards;
+    [SerializeField] private bool canBeModified;
 
     [Header("For UI display")] [SerializeField]
     protected Sprite icon;
@@ -18,6 +19,8 @@ public abstract class BaseAbility : MonoBehaviour
     public Sprite Icon => icon;
     public string Desc => description;
     public string Id => id;
+
+    public bool CanBeModified => canBeModified;
 
     public int AvailableSlots => currentNumberOfSlots;
     public List<SoulShard> InstalledShards => soulShards;

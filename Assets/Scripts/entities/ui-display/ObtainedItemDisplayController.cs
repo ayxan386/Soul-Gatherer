@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class ObtainedItemDisplayController : MonoBehaviour
 {
+    private const string PauseLockName = "Obtained-Display";
     [SerializeField] private GameObject obtainedMenu;
     [SerializeField] private ObtainedItemDisplayer itemDisplayPrefab;
     [SerializeField] private Transform displayParent;
 
     private List<ObtainedItemDisplayer> currentDisplayers;
     private List<string> currentDisplayerIds;
+    private string attachedId;
 
     void OnEnable()
     {
@@ -18,6 +20,8 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private void OnOnEntityObtainedClick(object sender, ObtainedEntity e)
     {
+        if (e.attachedId != attachedId) return;
+
         var findIndex = currentDisplayerIds.FindIndex((temp) => temp == e.data.id);
         if (findIndex >= 0)
         {
@@ -34,16 +38,17 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     public void CloseObtainedMenu()
     {
-        GlobalStateManager.Instance.RunningGame();
         obtainedMenu.SetActive(false);
+        GlobalStateManager.Instance.RunningGame(PauseLockName);
     }
 
     private void OnOnEntityObtainedDisplay(object sender, ObtainedEntity entity)
     {
-        if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf)
+        if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf || entity.attachedId != attachedId)
         {
-            GlobalStateManager.Instance.PausedGame();
+            GlobalStateManager.Instance.PausedGame(PauseLockName);
             obtainedMenu.SetActive(true);
+            attachedId = entity.attachedId;
             currentDisplayers = new List<ObtainedItemDisplayer>();
             currentDisplayerIds = new List<string>();
             for (int i = 0; i < displayParent.childCount; i++)

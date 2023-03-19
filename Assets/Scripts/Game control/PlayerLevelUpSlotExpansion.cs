@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerLevelUpSlotExpansion : MonoBehaviour
 {
+    private const string PauseLockName = "Level-up-reward";
     [SerializeField] private GameObject wrapper;
     [SerializeField] private Transform uiHolder;
     [SerializeField] private AbilityDisplayer abilityDisplayer;
@@ -30,7 +31,7 @@ public class PlayerLevelUpSlotExpansion : MonoBehaviour
     private void ShowRewards()
     {
         wrapper.SetActive(true);
-        GlobalStateManager.Instance.PausedGame();
+        GlobalStateManager.Instance.PausedGame(PauseLockName);
         Time.timeScale = 0;
         var playerAbilities = PlayerAbilityReferenceKeeper.PlayerAbilities.Values;
         foreach (var playerAbility in playerAbilities)
@@ -53,6 +54,7 @@ public class PlayerLevelUpSlotExpansion : MonoBehaviour
         {
             DisableUi();
             Time.timeScale = 1;
+            GlobalStateManager.Instance.RunningGame(PauseLockName);
         }
     }
 

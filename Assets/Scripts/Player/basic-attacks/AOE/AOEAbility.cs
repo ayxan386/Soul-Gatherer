@@ -13,7 +13,7 @@ public class AOEAbility : BaseAbility
 
     public override bool CanApplySoulShard(SoulShard soulShard)
     {
-        return soulShard.type != SoulShardType.Explosive;
+        return soulShard.type != SoulShardType.ExplosiveRadius && soulShard.type != SoulShardType.Speed;
     }
 
     public override void ApplySoulShard(SoulShard soulShard)
