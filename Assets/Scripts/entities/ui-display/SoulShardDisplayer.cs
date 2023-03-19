@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler,
+    ISubmitHandler, ISelectHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI desc;
@@ -12,6 +13,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
     [SerializeField] private Color lockedColor;
     [SerializeField] private Color filledColor = Color.white;
     [SerializeField] private bool inventoryCell;
+    [SerializeField] private Selectable selfSelection;
 
     private int state;
     private SoulShard soulShard;
@@ -67,5 +69,27 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
         state = 1;
         icon.color = lockedColor;
         icon.sprite = null;
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        if (soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
+        if (inventoryCell && state == 3)
+        {
+            EventStore.Instance.PublishShardAdd(soulShard);
+        }
+        else if (!inventoryCell && state == 3)
+        {
+            EventStore.Instance.PublishShardRemove(soulShard);
+        }
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (state > 2)
+        {
+            descRef.SetActive(true);
+            desc.text = soulShard.description;
+        }
     }
 }

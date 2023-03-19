@@ -6,19 +6,26 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject playerHealthUI;
     private bool isPaused;
 
-    void Update()
+    private void OnEnable()
     {
-        if (Input.GetButtonDown("Pause"))
+        EventStore.Instance.OnPauseMenu += OnPauseMenu;
+    }
+
+    private void OnDisable()
+    {
+        EventStore.Instance.OnPauseMenu -= OnPauseMenu;
+    }
+
+    void OnPauseMenu()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
         {
-            isPaused = !isPaused;
-            if (isPaused)
-            {
-                PauseGame();
-            }
-            else
-            {
-                ContinueGame();
-            }
+            PauseGame();
+        }
+        else
+        {
+            ContinueGame();
         }
     }
 
