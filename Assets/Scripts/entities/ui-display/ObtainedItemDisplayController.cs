@@ -34,6 +34,10 @@ public class ObtainedItemDisplayController : MonoBehaviour
         {
             CloseObtainedMenu();
         }
+        else
+        {
+            currentDisplayers[(findIndex - 1 + currentDisplayers.Count) % currentDisplayers.Count]?.Select();
+        }
     }
 
     public void CloseObtainedMenu()
@@ -59,6 +63,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
         ObtainedItemDisplayer obtainedItemDisplayer = Instantiate(itemDisplayPrefab, displayParent);
         obtainedItemDisplayer.Display(entity);
+        obtainedItemDisplayer.Select();
         currentDisplayers.Add(obtainedItemDisplayer);
         currentDisplayerIds.Add(entity.data.id);
     }

@@ -7,28 +7,68 @@ public class PlayerAbilityController : MonoBehaviour
     [SerializeField] private Transform launchPoint;
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioClip launchSound;
-    [SerializeField] private string buttonName;
+    [SerializeField] private AbilityBinding bindingName;
+
+    private bool canUse = true;
 
     IEnumerator Start()
     {
         yield return new WaitUntil(() => ability != null && !string.IsNullOrEmpty(ability.Id));
         EventStore.Instance.PublishPlayerAbilityAdd(ability);
+    }
 
-        while (true)
+    private void UseAbility()
+    {
+        if (!canUse) return;
+        canUse = false;
+        if (GlobalStateManager.Instance.CurrentState == GameState.Running)
         {
-            yield return new WaitUntil(() => GlobalStateManager.Instance.CurrentState == GameState.Running);
-            yield return new WaitUntil(() => Input.GetButton(buttonName));
-
-            if (GlobalStateManager.Instance.CurrentState == GameState.Running)
+            ability.CastAbility(launchPoint);
+            if (launchSound && soundSource)
             {
-                ability.CastAbility(launchPoint);
-                if (launchSound && soundSource)
-                {
-                    soundSource.PlayOneShot(launchSound);
-                }
+                soundSource.PlayOneShot(launchSound);
             }
+        }
 
-            yield return new WaitForSeconds(ability.GetCooldown());
+        StartCoroutine(AbilityCooldown());
+    }
+
+    private IEnumerator AbilityCooldown()
+    {
+        yield return new WaitForSeconds(ability.GetCooldown());
+        canUse = true;
+    }
+
+    void OnProjectile()
+    {
+        if (bindingName == AbilityBinding.Projectile)
+        {
+            UseAbility();
         }
     }
+
+    void OnAOE()
+    {
+        if (bindingName == AbilityBinding.AOE)
+        {
+            UseAbility();
+        }
+    }
+
+    void OnSelf()
+    {
+        if (bindingName == AbilityBinding.Self)
+        {
+            UseAbility();
+        }
+    }
+}
+
+public enum AbilityBinding
+{
+    Projectile,
+    AOE,
+    Self,
+    RightDash,
+    LeftDash
 }

@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
 
     void Update()
     {
+        if (GlobalStateManager.Instance.CurrentState != GameState.Running) return;
         if (inputVector.magnitude > 0)
         {
             cc.SimpleMove(transform.rotation * inputVector * speed);

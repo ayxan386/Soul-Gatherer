@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3386393978170679095}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &236121765
 MonoBehaviour:
@@ -182,7 +182,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3386393978170679095}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &356601864
 MonoBehaviour:
@@ -202,6 +202,7 @@ MonoBehaviour:
     type: 3}
   currentNumberOfSlots: 1
   soulShards: []
+  canBeModified: 0
   icon: {fileID: 21300000, guid: c46be55a65cb30e44b7c89e3c0d531da, type: 3}
   description: Apply some effects to player
   details:
@@ -252,7 +253,7 @@ GameObject:
   - component: {fileID: 1452606273}
   - component: {fileID: 1452606274}
   m_Layer: 3
-  m_Name: InventoryController
+  m_Name: ShardInventoryController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,6 +297,51 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8, type: 2}
   - {fileID: 11400000, guid: 2a92c5fe3339ed24799dd78c2a49849c, type: 2}
   - {fileID: 11400000, guid: 831e9c9870c81e945b10935e8ca04563, type: 2}
+--- !u!1 &1461802914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1461802915}
+  - component: {fileID: 1461802916}
+  m_Layer: 3
+  m_Name: RelicInventoryController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1461802915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461802914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3386393978170679095}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461802916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461802914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a400c060cb483caa7e7d6bfda47542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownedRelics: []
 --- !u!1 &2079661734
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +372,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3386393978170679095}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2079661736
 MonoBehaviour:
@@ -360,6 +406,7 @@ GameObject:
   - component: {fileID: 3386393978170679098}
   - component: {fileID: 3386393978170679097}
   - component: {fileID: 3386393979156441047}
+  - component: {fileID: 1706020356}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -385,6 +432,7 @@ Transform:
   - {fileID: 6536491434019824485}
   - {fileID: 725817240}
   - {fileID: 1452606273}
+  - {fileID: 1461802915}
   - {fileID: 356601865}
   - {fileID: 2079661735}
   - {fileID: 236121764}
@@ -645,6 +693,37 @@ MonoBehaviour:
   soundSource: {fileID: 3386393978170679098}
   launchSound: {fileID: 8300000, guid: 4838e37551b3dd945b0d1b4b2ec11439, type: 3}
   buttonName: Jump
+--- !u!114 &1706020356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386393978170679090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3c677587e13bf164b886dbcd5c55128d,
+    type: 3}
+  m_NotificationBehavior: 1
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3386393978259794101
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalLimits: {x: -60, y: 60}
-  mouseSensetivity: {x: 360, y: 270}
+  mouseSensetivity: {x: 45, y: 45}
   shakingFactor: {x: 0, y: 0}
 --- !u!1 &3386393979353851429
 GameObject:
@@ -1004,6 +1083,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379135338300590543, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4,
         type: 3}
+      propertyPath: canBeModified
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379135338300590543, guid: 53cf38dc58ae30f43a2ec6e4c22e3ac4,
+        type: 3}
       propertyPath: details.damage
       value: 0.5
       objectReference: {fileID: 0}
@@ -1061,6 +1145,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3488950328323795802, guid: 0a4ba337b5fec544282bad821d456503,
         type: 3}
+    - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
+        type: 3}
+      propertyPath: canBeModified
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: details.speed

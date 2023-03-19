@@ -1,14 +1,14 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ObtainedItemDisplayer : MonoBehaviour, IPointerClickHandler
+public class ObtainedItemDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 {
     [SerializeField] private new TextMeshProUGUI name;
     [SerializeField] private TextMeshProUGUI count;
     [SerializeField] private Image icon;
+    [SerializeField] private Selectable selfSelection;
 
     private ObtainedEntity entityData;
 
@@ -25,5 +25,16 @@ public class ObtainedItemDisplayer : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         EventStore.Instance.PublishEntityObtainedClick(entityData);
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        print("Submit event received");
+        EventStore.Instance.PublishEntityObtainedClick(entityData);
+    }
+
+    public void Select()
+    {
+        selfSelection.Select();
     }
 }
