@@ -18,11 +18,6 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
     private int state;
     private SoulShard soulShard;
 
-    private void Start()
-    {
-        selfSelection.interactable = false;
-    }
-
     public void DisplaySoulShard(SoulShard soulShard)
     {
         if (soulShard == null) return;

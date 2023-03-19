@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObtainedItemDisplayController : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
         }
         else
         {
-            currentDisplayers[(findIndex - 1 + currentDisplayers.Count) % currentDisplayers.Count]?.Select();
+           GlobalStateManager.Instance.FindNextSelectable(); 
         }
     }
 

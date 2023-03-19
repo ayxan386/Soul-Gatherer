@@ -11453,6 +11453,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3386393978911879711, guid: 54efb0b32ff4cb541a4d923e318846ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386393978911879711, guid: 54efb0b32ff4cb541a4d923e318846ab,
+        type: 3}
+      propertyPath: gamePadSensitivity.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386393978911879711, guid: 54efb0b32ff4cb541a4d923e318846ab,
+        type: 3}
+      propertyPath: gamePadSensitivity.y
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54efb0b32ff4cb541a4d923e318846ab, type: 3}
 --- !u!222 &3647869921068468257

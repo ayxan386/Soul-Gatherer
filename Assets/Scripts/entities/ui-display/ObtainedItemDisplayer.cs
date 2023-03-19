@@ -29,7 +29,6 @@ public class ObtainedItemDisplayer : MonoBehaviour, IPointerClickHandler, ISubmi
 
     public void OnSubmit(BaseEventData eventData)
     {
-        print("Submit event received");
         EventStore.Instance.PublishEntityObtainedClick(entityData);
     }
 
@@ -37,4 +36,5 @@ public class ObtainedItemDisplayer : MonoBehaviour, IPointerClickHandler, ISubmi
     {
         selfSelection.Select();
     }
+
 }

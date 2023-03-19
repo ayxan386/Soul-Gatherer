@@ -43,5 +43,6 @@ public class PauseMenuController : MonoBehaviour
         playerHealthUI.SetActive(false);
         pauseMenuRef.SetActive(true);
         GlobalStateManager.Instance.PausedGame("PauseMenu");
+        GlobalStateManager.Instance.FindNextSelectable();
     }
 }
