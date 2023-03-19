@@ -18,10 +18,16 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
     private int state;
     private SoulShard soulShard;
 
+    private void Start()
+    {
+        selfSelection.interactable = false;
+    }
+
     public void DisplaySoulShard(SoulShard soulShard)
     {
         if (soulShard == null) return;
         state = 3;
+        selfSelection.interactable = true;
         gameObject.SetActive(true);
         this.soulShard = soulShard;
         icon.color = filledColor;
@@ -30,12 +36,17 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
-        if (inventoryCell && state == 3)
+        CellSubmit();
+    }
+
+    private void CellSubmit()
+    {
+        if (state != 3 && soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
+        if (inventoryCell)
         {
             EventStore.Instance.PublishShardAdd(soulShard);
         }
-        else if (!inventoryCell && state == 3)
+        else if (!inventoryCell)
         {
             EventStore.Instance.PublishShardRemove(soulShard);
         }
@@ -57,6 +68,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void DisplayAsAvailable()
     {
+        selfSelection.interactable = false;
         gameObject.SetActive(!inventoryCell);
         state = 2;
         icon.color = availableColor;
@@ -65,6 +77,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void DisplayAsLocked()
     {
+        selfSelection.interactable = false;
         gameObject.SetActive(!inventoryCell);
         state = 1;
         icon.color = lockedColor;
@@ -73,15 +86,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void OnSubmit(BaseEventData eventData)
     {
-        if (soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
-        if (inventoryCell && state == 3)
-        {
-            EventStore.Instance.PublishShardAdd(soulShard);
-        }
-        else if (!inventoryCell && state == 3)
-        {
-            EventStore.Instance.PublishShardRemove(soulShard);
-        }
+        CellSubmit();
     }
 
     public void OnSelect(BaseEventData eventData)
