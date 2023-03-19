@@ -27,7 +27,7 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1;
         playerHealthUI.SetActive(true);
         pauseMenuRef.SetActive(false);
-        GlobalStateManager.Instance.RunningGame();
+        GlobalStateManager.Instance.RunningGame("PauseMenu");
     }
 
     private void PauseGame()
@@ -35,6 +35,6 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 0;
         playerHealthUI.SetActive(false);
         pauseMenuRef.SetActive(true);
-        GlobalStateManager.Instance.PausedGame();
+        GlobalStateManager.Instance.PausedGame("PauseMenu");
     }
 }

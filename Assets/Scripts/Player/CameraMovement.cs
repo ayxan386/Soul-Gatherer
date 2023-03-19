@@ -12,6 +12,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
+        GlobalStateManager.Instance.PausedGame();
         GlobalStateManager.Instance.RunningGame();
     }
 
