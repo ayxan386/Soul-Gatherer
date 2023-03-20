@@ -21,7 +21,10 @@ public class SoulShardDisplayController : MonoBehaviour
     private void OnPlayerAbilityModify(BaseAbility ability)
     {
         if (currentSelectedAbility != null && currentSelectedAbility.Id == ability.Id)
+        {
             UpdateCells(ability);
+            GlobalStateManager.Instance.FindNextSelectable();
+        }
     }
 
     private void OnDestroy()

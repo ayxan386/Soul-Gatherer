@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObtainedItemDisplayController : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class ObtainedItemDisplayController : MonoBehaviour
         {
             CloseObtainedMenu();
         }
+        else
+        {
+           GlobalStateManager.Instance.FindNextSelectable(); 
+        }
     }
 
     public void CloseObtainedMenu()
@@ -59,6 +64,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
         ObtainedItemDisplayer obtainedItemDisplayer = Instantiate(itemDisplayPrefab, displayParent);
         obtainedItemDisplayer.Display(entity);
+        obtainedItemDisplayer.Select();
         currentDisplayers.Add(obtainedItemDisplayer);
         currentDisplayerIds.Add(entity.data.id);
     }

@@ -2,21 +2,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler
+public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 {
     public string id;
     public AbilityDisplayType type;
     [SerializeField] private Image icon;
+    [SerializeField] private Selectable selfSelection;
 
     private void Start()
     {
         DisplayAbility(PlayerAbilityReferenceKeeper.PlayerAbilities[id]);
-        // EventStore.Instance.OnPlayerAbilityModify += OnPlayerAbilityModify;
-    }
-
-    private void OnPlayerAbilityModify(BaseAbility ability)
-    {
-        if (id == ability.Id) DisplayAbility(ability);
+        selfSelection.Select();
     }
 
     private void DisplayAbility(BaseAbility playerAbility)
@@ -31,9 +27,9 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler
         EventStore.Instance.PublishPlayerAbilityDisplayerClick(this);
     }
 
-    private void OnDisable()
+    public void OnSubmit(BaseEventData eventData)
     {
-        // EventStore.Instance.OnPlayerAbilityModify -= OnPlayerAbilityModify;
+        EventStore.Instance.PublishPlayerAbilityDisplayerClick(this);
     }
 }
 

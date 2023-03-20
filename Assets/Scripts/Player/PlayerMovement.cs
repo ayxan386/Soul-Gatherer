@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour, IMoveableEntity
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
     private CharacterController cc;
 
     public static PlayerMovement Instance;
+    private Vector3 inputVector = Vector3.zero;
 
     void Awake()
     {
@@ -22,9 +24,10 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
 
     void Update()
     {
-        if (Input.GetAxisRaw("Vertical") != 0)
+        if (GlobalStateManager.Instance.CurrentState != GameState.Running) return;
+        if (inputVector.magnitude > 0)
         {
-            cc.SimpleMove(transform.forward * (speed * Input.GetAxisRaw("Vertical")));
+            cc.SimpleMove(transform.rotation * inputVector * speed);
         }
 
         if (!cc.isGrounded)
@@ -57,5 +60,13 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
         }
 
         cc.Move(force);
+    }
+
+    private void OnMove(InputValue val)
+    {
+        var temp = val.Get<Vector2>();
+        inputVector.x = temp.x;
+        inputVector.z = temp.y;
+        inputVector.y = 0;
     }
 }

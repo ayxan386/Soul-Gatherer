@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler,
+    ISubmitHandler, ISelectHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI desc;
@@ -12,6 +13,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
     [SerializeField] private Color lockedColor;
     [SerializeField] private Color filledColor = Color.white;
     [SerializeField] private bool inventoryCell;
+    [SerializeField] private Selectable selfSelection;
 
     private int state;
     private SoulShard soulShard;
@@ -20,6 +22,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
     {
         if (soulShard == null) return;
         state = 3;
+        selfSelection.interactable = true;
         gameObject.SetActive(true);
         this.soulShard = soulShard;
         icon.color = filledColor;
@@ -28,12 +31,17 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
-        if (inventoryCell && state == 3)
+        CellSubmit();
+    }
+
+    private void CellSubmit()
+    {
+        if (state != 3 && soulShard.attachedAbility != null && !soulShard.attachedAbility.CanBeModified) return;
+        if (inventoryCell)
         {
             EventStore.Instance.PublishShardAdd(soulShard);
         }
-        else if (!inventoryCell && state == 3)
+        else if (!inventoryCell)
         {
             EventStore.Instance.PublishShardRemove(soulShard);
         }
@@ -55,6 +63,7 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void DisplayAsAvailable()
     {
+        selfSelection.interactable = false;
         gameObject.SetActive(!inventoryCell);
         state = 2;
         icon.color = availableColor;
@@ -63,9 +72,24 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void DisplayAsLocked()
     {
+        selfSelection.interactable = false;
         gameObject.SetActive(!inventoryCell);
         state = 1;
         icon.color = lockedColor;
         icon.sprite = null;
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        CellSubmit();
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (state > 2)
+        {
+            descRef.SetActive(true);
+            desc.text = soulShard.description;
+        }
     }
 }
