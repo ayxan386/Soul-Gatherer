@@ -4,6 +4,7 @@ public class PauseMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuRef;
     [SerializeField] private GameObject playerHealthUI;
+    [SerializeField] private GameObject settingsMenu;
     private bool isPaused;
 
     private void OnEnable()
@@ -43,6 +44,22 @@ public class PauseMenuController : MonoBehaviour
         playerHealthUI.SetActive(false);
         pauseMenuRef.SetActive(true);
         GlobalStateManager.Instance.PausedGame("PauseMenu");
-        GlobalStateManager.Instance.FindNextSelectable();
+        SelectionController.Instance.FindNextSelectable();
+    }
+
+    public void SettingsMenu()
+    {
+        settingsMenu.SetActive(true);
+    }
+
+    public void CloseSettingsMenu()
+    {
+        settingsMenu.SetActive(false);
+        SelectionController.Instance.FindNextSelectable();
+    }
+
+    public void MainMenu()
+    {
+        IntermediateLevelLoader.LoadLevel("MainMenu");
     }
 }

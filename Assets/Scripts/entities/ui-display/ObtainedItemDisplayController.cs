@@ -37,7 +37,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
         }
         else
         {
-           GlobalStateManager.Instance.FindNextSelectable(); 
+            SelectionController.Instance.FindNextSelectable(); 
         }
     }
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GlobalStateManager : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class GlobalStateManager : MonoBehaviour
         }
         else
         {
-            FindNextSelectable();
+            SelectionController.Instance.FindNextSelectable();
         }
     }
 
@@ -53,18 +52,6 @@ public class GlobalStateManager : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-        }
-    }
-
-    public void FindNextSelectable()
-    {
-        foreach (var selectable in Selectable.allSelectablesArray)
-        {
-            if (selectable.IsInteractable())
-            {
-                selectable.Select();
-                break;
-            }
         }
     }
 }

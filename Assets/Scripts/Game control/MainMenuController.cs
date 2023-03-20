@@ -18,13 +18,13 @@ public class MainMenuController : MonoBehaviour
         settingsButton.onClick.AddListener(() => SettingsMenu());
         quitButton.onClick.AddListener(() => QuitGame());
 
-        if (levelLoader.Instance == null)
+        if (LevelLoader.Instance == null)
         {
             levelLoader = Instantiate(levelLoader);
         }
         else
         {
-            levelLoader = levelLoader.Instance;
+            levelLoader = LevelLoader.Instance;
         }
     }
 

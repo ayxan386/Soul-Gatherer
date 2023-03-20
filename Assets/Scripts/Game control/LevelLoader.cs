@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour
     private const string CurrentLevel = "CurrentLevel";
     [SerializeField] private List<string> levelNames;
     [SerializeField] private int length;
-    public LevelLoader Instance { get; private set; }
+    public static LevelLoader Instance { get; private set; }
 
     private void Awake()
     {
@@ -31,7 +31,6 @@ public class LevelLoader : MonoBehaviour
         for (int i = 0; i < length; i++)
         {
             var index = Random.Range(0, levelNames.Count);
-            print("random index: " + index);
             var campaignData = new CampaignData();
             campaignData.levelName = levelNames[index];
             campaignData.difficulty = i + 1;
@@ -77,6 +76,11 @@ public class LevelLoader : MonoBehaviour
     {
         PlayerPrefs.DeleteKey(CurrentLevel);
         PlayerPrefs.DeleteKey(CampaignKey);
+    }
+
+    public void LevelComplete()
+    {
+        PlayerPrefs.SetInt(CurrentLevel, PlayerPrefs.GetInt(CurrentLevel) + 1);
     }
 }
 
