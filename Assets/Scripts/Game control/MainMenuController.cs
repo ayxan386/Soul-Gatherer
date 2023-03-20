@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +10,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private LevelLoader levelLoader;
+    [SerializeField] private GameObject settingsMenu;
 
     void Start()
     {
@@ -50,12 +50,11 @@ public class MainMenuController : MonoBehaviour
 
     private void SettingsMenu()
     {
-        throw new NotImplementedException();
+        settingsMenu.SetActive(true);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void CloseSettingsMenu()
     {
+        settingsMenu.SetActive(false);
     }
 }
