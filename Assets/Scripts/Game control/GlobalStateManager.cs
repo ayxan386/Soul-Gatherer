@@ -54,6 +54,15 @@ public class GlobalStateManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    private void OnDestroy()
+    {
+        if (CurrentScheme == ControlSchemes.Standard)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
 }
 
 public enum GameState

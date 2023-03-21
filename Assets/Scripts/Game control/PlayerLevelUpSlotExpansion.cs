@@ -36,9 +36,12 @@ public class PlayerLevelUpSlotExpansion : MonoBehaviour
         var playerAbilities = PlayerAbilityReferenceKeeper.PlayerAbilities.Values;
         foreach (var playerAbility in playerAbilities)
         {
-            var displayer = Instantiate(abilityDisplayer, uiHolder);
-            displayer.id = playerAbility.Id;
-            displayer.type = AbilityDisplayType.RewardMenu;
+            if (playerAbility.CanBeModified)
+            {
+                var displayer = Instantiate(abilityDisplayer, uiHolder);
+                displayer.id = playerAbility.Id;
+                displayer.type = AbilityDisplayType.RewardMenu;
+            }
         }
     }
 

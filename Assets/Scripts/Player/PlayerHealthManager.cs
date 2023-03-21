@@ -40,6 +40,11 @@ public class PlayerHealthManager : MonoBehaviour
     private void UpdateHealth(float newHealth)
     {
         currentHealth = Mathf.Clamp(newHealth, 0, maxHealth);
+        if (currentHealth <= 0)
+        {
+            GameEndController.LoadEndScene(false);
+        }
+
         UpdateUI();
         EventStore.Instance.PublishPlayerHealthChange(currentHealth);
     }

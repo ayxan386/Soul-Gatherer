@@ -18,6 +18,7 @@ public class PortalController : MonoBehaviour
             else
             {
                 print("Congrants you won!!!");
+                GameEndController.LoadEndScene(true);
             }
         }
     }
