@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EventStore : MonoBehaviour
 {
-    public static EventStore Instance;
+    public static EventStore Instance { get; private set; }
 
     public event EventHandler<ObtainedEntity> OnEntityObtainedDisplay;
 
@@ -30,6 +30,7 @@ public class EventStore : MonoBehaviour
 
     private void Awake()
     {
+        print("Event store awake");
         Instance = this;
     }
 

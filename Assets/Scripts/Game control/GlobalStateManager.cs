@@ -25,8 +25,8 @@ public class GlobalStateManager : MonoBehaviour
         if (pauseLock.Count == 0)
         {
             CurrentState = GameState.Running;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.visible = false;
+            // Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {

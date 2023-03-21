@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e72f72bbc9473ab8a62f7f371a2f2c, type: 3}
-  m_Name: Relic
+  m_Name: Relic Common
   m_EditorClassIdentifier: 
+  id: relic-common
   name: Relic
+  smallDisplayIcon: {fileID: 21300000, guid: 1c7fb9232fd9ba849b28141b5a9ff7b3, type: 3}
+  type: 3

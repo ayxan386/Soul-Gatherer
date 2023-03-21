@@ -7,7 +7,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
     private bool isPaused;
 
-    private void OnEnable()
+    private void Start()
     {
         EventStore.Instance.OnPauseMenu += OnPauseMenu;
     }

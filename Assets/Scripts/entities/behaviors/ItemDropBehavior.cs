@@ -72,6 +72,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
         {
             var item = lootTable.GetItem(Random.value);
             var obtainedEntity = new ObtainedEntity(item);
+            print("Generated new item: " + obtainedEntity.data.name);
             obtainedEntity.attachedId = attachedId;
             obtainedEntities.Add(obtainedEntity);
         }

@@ -13,5 +13,8 @@ public enum EntityType
 {
     Exp,
     Gold,
-    SoulShard
+    SoulShard,
+    Relic_Common,
+    Relic_Rare,
+    Relic_Epic,
 }

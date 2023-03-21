@@ -12,6 +12,7 @@ public class InteractableItem : MonoBehaviour
     [ContextMenu("Interact")]
     public void Interact()
     {
+        print("Interacted");
         if (!Interactable) return;
         if (inProgress) return;
         inProgress = true;
