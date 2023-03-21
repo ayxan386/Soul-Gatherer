@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RelicInventoryController : MonoBehaviour
 {
@@ -81,7 +83,13 @@ public class RelicInventoryController : MonoBehaviour
         {
             if (CanObtainRelic(relicsSource[index % relicsSource.Count]))
                 roll -= relicsSource[index % relicsSource.Count].DropChance;
-            index++;
+            if (roll > 0)
+                index++;
+
+            if (index > 100)
+            {
+                throw new ArgumentException("Relic not found");
+            }
         }
 
         return Instantiate(relicsSource[index % relicsSource.Count]);
@@ -89,6 +97,7 @@ public class RelicInventoryController : MonoBehaviour
 
     private void AddRelicToInventory(BaseRelic obj)
     {
+        print("Added new relic: " + obj.Name);
         ownedRelics.Add(obj);
         obj.RelicObtained();
         obj.transform.parent = transform;

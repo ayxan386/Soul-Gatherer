@@ -51,6 +51,7 @@ MonoBehaviour:
   oneTimeRelicEffects:
   - {fileID: 1023107207952113750}
   icon: {fileID: 2136427159, guid: e6195e8a08c0a4d459695f5e2bbce502, type: 3}
+  dropChance: 0.321
 --- !u!114 &1023107207952113750
 MonoBehaviour:
   m_ObjectHideFlags: 0
