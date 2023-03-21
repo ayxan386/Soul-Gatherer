@@ -17,16 +17,16 @@ public class SelectionController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Selection.selectionChanged += SelectionChanged;
+        // Selection.selectionChanged += SelectionChanged;
     }
 
-    private void SelectionChanged()
-    {
-        if (Selection.activeGameObject == null || !Selection.activeGameObject.activeSelf)
-        {
-            FindNextSelectable();
-        }
-    }
+    // private void SelectionChanged()
+    // {
+    //     if (Selection.activeGameObject == null || !Selection.activeGameObject.activeSelf)
+    //     {
+    //         FindNextSelectable();
+    //     }
+    // }
 
 
     public void FindNextSelectable()

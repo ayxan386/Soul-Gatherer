@@ -1,12 +1,18 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MeshGenerator : MonoBehaviour
 {
     [SerializeField] private SquareGrid squareGrid;
     [SerializeField] private MeshFilter walls;
     [SerializeField] private float wallHeight;
+    [SerializeField] private GameObject torch;
+    [SerializeField] [Range(0, 1f)] private float torchFrequency;
+    [SerializeField] [Range(0, 1f)] private float torchHeightFactor;
+    [SerializeField] private float torchNormalShiftFactor;
+    [SerializeField] private Transform lightParent;
 
     List<Vector3> vertices;
     List<int> triangles;
@@ -43,7 +49,7 @@ public class MeshGenerator : MonoBehaviour
 
         if (TryGetComponent(out MeshCollider coll))
         {
-            Destroy(coll);
+            DestroyImmediate(coll);
         }
 
         gameObject.AddComponent<MeshCollider>();
@@ -64,10 +70,12 @@ public class MeshGenerator : MonoBehaviour
             for (int i = 0; i < outline.Count - 1; i++)
             {
                 int startIndex = wallVertices.Count;
-                wallVertices.Add(vertices[outline[i]]); // left
-                wallVertices.Add(vertices[outline[i + 1]]); // right
-                wallVertices.Add(vertices[outline[i]] - Vector3.up * wallHeight); // bottom left
-                wallVertices.Add(vertices[outline[i + 1]] - Vector3.up * wallHeight); // bottom right
+                var topLeft = vertices[outline[i]];
+                var topRight = vertices[outline[i + 1]];
+                wallVertices.Add(topLeft); // left
+                wallVertices.Add(topRight); // right
+                wallVertices.Add(topLeft - Vector3.up * wallHeight); // bottom left
+                wallVertices.Add(topRight - Vector3.up * wallHeight); // bottom right
 
                 wallTriangles.Add(startIndex + 0);
                 wallTriangles.Add(startIndex + 2);
@@ -76,6 +84,14 @@ public class MeshGenerator : MonoBehaviour
                 wallTriangles.Add(startIndex + 3);
                 wallTriangles.Add(startIndex + 1);
                 wallTriangles.Add(startIndex + 0);
+
+                if (Random.value < torchFrequency)
+                {
+                    var normal = Vector3.Cross((topRight - topLeft), Vector3.up).normalized;
+                    var pos = Vector3.Lerp(topLeft, topRight, 0.5f) - Vector3.up * wallHeight * torchHeightFactor +
+                              normal * torchNormalShiftFactor;
+                    Instantiate(torch, pos, Quaternion.LookRotation(normal), lightParent);
+                }
             }
         }
 

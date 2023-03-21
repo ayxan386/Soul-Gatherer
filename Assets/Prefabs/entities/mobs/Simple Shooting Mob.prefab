@@ -320,8 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70199629546b8a048bbbfb67d778de2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSeeDistance: 15
-  playerReachDistance: 5
+  playerSeeDistance: 17
+  playerReachDistance: 8
   playerDetectionLayer:
     serializedVersion: 2
     m_Bits: 904
@@ -411,10 +411,12 @@ MonoBehaviour:
     type: 3}
   currentNumberOfSlots: 0
   soulShards: []
+  canBeModified: 0
   icon: {fileID: 0}
   description: 
   details:
     damage: 1
+    tickDamage: 0
     lifespan: 3
     force: {x: 0, y: 0, z: 0}
     canAffectPlayer: 0
