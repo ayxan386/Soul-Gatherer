@@ -9,7 +9,7 @@ public class ProjectileController : BaseParamAcceptingEntity
     private void LateUpdate()
     {
         transform.Translate(transform.InverseTransformDirection(transform.forward) *
-                            (startSpeed * Time.fixedDeltaTime));
+                            (startSpeed * Time.deltaTime));
         var colliders = Physics.OverlapSphere(transform.position, details.radius, details.collisionMask);
         if (colliders.Length > 0)
         {
