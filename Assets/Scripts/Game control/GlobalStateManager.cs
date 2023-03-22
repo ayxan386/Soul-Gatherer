@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GlobalStateManager : MonoBehaviour
 {
-    private Stack<string> pauseLock;
+    private List<string> pauseLock;
     public GameState CurrentState { get; private set; }
     public ControlSchemes CurrentScheme { get; private set; } = ControlSchemes.Standard;
 
@@ -12,17 +12,12 @@ public class GlobalStateManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        pauseLock = new Stack<string>();
+        pauseLock = new List<string>();
     }
 
     public void RunningGame(string lockerName = "default")
     {
-        if (pauseLock.Count > 0 && pauseLock.Peek() == lockerName)
-        {
-            pauseLock.Pop();
-        }
-
-        if (pauseLock.Count == 0)
+        if (pauseLock.Remove(lockerName) && pauseLock.Count == 0)
         {
             CurrentState = GameState.Running;
             Cursor.visible = false;
@@ -36,7 +31,7 @@ public class GlobalStateManager : MonoBehaviour
 
     public void PausedGame(string lockerName = "default")
     {
-        pauseLock.Push(lockerName);
+        pauseLock.Add(lockerName);
         CurrentState = GameState.Paused;
         if (CurrentScheme != ControlSchemes.Gamepad)
         {

@@ -29,6 +29,7 @@ public class AbilityAffectedEntity : MonoBehaviour
 
     private Rigidbody rb;
     private NavMeshAgent agent;
+    private bool hurtEffects;
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class AbilityAffectedEntity : MonoBehaviour
     public void ApplyAbility(AbilityParam ability)
     {
         TakeDamage(ability.damage * (ability.tickDamage ? Time.deltaTime : 1));
-        
+
         if (applyForce && ability.force.magnitude > 0)
         {
             if (agent != null)
@@ -94,10 +95,12 @@ public class AbilityAffectedEntity : MonoBehaviour
     private void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (damage > 0)
+        if (damage > 0 && !hurtEffects)
         {
+            hurtEffects = true;
             effectSource?.PlayOneShot(damageSound);
             bloodParticles.Play();
+            Invoke("ResetAfterPeriod", 0.4f);
         }
 
         if (xScaleBasedHealthDisplay)
@@ -120,5 +123,10 @@ public class AbilityAffectedEntity : MonoBehaviour
         }
 
         afterDeathInteraction.Interactable = true;
+    }
+
+    void ResetAfterPeriod()
+    {
+        hurtEffects = false;
     }
 }

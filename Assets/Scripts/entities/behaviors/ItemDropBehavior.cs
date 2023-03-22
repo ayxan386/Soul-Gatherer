@@ -32,7 +32,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
         if (obtainedEntities.Count <= 0)
         {
             afterLootAction?.Invoke();
-            Destroy(this);
+            Complete = true;
         }
     }
 
@@ -45,7 +45,6 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
         DisplayItems();
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
-        Complete = true;
     }
 
     private void DisplayItems()
