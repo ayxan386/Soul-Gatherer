@@ -26,6 +26,8 @@ public class EventStore : MonoBehaviour
 
     public event Action<float, bool> OnPlayerHealingApplied;
     public event Action<float, bool> OnPlayerMaxHealthChange;
+
+    public event Action<float> OnPlayerMaxSpeedChange;
     public event Action OnPauseMenu;
 
     private void Awake()
@@ -102,6 +104,11 @@ public class EventStore : MonoBehaviour
     public void PublishPauseMenu()
     {
         OnPauseMenu?.Invoke();
+    }
+
+    public void PublishPlayerMaxSpeedChange(float changePercentage)
+    {
+        OnPlayerMaxSpeedChange?.Invoke(changePercentage);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

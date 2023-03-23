@@ -95,7 +95,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected
     private void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (damage > 0 && !hurtEffects)
+        if (currentHealth > 0 && damage > 0 && !hurtEffects)
         {
             hurtEffects = true;
             effectSource?.PlayOneShot(damageSound);

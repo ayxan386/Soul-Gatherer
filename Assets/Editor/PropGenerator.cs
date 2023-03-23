@@ -72,7 +72,6 @@ public class PropGenerator : MonoBehaviour
     {
         foreach (var position in positions)
         {
-            // PrefabUtils.
             var gameObject = PrefabUtility.InstantiatePrefab(prefab, holder) as GameObject;
             gameObject.transform.position = position;
             gameObject.transform.rotation = Quaternion.identity;
@@ -93,4 +92,6 @@ public class PropGenerator : MonoBehaviour
             Gizmos.DrawSphere(dir, size);
         }
     }
+
+// #endif
 }

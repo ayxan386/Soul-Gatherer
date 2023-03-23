@@ -7,7 +7,7 @@ public class ProjectileAbility : BaseAbility
 
     public override void CastAbility(Transform centerPoint)
     {
-        details.casterSpeed = PlayerMovement.Instance.Speed;
+        details.casterSpeed = PlayerMovement.Instance.CurrentSpeed;
         Instantiate(abilityPrefab, centerPoint.position, Quaternion.LookRotation(centerPoint.forward))
             .ApplyParams(details);
     }

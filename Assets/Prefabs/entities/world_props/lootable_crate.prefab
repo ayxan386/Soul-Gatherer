@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456866d907e02ff4b855102490b052bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capsuleCollider: {fileID: 0}
+  capsuleCollider: {fileID: 8275839945622812279}
   aoeLayer:
     serializedVersion: 2
     m_Bits: 512

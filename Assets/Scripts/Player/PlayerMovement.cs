@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour, IMoveableEntity
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float startSpeed;
     [Header("SFX")] [SerializeField] private AudioSource playerEffectSource;
     [SerializeField] private AudioClip footSteps;
     [SerializeField] [Range(0, 1f)] private float stepFrequency;
@@ -12,17 +12,19 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
     [SerializeField] private float gravity;
 
     private CharacterController cc;
+    private float currentSpeed;
 
     public static PlayerMovement Instance { get; private set; }
     private Vector3 inputVector = Vector3.zero;
 
     public Vector3 MovementDir => inputVector;
-    public float Speed => speed;
+    public float CurrentSpeed => currentSpeed;
 
     void Awake()
     {
         cc = GetComponent<CharacterController>();
         Instance = this;
+        currentSpeed = startSpeed;
     }
 
     void Update()
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
         if (GlobalStateManager.Instance.CurrentState != GameState.Running) return;
         if (inputVector.magnitude > 0)
         {
-            cc.SimpleMove(transform.rotation * inputVector * speed);
+            cc.SimpleMove(transform.rotation * inputVector * currentSpeed);
         }
 
         if (!cc.isGrounded)
@@ -71,5 +73,15 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
         inputVector.x = temp.x;
         inputVector.z = temp.y;
         inputVector.y = 0;
+    }
+
+    private void Start()
+    {
+        EventStore.Instance.OnPlayerMaxSpeedChange += OnPlayerMaxSpeedChange;
+    }
+
+    private void OnPlayerMaxSpeedChange(float changePercentage)
+    {
+        currentSpeed *= (1 + changePercentage / 100);
     }
 }
