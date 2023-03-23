@@ -64,20 +64,11 @@ public class MapGeneraator : MonoBehaviour
     public void SaveToTextureMap()
     {
         var colorMap = new List<Color>();
-        for (int x = 0; x < borderedMap.GetLength(0); x++)
         {
             for (int y = 0; y < borderedMap.GetLength(1); y++)
             {
-                if (x >= borderSize && x < width + borderSize && y >= borderSize && y < height + borderSize)
-                {
-                    borderedMap[x, y] = map[x - borderSize, y - borderSize];
-                }
-                else
-                {
-                    borderedMap[x, y] = 1;
-                }
-
-                colorMap.Add(borderedMap[x, y] == 1 ? Color.black : Color.white);
+                for (int x = 0; x < borderedMap.GetLength(0); x++)
+                    colorMap.Add(borderedMap[x, y] == 1 ? Color.black : Color.white);
             }
         }
 
@@ -103,7 +94,7 @@ public class MapGeneraator : MonoBehaviour
         {
             for (int y = 0; y < borderedMap.GetLength(1); y++)
             {
-                borderedMap[x, y] = colorMap[x + y * borderedMap.GetLength(1)].r > 0.3f ? 0 : 1;
+                borderedMap[x, y] = colorMap[x + y * borderedMap.GetLength(0)].r > 0.3f ? 0 : 1;
             }
         }
     }
