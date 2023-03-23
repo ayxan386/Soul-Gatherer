@@ -13,8 +13,11 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
 
     private CharacterController cc;
 
-    public static PlayerMovement Instance;
+    public static PlayerMovement Instance { get; private set; }
     private Vector3 inputVector = Vector3.zero;
+
+    public Vector3 MovementDir => inputVector;
+    public float Speed => speed;
 
     void Awake()
     {

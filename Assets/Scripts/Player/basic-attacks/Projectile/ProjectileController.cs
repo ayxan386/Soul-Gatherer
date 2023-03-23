@@ -54,7 +54,8 @@ public class ProjectileController : BaseParamAcceptingEntity
     {
         this.details = generalParam as ProjectileParams;
         transform.localScale *= (details.radius / 0.5f);
-        startSpeed = details.speed;
+        startSpeed = details.speed + details.casterSpeed;
+        details.casterSpeed = 0;
         Destroy(gameObject, details.lifespan);
     }
 

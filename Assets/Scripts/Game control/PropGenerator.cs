@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PropGenerator : MonoBehaviour
@@ -71,8 +72,12 @@ public class PropGenerator : MonoBehaviour
     {
         foreach (var position in positions)
         {
-            Instantiate(prefab, position, Quaternion.identity, holder)
-                .transform.localScale *= Random.Range(scaleFactor.x, scaleFactor.y);
+            // PrefabUtils.
+            var gameObject = PrefabUtility.InstantiatePrefab(prefab, holder) as GameObject;
+            gameObject.transform.position = position;
+            gameObject.transform.rotation = Quaternion.identity;
+            gameObject.transform.Rotate(0, Random.Range(-90, 90), 0);
+            gameObject.transform.localScale *= Random.Range(scaleFactor.x, scaleFactor.y);
         }
     }
 

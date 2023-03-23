@@ -7,6 +7,7 @@ public class ProjectileAbility : BaseAbility
 
     public override void CastAbility(Transform centerPoint)
     {
+        details.casterSpeed = PlayerMovement.Instance.Speed;
         Instantiate(abilityPrefab, centerPoint.position, Quaternion.LookRotation(centerPoint.forward))
             .ApplyParams(details);
     }
@@ -82,4 +83,5 @@ public class ProjectileParams : AbilityParam
     public float explosionRadius;
     public float explosionForce;
     public LayerMask collisionMask;
+    public float casterSpeed;
 }
