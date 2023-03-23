@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AbilityAffectedEntity : MonoBehaviour
+public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected
 {
     [SerializeField] private LayerMask abilityCheckLayer;
 

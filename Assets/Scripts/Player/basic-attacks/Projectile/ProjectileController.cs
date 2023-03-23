@@ -42,7 +42,7 @@ public class ProjectileController : BaseParamAcceptingEntity
             return;
         }
 
-        AbilityAffectedEntity entity;
+        IAbilityAffected entity;
         if (collider.TryGetComponent(out entity)
             || (collider.transform.parent != null && collider.transform.parent.TryGetComponent(out entity)))
         {

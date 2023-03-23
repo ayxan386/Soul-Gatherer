@@ -137,3 +137,8 @@ public enum SoulShardEffectRule
     Add,
     Multiply
 }
+
+public interface IAbilityAffected
+{
+    public void ApplyAbility(AbilityParam details);
+}

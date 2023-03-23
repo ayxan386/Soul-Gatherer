@@ -9,6 +9,7 @@ public class MapGeneraator : MonoBehaviour
     [SerializeField] private bool useRandomSeed;
     [SerializeField] [Range(0, 9)] private int thresholdValue;
     [SerializeField] private int smoothingIterationCount = 5;
+    [SerializeField] private int[,] borderedMap;
 
     private int[,] map;
 
@@ -36,7 +37,7 @@ public class MapGeneraator : MonoBehaviour
         }
 
         int borderSize = 1;
-        int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
+        borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
 
         for (int x = 0; x < borderedMap.GetLength(0); x++)
         {
@@ -52,7 +53,11 @@ public class MapGeneraator : MonoBehaviour
                 }
             }
         }
+    }
 
+    [ContextMenu("Generate mesh")]
+    public void GenerateMesh()
+    {
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
     }
