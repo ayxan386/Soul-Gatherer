@@ -30,6 +30,8 @@ public class EventStore : MonoBehaviour
     public event Action<float> OnPlayerMaxSpeedChange;
     public event Action OnPauseMenu;
 
+    public event Action<PlayerWorldData> OnPlayerDataSave; 
+
     private void Awake()
     {
         print("Event store awake");
@@ -111,9 +113,16 @@ public class EventStore : MonoBehaviour
         OnPlayerMaxSpeedChange?.Invoke(changePercentage);
     }
 
+    public void PublishPlayerWorldDataPrepared(PlayerWorldData data)
+    {
+        OnPlayerDataSave?.Invoke(data);
+    }
+
     public delegate void AbilityPassingEvent(BaseAbility ability);
 
     public delegate void AbilityParamPassingEvent(AbilityParam ability);
 
     public delegate void ShardPassingEvent(SoulShard soulShard);
+    
+    public delegate float FloatPassingEvent();
 }

@@ -14,12 +14,20 @@ public class PlayerLevelManager : MonoBehaviour
     private void Start()
     {
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtained;
+        EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
         AddExp(0);
+    }
+
+    private void OnPlayerDataSave(PlayerWorldData obj)
+    {
+        obj.currentLevel = currentLevel;
+        obj.currentExp = currentExp;
     }
 
     private void OnDestroy()
     {
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtained;
+        EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
     }
 
     private void OnEntityObtained(object sender, ObtainedEntity ent)
