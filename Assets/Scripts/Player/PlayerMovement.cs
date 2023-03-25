@@ -78,6 +78,29 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
     private void Start()
     {
         EventStore.Instance.OnPlayerMaxSpeedChange += OnPlayerMaxSpeedChange;
+        EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
+        EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
+    }
+
+    private void OnDestroy()
+    {
+        EventStore.Instance.OnPlayerMaxSpeedChange -= OnPlayerMaxSpeedChange;
+        EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
+        EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
+    }
+
+    private void OnPlayerDataSave(PlayerWorldData obj)
+    {
+        obj.speed = currentSpeed;
+        obj.position = transform.position;
+        obj.rotation = transform.rotation;
+    }
+
+    private void OnPlayerDataLoad(PlayerWorldData obj)
+    {
+        MoveTo(obj.position);
+        transform.rotation = obj.rotation;
+        currentSpeed = obj.speed;
     }
 
     private void OnPlayerMaxSpeedChange(float changePercentage)

@@ -10,14 +10,19 @@ public class PlayerDataManager : MonoBehaviour
     public void SaveData()
     {
         var playerWorldData = new PlayerWorldData();
-        playerWorldData.position = PlayerMovement.Instance.transform.position;
-        playerWorldData.rotation = PlayerMovement.Instance.transform.rotation;
         EventStore.Instance.PublishPlayerWorldDataPrepared(playerWorldData);
         var json = JsonUtility.ToJson(playerWorldData);
-        print("Json to save: " + json);
-        var path = Path.Combine(Application.dataPath, fileName);
-        print("File path : " + path);
+        var path = Path.Combine(Application.persistentDataPath, fileName);
         File.WriteAllText(path, json);
+    }
+
+    [ContextMenu("Load player data")]
+    public void LoadData()
+    {
+        var path = Path.Combine(Application.persistentDataPath, fileName);
+        var json = File.ReadAllText(path);
+        var playerWorldData = JsonUtility.FromJson<PlayerWorldData>(json);
+        EventStore.Instance.PublishPlayerWorldDataLoaded(playerWorldData);
     }
 }
 
@@ -26,7 +31,9 @@ public class PlayerWorldData
 {
     public Vector3 position;
     public Quaternion rotation;
+    public float speed;
     public float currentHealth;
+    public float maxHealth;
     public int currentLevel;
     public float currentExp;
 }

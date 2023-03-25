@@ -15,7 +15,7 @@ public class DebugHelper : MonoBehaviour
 
         total += 1f / Time.deltaTime;
         count++;
-        print("FPS: " + total / count);
+        // print("FPS: " + total / count);
 
         if (count >= 10000)
         {
