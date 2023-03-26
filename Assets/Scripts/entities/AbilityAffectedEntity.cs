@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected
+public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableEntity
 {
     [SerializeField] private LayerMask abilityCheckLayer;
 
@@ -128,5 +128,34 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected
     void ResetAfterPeriod()
     {
         hurtEffects = false;
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        agent.enabled = false;
+        transform.localPosition = data.position;
+        transform.localRotation = data.rotation;
+        currentHealth = data.health;
+        TakeDamage(0);
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var entityData = new LoadableEntityData();
+        entityData.instanceId = GetInstanceID();
+        entityData.position = transform.localPosition;
+        entityData.rotation = transform.localRotation;
+        entityData.health = currentHealth;
+        return entityData;
+    }
+
+    public int GetId()
+    {
+        return GetInstanceID();
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PauseMenuController : MonoBehaviour
@@ -5,11 +6,23 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject pauseMenuRef;
     [SerializeField] private GameObject playerHealthUI;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject levelLoader;
     private bool isPaused;
 
-    private void Start()
+    private IEnumerator Start()
     {
         EventStore.Instance.OnPauseMenu += OnPauseMenu;
+        if (LevelLoader.Instance == null)
+        {
+            Instantiate(levelLoader);
+        }
+
+        loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(1);
+        PlayerDataManager.LoadData();
+        yield return new WaitForSeconds(1);
+        loadingScreen.SetActive(false);
     }
 
     private void OnDisable()
@@ -60,6 +73,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void MainMenu()
     {
+        PlayerDataManager.SaveData();
         IntermediateLevelLoader.LoadLevel("MainMenu");
     }
 }

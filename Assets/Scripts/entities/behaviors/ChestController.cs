@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChestController : ItemInteractionBehavior
+public class ChestController : ItemInteractionBehavior, ILoadableEntity
 {
     [SerializeField] private Transform lidTransform;
     [SerializeField] private float speed;
@@ -25,4 +25,26 @@ public class ChestController : ItemInteractionBehavior
 
         Complete = true;
     }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        lidTransform.rotation = data.rotation;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var entityData = new LoadableEntityData();
+        entityData.rotation = lidTransform.rotation;
+        entityData.instanceId = GetInstanceID();
+        return entityData;
+    }
+
+    public int GetId()
+    {
+        return GetInstanceID();
+    }
+       public void Destroy()
+        {
+            Destroy(gameObject);
+        }
 }

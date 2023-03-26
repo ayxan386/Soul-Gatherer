@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableItem : MonoBehaviour
+public class InteractableItem : MonoBehaviour, ILoadableEntity
 {
     [SerializeField] protected List<ItemInteractionBehavior> interactionBehaviors;
     public bool Interactable { get; set; } = true;
@@ -31,6 +31,31 @@ public class InteractableItem : MonoBehaviour
         }
 
         inProgress = false;
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        wasInteracted = data.wasInteracted;
+        Interactable = data.interactable;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var res = new LoadableEntityData();
+        res.wasInteracted = wasInteracted;
+        res.interactable = Interactable;
+        res.instanceId = GetInstanceID();
+        return res;
+    }
+
+    public int GetId()
+    {
+        return GetInstanceID();
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
 

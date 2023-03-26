@@ -98,8 +98,12 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
 
     private void OnPlayerDataLoad(PlayerWorldData obj)
     {
-        MoveTo(obj.position);
-        transform.rotation = obj.rotation;
+        if (obj.level == LevelLoader.Instance.GetCurrentLevel().order)
+        {
+            MoveTo(obj.position);
+            transform.rotation = obj.rotation;
+        }
+
         currentSpeed = obj.speed;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class ItemDropBehavior : ItemInteractionBehavior
+public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
 {
     [SerializeField] private LootTable lootTable;
     [SerializeField] private int numberOfItems;
@@ -77,6 +77,31 @@ public class ItemDropBehavior : ItemInteractionBehavior
         }
 
         lootTable.ResetTable();
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        attachedId = data.attachedId;
+        obtainedEntities = data.obtainedEntities;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var entityData = new LoadableEntityData();
+        entityData.instanceId = GetId();
+        entityData.attachedId = attachedId;
+        entityData.obtainedEntities = obtainedEntities;
+        return entityData;
+    }
+
+    public int GetId()
+    {
+        return GetInstanceID();
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
 
