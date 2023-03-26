@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -36,4 +37,16 @@ public class PlayerWorldData
     public float maxHealth;
     public int currentLevel;
     public float currentExp;
+    public List<PlayerAbilityData> abilities;
+    public List<SoulShard> ownedShards;
+    public List<string> relicIds;
+}
+
+[Serializable]
+public class PlayerAbilityData
+{
+    public string id;
+    public int slots;
+    public List<SoulShard> soulShards;
+    public bool canBeModified;
 }

@@ -16,10 +16,10 @@ public class BaseRelic : MonoBehaviour
 
     public float DropChance => dropChance;
 
-    public virtual void RelicObtained()
+    public virtual void RelicObtained(bool fromSaveFile = false)
     {
         tickBasedRelicEffects.ForEach(tickBasedRelicEffect => tickBasedRelicEffect.StartEffect());
-        oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.ApplyEffect());
+        if (!fromSaveFile) oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.ApplyEffect());
     }
 
     public virtual void RelicDestroyed()

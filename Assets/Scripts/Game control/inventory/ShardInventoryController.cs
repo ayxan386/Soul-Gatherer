@@ -22,6 +22,8 @@ public class ShardInventoryController : MonoBehaviour
         EventStore.Instance.OnPlayerAbilityDisplayerClick += OnAbilityDisplayerClick;
         EventStore.Instance.OnShardAdd += OnShardAdd;
         EventStore.Instance.OnShardRemove += OnShardRemove;
+        EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
+        EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
 
         if (ownedShards == null) ownedShards = new List<SoulShard>();
         cells = cellHolder.GetComponentsInChildren<SoulShardDisplayer>();
@@ -36,6 +38,8 @@ public class ShardInventoryController : MonoBehaviour
         EventStore.Instance.OnPlayerAbilityDisplayerClick -= OnAbilityDisplayerClick;
         EventStore.Instance.OnShardAdd -= OnShardAdd;
         EventStore.Instance.OnShardRemove -= OnShardRemove;
+        EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
+        EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
     }
 
     private void OnAbilityDisplayerClick(AbilityDisplayer displayer)
@@ -58,6 +62,42 @@ public class ShardInventoryController : MonoBehaviour
             ownedShards.Add(RandomShard());
             DisplayOwnedShards();
         }
+    }
+
+
+    private void OnPlayerDataSave(PlayerWorldData obj)
+    {
+        if (obj.abilities == null) obj.abilities = new List<PlayerAbilityData>();
+        foreach (var abilitiesValue in PlayerAbilityReferenceKeeper.PlayerAbilities.Values)
+        {
+            obj.abilities.Add(abilitiesValue.GetData());
+        }
+
+        obj.ownedShards = ownedShards;
+    }
+
+    private void OnPlayerDataLoad(PlayerWorldData obj)
+    {
+        if (obj.abilities == null) return;
+        ownedShards = obj.ownedShards;
+
+        foreach (var abilityData in obj.abilities)
+        {
+            var playerAbility = PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.id];
+            playerAbility.ApplyData(abilityData);
+            foreach (var soulShard in abilityData.soulShards)
+            {
+                if (soulShard != null && currentSelectedAbility != null
+                                      && currentSelectedAbility.CanBeModified
+                                      && currentSelectedAbility.CanApplySoulShard(soulShard))
+                {
+                    playerAbility.ApplySoulShard(soulShard);
+                }
+            }
+        }
+
+
+        DisplayOwnedShards();
     }
 
     private void UpdateGoldCounter()

@@ -89,6 +89,27 @@ public abstract class BaseAbility : MonoBehaviour
     {
         par -= decrement;
     }
+
+    public PlayerAbilityData GetData()
+    {
+        var res = new PlayerAbilityData();
+        res.id = id;
+        res.soulShards = soulShards;
+        res.canBeModified = canBeModified;
+        res.slots = currentNumberOfSlots;
+        return res;
+    }
+
+    public void ApplyData(PlayerAbilityData data)
+    {
+        id = data.id;
+        canBeModified = data.canBeModified;
+        currentNumberOfSlots = data.slots;
+        foreach (var soulShard in data.soulShards)
+        {
+            ApplySoulShard(soulShard);
+        }
+    }
 }
 
 

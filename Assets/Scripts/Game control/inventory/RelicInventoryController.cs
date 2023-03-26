@@ -24,6 +24,8 @@ public class RelicInventoryController : MonoBehaviour
     {
         EventStore.Instance.OnRelicObtained += OnRelicObtained;
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
+        EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
+        EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
     }
 
 
@@ -31,6 +33,8 @@ public class RelicInventoryController : MonoBehaviour
     {
         EventStore.Instance.OnRelicObtained -= OnRelicObtained;
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtainedClick;
+        EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
+        EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
     }
 
     private void OnRelicObtained(BaseRelic newRelic)
@@ -95,11 +99,57 @@ public class RelicInventoryController : MonoBehaviour
         return Instantiate(relicsSource[index % relicsSource.Count]);
     }
 
-    private void AddRelicToInventory(BaseRelic obj)
+    private void AddRelicToInventory(BaseRelic obj, bool saveFile = false)
     {
         print("Added new relic: " + obj.Name);
         ownedRelics.Add(obj);
-        obj.RelicObtained();
+        obj.RelicObtained(saveFile);
         obj.transform.parent = transform;
+    }
+
+
+    private void OnPlayerDataLoad(PlayerWorldData obj)
+    {
+        if (obj.relicIds == null) return;
+        ownedRelics = new List<BaseRelic>();
+        foreach (var id in obj.relicIds)
+        {
+            FindAndAddRelic(id);
+        }
+    }
+
+    private void FindAndAddRelic(string id)
+    {
+        foreach (var commonRelic in commonRelics)
+        {
+            if (commonRelic.Name == id)
+            {
+                AddRelicToInventory(Instantiate(commonRelic, transform), true);
+                return;
+            }
+        }
+
+        foreach (var relicPrefab in rareRelics)
+        {
+            if (relicPrefab.Name == id)
+            {
+                AddRelicToInventory(Instantiate(relicPrefab, transform), true);
+                return;
+            }
+        }
+
+        foreach (var baseRelic in epicRelics)
+        {
+            if (baseRelic.Name == id)
+            {
+                AddRelicToInventory(Instantiate(baseRelic, transform), true);
+                return;
+            }
+        }
+    }
+
+    private void OnPlayerDataSave(PlayerWorldData obj)
+    {
+        obj.relicIds = ownedRelics.ConvertAll(relic => relic.Name);
     }
 }
