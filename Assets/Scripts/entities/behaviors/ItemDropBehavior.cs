@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
@@ -11,6 +12,7 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
     [SerializeField] private bool useRange;
     [SerializeField] private Vector2Int countRange;
     [SerializeField] private UnityEvent afterLootAction;
+    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
 
     private List<ObtainedEntity> obtainedEntities;
     private string attachedId;
@@ -93,10 +95,15 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
         entityData.obtainedEntities = obtainedEntities;
         return entityData;
     }
+    
+    public void SetId(int id)
+    {
+        this.assignedId = id;
+    }
 
     public int GetId()
     {
-        return GetInstanceID();
+        return assignedId;
     }
 
     public void Destroy()

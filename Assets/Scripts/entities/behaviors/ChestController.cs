@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ChestController : ItemInteractionBehavior, ILoadableEntity
 {
     [SerializeField] private Transform lidTransform;
     [SerializeField] private float speed;
     [SerializeField] private float maxAngle;
+    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
 
     public override void Interact(InteractionPassData data)
     {
@@ -35,16 +37,22 @@ public class ChestController : ItemInteractionBehavior, ILoadableEntity
     {
         var entityData = new LoadableEntityData();
         entityData.rotation = lidTransform.rotation;
-        entityData.instanceId = GetInstanceID();
+        entityData.instanceId = GetId();
         return entityData;
+    }
+    
+    public void SetId(int id)
+    {
+        this.assignedId = id;
     }
 
     public int GetId()
     {
-        return GetInstanceID();
+        return assignedId;
     }
-       public void Destroy()
-        {
-            Destroy(gameObject);
-        }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

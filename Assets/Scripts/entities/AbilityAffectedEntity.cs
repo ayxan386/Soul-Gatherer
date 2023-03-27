@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableEntity
 {
@@ -30,6 +31,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     private Rigidbody rb;
     private NavMeshAgent agent;
     private bool hurtEffects;
+    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
 
     void Start()
     {
@@ -130,6 +132,16 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
         hurtEffects = false;
     }
 
+    public void SetId(int id)
+    {
+        this.assignedId = id;
+    }
+
+    public int GetId()
+    {
+        return assignedId;
+    }
+
     public void LoadData(LoadableEntityData data)
     {
         agent.enabled = false;
@@ -142,16 +154,11 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     public LoadableEntityData GetData()
     {
         var entityData = new LoadableEntityData();
-        entityData.instanceId = GetInstanceID();
+        entityData.instanceId = GetId();
         entityData.position = transform.localPosition;
         entityData.rotation = transform.localRotation;
         entityData.health = currentHealth;
         return entityData;
-    }
-
-    public int GetId()
-    {
-        return GetInstanceID();
     }
 
     public void Destroy()

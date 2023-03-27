@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InteractableItem : MonoBehaviour, ILoadableEntity
 {
@@ -8,6 +9,7 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
     public bool Interactable { get; set; } = true;
     protected bool wasInteracted;
     private bool inProgress;
+    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
 
     [ContextMenu("Interact")]
     public void Interact()
@@ -44,13 +46,18 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
         var res = new LoadableEntityData();
         res.wasInteracted = wasInteracted;
         res.interactable = Interactable;
-        res.instanceId = GetInstanceID();
+        res.instanceId = GetId();
         return res;
+    }
+
+    public void SetId(int id)
+    {
+        this.assignedId = id;
     }
 
     public int GetId()
     {
-        return GetInstanceID();
+        return assignedId;
     }
 
     public void Destroy()

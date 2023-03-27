@@ -122,11 +122,13 @@ public class PlayerAbilityData
 
 public interface ILoadableEntity
 {
+    public void SetId(int id);
+
+    public int GetId();
     public void LoadData(LoadableEntityData data);
 
     public LoadableEntityData GetData();
 
-    public int GetId();
     public void Destroy();
 }
 

@@ -2842,6 +2842,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 72
 --- !u!114 &134792149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66444,6 +66445,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 73
 --- !u!114 &1127605387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73282,6 +73284,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 74
 --- !u!114 &1224298990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84517,6 +84520,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 75
 --- !u!114 &1524841210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87292,6 +87296,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 76
 --- !u!114 &1649765910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88751,6 +88756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1714985678}
   - component: {fileID: 1714985679}
+  - component: {fileID: 1714985680}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -88870,6 +88876,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1714985680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714985677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df33104c3664add9f403fd771a15100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastId: 0
 --- !u!1 &1716628702
 GameObject:
   m_ObjectHideFlags: 0
@@ -90184,6 +90203,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 77
 --- !u!114 &1769849650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95239,6 +95259,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 78
 --- !u!114 &1967238090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96562,6 +96583,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 79
 --- !u!114 &2009308397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98260,6 +98282,7 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+  assignedId: 80
 --- !u!114 &2069302369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102126,10 +102149,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1185320794}
     m_Modifications:
+    - target: {fileID: 5319608052755097235, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319608052755097235, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: assignedId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5319608052755097449, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}
       propertyPath: m_Name
       value: Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319608052755097452, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: id
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319608052755097452, guid: d3329c11cb867de43ab99aec9b5810a7,
+        type: 3}
+      propertyPath: assignedId
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5319608052755097453, guid: d3329c11cb867de43ab99aec9b5810a7,
         type: 3}

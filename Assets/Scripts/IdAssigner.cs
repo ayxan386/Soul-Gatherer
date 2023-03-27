@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class IdAssigner : MonoBehaviour
 {
@@ -7,13 +8,10 @@ public class IdAssigner : MonoBehaviour
     [ContextMenu("Assign ids")]
     public void AssignIds()
     {
-        var allObjects = FindObjectsOfType<MonoBehaviour>();
+        var allObjects = FindObjectsOfType<MonoBehaviour>().OfType<ILoadableEntity>();
         foreach (var obj in allObjects)
         {
-            if (obj is ILoadableEntity)
-            {
-                obj.name += "id = " + lastId++;
-            }
+            obj.SetId(lastId++);
         }
     }
 }
