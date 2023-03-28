@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public class AOEAbility : BaseAbility
+public class AOEAbility : BaseAbility, IModifiableEntityAbility
 {
+    [SerializeField] private bool mobAttached;
     [SerializeField] private AOEParams details;
 
     public override void CastAbility(Transform centerPoint)
@@ -56,6 +57,11 @@ public class AOEAbility : BaseAbility
         }
 
         base.RemoveSoulShard(soulShard);
+    }
+
+    public void IncreaseDamage(float mult)
+    {
+        if (mobAttached) details.damage *= mult;
     }
 }
 

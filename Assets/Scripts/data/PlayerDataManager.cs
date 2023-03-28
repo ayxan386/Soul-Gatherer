@@ -74,7 +74,8 @@ public static class PlayerDataManager
         {
             var json = File.ReadAllText(path);
             var entityWrapper = JsonUtility.FromJson<LoadableEntityWrapper>(json);
-            if (entityWrapper.campaignId == LevelLoader.Instance.GetCampaignId())
+            if (entityWrapper.campaignId == LevelLoader.Instance.GetCampaignId()
+                && entityWrapper.level == LevelLoader.Instance.GetCurrentLevel().order)
             {
                 var loadableEntities = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ILoadableEntity>();
                 foreach (var loadableEntity in loadableEntities)

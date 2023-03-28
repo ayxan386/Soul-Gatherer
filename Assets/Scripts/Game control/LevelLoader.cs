@@ -10,7 +10,14 @@ public class LevelLoader : MonoBehaviour
     private const string CurrentLevel = "CurrentLevel";
     [SerializeField] private List<string> levelNames;
     [SerializeField] private int length;
+    [SerializeField] private float difficultyIncrement;
     public static LevelLoader Instance { get; private set; }
+
+    public float DifficultyIncrement
+    {
+        get => difficultyIncrement;
+        set => difficultyIncrement = value;
+    }
 
     private void Awake()
     {
@@ -90,6 +97,11 @@ public class LevelLoader : MonoBehaviour
     public void LevelComplete()
     {
         PlayerPrefs.SetInt(CurrentLevel, PlayerPrefs.GetInt(CurrentLevel) + 1);
+    }
+
+    public float CalculateDifficulty()
+    {
+        return Mathf.Pow(DifficultyIncrement, GetCurrentLevel().difficulty);
     }
 }
 

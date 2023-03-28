@@ -12,12 +12,12 @@ public class PortalController : MonoBehaviour
             var currentLevel = LevelLoader.Instance.GetCurrentLevel();
             if (!currentLevel.isLast)
             {
+                PlayerDataManager.SaveData();
                 LevelLoader.Instance.LevelComplete();
                 IntermediateLevelLoader.LoadLevel(LevelLoader.Instance.GetCurrentLevel().levelName);
             }
             else
             {
-                print("Congrants you won!!!");
                 GameEndController.LoadEndScene(true);
             }
         }

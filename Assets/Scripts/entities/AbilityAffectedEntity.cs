@@ -40,7 +40,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     void Start()
     {
         afterDeathInteraction.Interactable = false;
-        currentHealth = maxHealth;
+        currentHealth = maxHealth * (LevelLoader.Instance ? LevelLoader.Instance.CalculateDifficulty() : 1);
         TryGetComponent(out rb);
         if (TryGetComponent(out agent))
         {

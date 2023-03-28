@@ -43,13 +43,6 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
 
     public void MoveTo(Vector3 point)
     {
-        var dir = point - transform.position;
-        var dist = dir.magnitude;
-        if (Physics.Raycast(transform.position, dir, out RaycastHit hit, dist, solidLayers))
-        {
-            point = hit.point;
-        }
-
         cc.enabled = false;
         transform.position = point;
         cc.enabled = true;

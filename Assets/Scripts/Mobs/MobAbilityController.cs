@@ -10,6 +10,19 @@ public class MobAbilityController : MonoBehaviour
 
     private bool canAttack = true;
 
+    private void Start()
+    {
+        if (LevelLoader.Instance != null)
+        {
+            var mult = (LevelLoader.Instance ? LevelLoader.Instance.CalculateDifficulty() : 1);
+            if (ability != null) ability.IncreaseDamage(mult);
+            if (aoeAbility != null)
+            {
+                aoeAbility.IncreaseDamage(mult);
+            }
+        }
+    }
+
     public void ShootProjectile()
     {
         if (!canAttack) return;
@@ -36,4 +49,9 @@ public class MobAbilityController : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
     }
+}
+
+public interface IModifiableEntityAbility
+{
+    public void IncreaseDamage(float mult);
 }
