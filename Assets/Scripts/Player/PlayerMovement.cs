@@ -92,8 +92,8 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
     private void OnPlayerDataSave(PlayerWorldData obj)
     {
         obj.speed = currentSpeed;
-        obj.position = transform.position;
-        obj.rotation = transform.rotation;
+        obj.position = transform.localPosition;
+        obj.rotation = transform.localRotation;
     }
 
     private void OnPlayerDataLoad(PlayerWorldData obj)
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour, IMoveableEntity
         if (obj.level == LevelLoader.Instance.GetCurrentLevel().order)
         {
             MoveTo(obj.position);
-            transform.rotation = obj.rotation;
+            transform.localRotation = obj.rotation;
         }
 
         currentSpeed = obj.speed;

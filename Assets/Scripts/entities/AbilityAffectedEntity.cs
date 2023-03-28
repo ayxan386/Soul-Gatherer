@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableEntity
 {
@@ -27,11 +26,16 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     [SerializeField] private ParticleSystem bloodParticles;
     [Header("Death")] [SerializeField] private InteractableItem afterDeathInteraction;
     [SerializeField] private Behaviour[] toDisableOnDeath;
+    private StringIdHolder assignedId;
 
     private Rigidbody rb;
     private NavMeshAgent agent;
     private bool hurtEffects;
-    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     void Start()
     {
@@ -132,14 +136,15 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
         hurtEffects = false;
     }
 
-    public void SetId(int id)
+    public void SetId(string id)
     {
-        this.assignedId = id;
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
     }
 
-    public int GetId()
+    public string GetId()
     {
-        return assignedId;
+        return assignedId.id + GetType().Name;
     }
 
     public void LoadData(LoadableEntityData data)
@@ -149,6 +154,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
         transform.localRotation = data.rotation;
         currentHealth = data.health;
         TakeDamage(0);
+        agent.enabled = true;
     }
 
     public LoadableEntityData GetData()

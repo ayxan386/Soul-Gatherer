@@ -23,12 +23,15 @@ public class EventStore : MonoBehaviour
     public event Action<int> OnPlayerLevelUp;
 
     public event Action<BaseRelic> OnRelicObtained;
+    public event Action<BaseRelic> OnRelicDestroyed;
 
     public event Action<float, bool> OnPlayerHealingApplied;
     public event Action<float, bool> OnPlayerMaxHealthChange;
 
     public event Action<float> OnPlayerMaxSpeedChange;
     public event Action OnPauseMenu;
+
+    public event Action OnRelicInventoryUpdate;
 
     public event Action<PlayerWorldData> OnPlayerDataSave;
 
@@ -123,6 +126,16 @@ public class EventStore : MonoBehaviour
     public void PublishPlayerWorldDataLoaded(PlayerWorldData playerWorldData)
     {
         OnPlayerDataLoad?.Invoke(playerWorldData);
+    }
+
+    public void PublishRelicDestroyed(BaseRelic destroyedRelic)
+    {
+        OnRelicDestroyed?.Invoke(destroyedRelic);
+    }
+
+    public void PublishRelicInventoryUpdated()
+    {
+        OnRelicInventoryUpdate?.Invoke();
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

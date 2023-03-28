@@ -36,7 +36,7 @@ public static class PlayerDataManager
         data.datas = new List<LoadableEntityData>();
         foreach (var loadableEntity in loadableEntities)
         {
-            data.datas.Add((loadableEntity as ILoadableEntity).GetData());
+            data.datas.Add(loadableEntity.GetData());
         }
 
         data.level = LevelLoader.Instance.GetCurrentLevel().order;
@@ -122,9 +122,9 @@ public class PlayerAbilityData
 
 public interface ILoadableEntity
 {
-    public void SetId(int id);
+    public void SetId(string id);
 
-    public int GetId();
+    public string GetId();
     public void LoadData(LoadableEntityData data);
 
     public LoadableEntityData GetData();
@@ -135,7 +135,7 @@ public interface ILoadableEntity
 [Serializable]
 public class LoadableEntityData
 {
-    public int instanceId;
+    public string instanceId;
     public bool interactable;
     public bool wasInteracted;
     public string attachedId;

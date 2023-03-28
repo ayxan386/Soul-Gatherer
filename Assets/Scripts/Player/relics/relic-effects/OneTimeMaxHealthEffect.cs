@@ -6,14 +6,13 @@ public class OneTimeMaxHealthEffect : OneTimeRelicEffect
     [SerializeField] private float value;
     [SerializeField] private bool fraction;
 
-    public override void ApplyEffect()
+    public override void ObtainedEffect()
     {
         EventStore.Instance.PublishPlayerMaxHealthChange(value, fraction);
     }
 
-    public override void RelicDestroyed()
+    public override void UsedEffect()
     {
-        throw new NotImplementedException();
     }
 
     public override string GetDescription()

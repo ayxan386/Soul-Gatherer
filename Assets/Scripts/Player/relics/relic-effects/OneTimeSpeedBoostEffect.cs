@@ -4,14 +4,14 @@ public class OneTimeSpeedBoostEffect : OneTimeRelicEffect
 {
     [SerializeField] private float speedIncreasePercentage;
 
-    public override void ApplyEffect()
+    public override void ObtainedEffect()
     {
         EventStore.Instance.PublishPlayerMaxSpeedChange(speedIncreasePercentage);
     }
 
-    public override void RelicDestroyed()
+    public override void UsedEffect()
     {
-        EventStore.Instance.PublishPlayerMaxSpeedChange(speedIncreasePercentage);
+        EventStore.Instance.PublishPlayerMaxSpeedChange(-speedIncreasePercentage);
     }
 
     public override string GetDescription()

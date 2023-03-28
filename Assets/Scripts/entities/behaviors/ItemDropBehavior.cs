@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
@@ -12,10 +11,15 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
     [SerializeField] private bool useRange;
     [SerializeField] private Vector2Int countRange;
     [SerializeField] private UnityEvent afterLootAction;
-    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
+    private StringIdHolder assignedId;
 
     private List<ObtainedEntity> obtainedEntities;
     private string attachedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     private void OnDisable()
     {
@@ -95,15 +99,16 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
         entityData.obtainedEntities = obtainedEntities;
         return entityData;
     }
-    
-    public void SetId(int id)
+
+    public void SetId(string id)
     {
-        this.assignedId = id;
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
     }
 
-    public int GetId()
+    public string GetId()
     {
-        return assignedId;
+        return assignedId.id + GetType().Name;
     }
 
     public void Destroy()

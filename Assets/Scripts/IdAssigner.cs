@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IdAssigner : MonoBehaviour
 {
@@ -8,10 +7,25 @@ public class IdAssigner : MonoBehaviour
     [ContextMenu("Assign ids")]
     public void AssignIds()
     {
-        var allObjects = FindObjectsOfType<MonoBehaviour>().OfType<ILoadableEntity>();
+        var allObjects = FindObjectsOfType<MonoBehaviour>();
         foreach (var obj in allObjects)
         {
-            obj.SetId(lastId++);
+            if (obj is ILoadableEntity && !obj.TryGetComponent(out StringIdHolder idHolder))
+            {
+                var id = "" + lastId++;
+                (obj as ILoadableEntity).SetId(id);
+                print(id);
+            }
+        }
+    }
+
+    [ContextMenu("Delete ids")]
+    public void DeleteIds()
+    {
+        var allObjects = FindObjectsOfType<StringIdHolder>();
+        foreach (var obj in allObjects)
+        {
+            DestroyImmediate(obj);
         }
     }
 }

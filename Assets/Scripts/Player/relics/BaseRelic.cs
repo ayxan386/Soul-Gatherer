@@ -19,13 +19,14 @@ public class BaseRelic : MonoBehaviour
     public virtual void RelicObtained(bool fromSaveFile = false)
     {
         tickBasedRelicEffects.ForEach(tickBasedRelicEffect => tickBasedRelicEffect.StartEffect());
-        if (!fromSaveFile) oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.ApplyEffect());
+        if (!fromSaveFile) oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.ObtainedEffect());
     }
 
-    public virtual void RelicDestroyed()
+    public virtual void RelicUsed()
     {
+        print("Used");
         tickBasedRelicEffects.ForEach(tickBasedRelicEffect => tickBasedRelicEffect.RelicDestroyed());
-        oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.RelicDestroyed());
+        oneTimeRelicEffects.ForEach(oneTimeRelicEffect => oneTimeRelicEffect.UsedEffect());
     }
 
     public string GetDescription()

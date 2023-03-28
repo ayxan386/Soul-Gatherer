@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class InteractableItem : MonoBehaviour, ILoadableEntity
 {
@@ -9,7 +8,12 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
     public bool Interactable { get; set; } = true;
     protected bool wasInteracted;
     private bool inProgress;
-    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
+    [SerializeField] private StringIdHolder assignedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     [ContextMenu("Interact")]
     public void Interact()
@@ -50,14 +54,16 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
         return res;
     }
 
-    public void SetId(int id)
+    public void SetId(string id)
     {
-        this.assignedId = id;
+        print("Set id called");
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
     }
 
-    public int GetId()
+    public string GetId()
     {
-        return assignedId;
+        return assignedId.id + GetType().Name;
     }
 
     public void Destroy()

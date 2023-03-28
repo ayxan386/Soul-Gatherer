@@ -1,13 +1,17 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ChestController : ItemInteractionBehavior, ILoadableEntity
 {
     [SerializeField] private Transform lidTransform;
     [SerializeField] private float speed;
     [SerializeField] private float maxAngle;
-    [FormerlySerializedAs("id")] [SerializeField] private int assignedId;
+    private StringIdHolder assignedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     public override void Interact(InteractionPassData data)
     {
@@ -40,15 +44,16 @@ public class ChestController : ItemInteractionBehavior, ILoadableEntity
         entityData.instanceId = GetId();
         return entityData;
     }
-    
-    public void SetId(int id)
+
+    public void SetId(string id)
     {
-        this.assignedId = id;
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
     }
 
-    public int GetId()
+    public string GetId()
     {
-        return assignedId;
+        return assignedId.id + GetType().Name;
     }
 
     public void Destroy()

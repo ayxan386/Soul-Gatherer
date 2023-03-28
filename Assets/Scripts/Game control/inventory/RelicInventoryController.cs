@@ -9,10 +9,13 @@ public class RelicInventoryController : MonoBehaviour
     [SerializeField] private List<BaseRelic> commonRelics;
     [SerializeField] private List<BaseRelic> rareRelics;
     [SerializeField] private List<BaseRelic> epicRelics;
+    [SerializeField] private int inventorySize;
 
     public static RelicInventoryController Instance { get; private set; }
 
     public List<BaseRelic> OwnedRelics => ownedRelics;
+
+    public int InventorySize => inventorySize;
 
     private void Awake()
     {
@@ -26,6 +29,7 @@ public class RelicInventoryController : MonoBehaviour
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
         EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
         EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
+        EventStore.Instance.OnRelicDestroyed += OnRelicDestroyed;
     }
 
 
@@ -35,6 +39,7 @@ public class RelicInventoryController : MonoBehaviour
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtainedClick;
         EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
         EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
+        EventStore.Instance.OnRelicDestroyed -= OnRelicDestroyed;
     }
 
     private void OnRelicObtained(BaseRelic newRelic)
@@ -151,5 +156,15 @@ public class RelicInventoryController : MonoBehaviour
     private void OnPlayerDataSave(PlayerWorldData obj)
     {
         obj.relicIds = ownedRelics.ConvertAll(relic => relic.Name);
+    }
+
+    private void OnRelicDestroyed(BaseRelic relic)
+    {
+        var baseRelicIndex = ownedRelics.FindIndex(ownedRelic => ownedRelic.Name == relic.Name);
+        if (baseRelicIndex >= 0)
+        {
+            ownedRelics.RemoveAt(baseRelicIndex);
+            EventStore.Instance.PublishRelicInventoryUpdated();
+        }
     }
 }

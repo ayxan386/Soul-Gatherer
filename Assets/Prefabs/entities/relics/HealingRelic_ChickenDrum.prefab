@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1023107207952113736}
   - component: {fileID: 1023107207952113751}
   - component: {fileID: 1023107207952113750}
+  - component: {fileID: 1072645294710509004}
   m_Layer: 0
   m_Name: HealingRelic_ChickenDrum
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   tickBasedRelicEffects: []
   oneTimeRelicEffects:
   - {fileID: 1023107207952113750}
+  - {fileID: 1072645294710509004}
   icon: {fileID: 2136427159, guid: e6195e8a08c0a4d459695f5e2bbce502, type: 3}
   dropChance: 0.321
 --- !u!114 &1023107207952113750
@@ -66,3 +68,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 1
   fraction: 0
+--- !u!114 &1072645294710509004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023107207952113737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644cb35b8b3e4cc69e949aaef9754469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1023107207952113737}
+  destroyedRelic: {fileID: 1023107207952113751}
