@@ -137,11 +137,11 @@ public class ShardInventoryController : MonoBehaviour
     private SoulShard RandomShard()
     {
         var res = new SoulShard();
-        Random.InitState(Time.time.ToString().GetHashCode());
-        var range = Random.Range(0, 5);
-        for (int i = 0; i < Random.Range(10, 50); i++)
+        Random.InitState(Guid.NewGuid().ToString().GetHashCode());
+        var range = 0;
+        for (int i = 0; i < Random.Range(10, 20); i++)
         {
-            range = Random.Range(0, 6);
+            range = Random.Range(0, Enum.GetNames(typeof(SoulShardType)).Length);
         }
 
         var soulShardType = (SoulShardType)range;
@@ -151,7 +151,6 @@ public class ShardInventoryController : MonoBehaviour
         shardDropData.ApplyTo(res);
         return res;
     }
-
 
     private void DisplayOwnedShards()
     {

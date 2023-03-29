@@ -191,7 +191,7 @@ public enum SoulShardType
     Speed,
     ExplosiveRadius,
     Damage,
-    Explosive,
+    AOE_Coverage
 }
 
 public enum SoulShardEffectRule

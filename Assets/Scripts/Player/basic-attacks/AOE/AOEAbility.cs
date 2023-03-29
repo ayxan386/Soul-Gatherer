@@ -30,6 +30,9 @@ public class AOEAbility : BaseAbility, IModifiableEntityAbility
             case SoulShardType.Vector:
                 ApplyToVector(soulShard.force, ref details.force);
                 break;
+            case SoulShardType.AOE_Coverage:
+                ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.converageFraction);
+                break;
             case SoulShardType.Damage:
                 ApplyToFloat(soulShard.value, soulShard.effectRule, ref details.damage);
                 break;
@@ -50,6 +53,9 @@ public class AOEAbility : BaseAbility, IModifiableEntityAbility
                 break;
             case SoulShardType.Vector:
                 RemoveFromVector(soulShard.force, ref details.force);
+                break;
+            case SoulShardType.AOE_Coverage:
+                RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.converageFraction);
                 break;
             case SoulShardType.Damage:
                 RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.damage);

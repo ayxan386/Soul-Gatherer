@@ -340,6 +340,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8, type: 2}
   - {fileID: 11400000, guid: 2a92c5fe3339ed24799dd78c2a49849c, type: 2}
   - {fileID: 11400000, guid: 831e9c9870c81e945b10935e8ca04563, type: 2}
+  - {fileID: 11400000, guid: 6b824f7e9f1e42444a1656d2b7c08627, type: 2}
   ownedShards: []
 --- !u!1 &1461802914
 GameObject:
