@@ -2,12 +2,12 @@ public class OneTimeTestEffect : OneTimeRelicEffect
 {
     public string text;
 
-    public override void ApplyEffect()
+    public override void ObtainedEffect()
     {
         print("One time effect " + text);
     }
 
-    public override void RelicDestroyed()
+    public override void UsedEffect()
     {
     }
 

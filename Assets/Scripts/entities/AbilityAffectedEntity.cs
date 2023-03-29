@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AbilityAffectedEntity : MonoBehaviour
+public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableEntity
 {
     [SerializeField] private LayerMask abilityCheckLayer;
 
@@ -26,14 +26,21 @@ public class AbilityAffectedEntity : MonoBehaviour
     [SerializeField] private ParticleSystem bloodParticles;
     [Header("Death")] [SerializeField] private InteractableItem afterDeathInteraction;
     [SerializeField] private Behaviour[] toDisableOnDeath;
+    private StringIdHolder assignedId;
 
     private Rigidbody rb;
     private NavMeshAgent agent;
+    private bool hurtEffects;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     void Start()
     {
         afterDeathInteraction.Interactable = false;
-        currentHealth = maxHealth;
+        currentHealth = maxHealth * (LevelLoader.Instance ? LevelLoader.Instance.CalculateDifficulty() : 1);
         TryGetComponent(out rb);
         if (TryGetComponent(out agent))
         {
@@ -50,7 +57,7 @@ public class AbilityAffectedEntity : MonoBehaviour
     public void ApplyAbility(AbilityParam ability)
     {
         TakeDamage(ability.damage * (ability.tickDamage ? Time.deltaTime : 1));
-        
+
         if (applyForce && ability.force.magnitude > 0)
         {
             if (agent != null)
@@ -94,10 +101,12 @@ public class AbilityAffectedEntity : MonoBehaviour
     private void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (damage > 0)
+        if (currentHealth > 0 && damage > 0 && !hurtEffects)
         {
+            hurtEffects = true;
             effectSource?.PlayOneShot(damageSound);
             bloodParticles.Play();
+            Invoke("ResetAfterPeriod", 0.4f);
         }
 
         if (xScaleBasedHealthDisplay)
@@ -120,5 +129,46 @@ public class AbilityAffectedEntity : MonoBehaviour
         }
 
         afterDeathInteraction.Interactable = true;
+    }
+
+    void ResetAfterPeriod()
+    {
+        hurtEffects = false;
+    }
+
+    public void SetId(string id)
+    {
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
+    }
+
+    public string GetId()
+    {
+        return assignedId.id + GetType().Name;
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        agent.enabled = false;
+        transform.localPosition = data.position;
+        transform.localRotation = data.rotation;
+        currentHealth = data.health;
+        TakeDamage(0);
+        agent.enabled = true;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var entityData = new LoadableEntityData();
+        entityData.instanceId = GetId();
+        entityData.position = transform.localPosition;
+        entityData.rotation = transform.localRotation;
+        entityData.health = currentHealth;
+        return entityData;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

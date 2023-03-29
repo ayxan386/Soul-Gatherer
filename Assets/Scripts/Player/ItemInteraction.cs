@@ -10,8 +10,19 @@ public class ItemInteraction : MonoBehaviour
     [SerializeField] private LayerMask interactionLayer;
 
     [Header("Others")] [SerializeField] private GameObject interactableDisplay;
+    [SerializeField] private AudioSource itemInteractionSound;
 
     private InteractableItem item;
+
+    public static ItemInteraction Instance { get; private set; }
+
+
+    public AudioSource ItemInteractionSound => itemInteractionSound;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
 
 
     void Update()

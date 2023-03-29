@@ -14,16 +14,30 @@ public class PlayerHealthManager : MonoBehaviour
         EventStore.Instance.OnPlayerAbilityAffected += OnPlayerAbilityAffected;
         EventStore.Instance.OnPlayerHealingApplied += OnPlayerHealingApplied;
         EventStore.Instance.OnPlayerMaxHealthChange += OnPlayerMaxHealthChange;
+        EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
+        EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
     }
-
 
     private void OnDisable()
     {
         EventStore.Instance.OnPlayerAbilityAffected -= OnPlayerAbilityAffected;
         EventStore.Instance.OnPlayerHealingApplied -= OnPlayerHealingApplied;
         EventStore.Instance.OnPlayerMaxHealthChange -= OnPlayerMaxHealthChange;
+        EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
+        EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
     }
 
+    private void OnPlayerDataLoad(PlayerWorldData obj)
+    {
+        maxHealth = obj.maxHealth;
+        UpdateHealth(obj.currentHealth);
+    }
+
+    private void OnPlayerDataSave(PlayerWorldData obj)
+    {
+        obj.currentHealth = currentHealth;
+        obj.maxHealth = maxHealth;
+    }
 
     private void OnPlayerAbilityAffected(AbilityParam ability)
     {

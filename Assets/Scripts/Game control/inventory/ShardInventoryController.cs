@@ -8,11 +8,11 @@ public class ShardInventoryController : MonoBehaviour
 {
     [SerializeField] private Transform cellHolder;
     [SerializeField] private TextMeshProUGUI goldCounter;
-    [SerializeField] private List<SoulShard> ownedShards;
     [SerializeField] private int gold;
 
     [SerializeField] private List<ShardDropData> possibleShards;
 
+    [SerializeField] private List<SoulShard> ownedShards;
     private SoulShardDisplayer[] cells;
     private BaseAbility currentSelectedAbility;
 
@@ -22,6 +22,8 @@ public class ShardInventoryController : MonoBehaviour
         EventStore.Instance.OnPlayerAbilityDisplayerClick += OnAbilityDisplayerClick;
         EventStore.Instance.OnShardAdd += OnShardAdd;
         EventStore.Instance.OnShardRemove += OnShardRemove;
+        EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
+        EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
 
         if (ownedShards == null) ownedShards = new List<SoulShard>();
         cells = cellHolder.GetComponentsInChildren<SoulShardDisplayer>();
@@ -36,6 +38,8 @@ public class ShardInventoryController : MonoBehaviour
         EventStore.Instance.OnPlayerAbilityDisplayerClick -= OnAbilityDisplayerClick;
         EventStore.Instance.OnShardAdd -= OnShardAdd;
         EventStore.Instance.OnShardRemove -= OnShardRemove;
+        EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
+        EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
     }
 
     private void OnAbilityDisplayerClick(AbilityDisplayer displayer)
@@ -60,6 +64,48 @@ public class ShardInventoryController : MonoBehaviour
         }
     }
 
+
+    private void OnPlayerDataSave(PlayerWorldData obj)
+    {
+        if (obj.abilities == null) obj.abilities = new List<PlayerAbilityData>();
+        foreach (var abilitiesValue in PlayerAbilityReferenceKeeper.PlayerAbilities.Values)
+        {
+            obj.abilities.Add(abilitiesValue.GetData());
+        }
+
+        obj.ownedShards = ownedShards;
+    }
+
+    private void OnPlayerDataLoad(PlayerWorldData savedData)
+    {
+        if (savedData.abilities == null) return;
+        ownedShards = new List<SoulShard>(savedData.ownedShards);
+
+        foreach (var ownedShard in ownedShards)
+        {
+            if (ownedShard.attached && !string.IsNullOrEmpty(ownedShard.abilityId))
+            {
+                var playerAbility = PlayerAbilityReferenceKeeper.PlayerAbilities[ownedShard.abilityId];
+                var savedPlayerAbility =
+                    savedData.abilities.Find((savedAbility) => savedAbility.id == ownedShard.abilityId);
+                if (savedPlayerAbility != null)
+                {
+                    playerAbility.ApplyData(savedPlayerAbility);
+                    playerAbility.ApplySoulShard(ownedShard);
+                }
+            }
+        }
+
+        foreach (var abilityData in savedData.abilities)
+        {
+            var playerAbility = PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.id];
+            playerAbility.ApplyData(abilityData);
+        }
+
+
+        DisplayOwnedShards();
+    }
+
     private void UpdateGoldCounter()
     {
         goldCounter.text = "Gold: " + gold;
@@ -78,9 +124,12 @@ public class ShardInventoryController : MonoBehaviour
 
     private void OnShardRemove(SoulShard soulShard)
     {
+        print("Remove event received");
         if (soulShard != null && currentSelectedAbility != null)
         {
+            print("Remove event received");
             currentSelectedAbility.RemoveSoulShard(soulShard);
+            soulShard.attached = false;
             DisplayOwnedShards();
         }
     }
@@ -108,7 +157,12 @@ public class ShardInventoryController : MonoBehaviour
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            if (i < ownedShards.Count && ownedShards[i].attachedAbility == null)
+            if (i < ownedShards.Count)
+            {
+                print("Updated ui for : " + ownedShards[i]);
+            }
+
+            if (i < ownedShards.Count && !ownedShards[i].attached)
             {
                 cells[i].DisplaySoulShard(ownedShards[i]);
             }

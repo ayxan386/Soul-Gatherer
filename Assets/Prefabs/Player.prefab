@@ -332,7 +332,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellHolder: {fileID: 0}
   goldCounter: {fileID: 0}
-  ownedShards: []
   gold: 0
   possibleShards:
   - {fileID: 11400000, guid: aeddc14b914105f4d8493c8fce2009fd, type: 2}
@@ -341,6 +340,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8, type: 2}
   - {fileID: 11400000, guid: 2a92c5fe3339ed24799dd78c2a49849c, type: 2}
   - {fileID: 11400000, guid: 831e9c9870c81e945b10935e8ca04563, type: 2}
+  ownedShards: []
 --- !u!1 &1461802914
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +386,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownedRelics: []
+  commonRelics:
+  - {fileID: 2439144649232021202, guid: b6d095a9cb27b864897a131ba3c6fecc, type: 3}
+  - {fileID: 1023107207952113751, guid: 6ac341f988a80804c96253c636a499a4, type: 3}
+  - {fileID: 1208636845463646167, guid: 3f8da03650c47a249abdd6059eae8bf2, type: 3}
+  rareRelics:
+  - {fileID: 1960645285605323441, guid: 0382454ab3df33b4e92bad7f2fb5d10b, type: 3}
+  epicRelics:
+  - {fileID: 729096581209400565, guid: b67439cedb30f71459829d6a211441d8, type: 3}
+  inventorySize: 21
 --- !u!1 &2079661734
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000d7b541f861824f99599c2bcfa3c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  startSpeed: 3
   playerEffectSource: {fileID: 0}
   footSteps: {fileID: 0}
   stepFrequency: 0
@@ -591,6 +600,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   interactableDisplay: {fileID: 0}
+  itemInteractionSound: {fileID: 3386393978170679098}
 --- !u!114 &3386393978170679099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +616,7 @@ MonoBehaviour:
   ability: {fileID: 6551191615278385341}
   launchPoint: {fileID: 3386393979353851428}
   soundSource: {fileID: 3386393978170679098}
-  launchSound: {fileID: 0}
+  launchSound: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
   bindingName: 0
 --- !u!82 &3386393978170679098
 AudioSource:
@@ -719,7 +729,7 @@ MonoBehaviour:
   ability: {fileID: 6536491434019824484}
   launchPoint: {fileID: 725817240}
   soundSource: {fileID: 3386393978170679098}
-  launchSound: {fileID: 0}
+  launchSound: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   bindingName: 1
 --- !u!114 &3386393979156441047
 MonoBehaviour:
@@ -881,8 +891,8 @@ Camera:
   m_GameObject: {fileID: 3386393978911879700}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -896,8 +906,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 28
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -970,6 +980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalLimits: {x: -60, y: 60}
   mouseSensetivity: {x: 45, y: 45}
+  gamePadSensitivity: {x: 120, y: 120}
   shakingFactor: {x: 0, y: 0}
 --- !u!1 &3386393979353851429
 GameObject:
@@ -1223,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: currentNumberOfSlots
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}

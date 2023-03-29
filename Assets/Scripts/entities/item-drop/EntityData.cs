@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/EntityData", order = 2)]
+[Serializable]
 public class EntityData : ScriptableObject
 {
     public string id;
@@ -13,5 +15,8 @@ public enum EntityType
 {
     Exp,
     Gold,
-    SoulShard
+    SoulShard,
+    Relic_Common,
+    Relic_Rare,
+    Relic_Epic,
 }

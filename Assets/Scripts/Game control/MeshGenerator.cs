@@ -1,12 +1,18 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class MeshGenerator : MonoBehaviour
 {
     [SerializeField] private SquareGrid squareGrid;
     [SerializeField] private MeshFilter walls;
     [SerializeField] private float wallHeight;
+    [SerializeField] private ExtraPropsData torches;
+    [SerializeField] private ExtraPropsData stones;
+    [SerializeField] private ExtraPropsData lootableJugs;
+
 
     List<Vector3> vertices;
     List<int> triangles;
@@ -43,12 +49,95 @@ public class MeshGenerator : MonoBehaviour
 
         if (TryGetComponent(out MeshCollider coll))
         {
-            Destroy(coll);
+            DestroyImmediate(coll);
         }
 
         gameObject.AddComponent<MeshCollider>();
 
         CreateWallMesh();
+    }
+
+    [ContextMenu("Add extras torches")]
+    public void AddTorches()
+    {
+        for (int i = 0; i < torches.holder.childCount; i++)
+        {
+            DestroyImmediate(torches.holder.GetChild(i).gameObject);
+        }
+
+        Random.InitState(torches.seed.GetHashCode());
+        foreach (List<int> outline in outlines)
+        {
+            for (int i = 0; i < outline.Count - 1; i++)
+            {
+                var topLeft = vertices[outline[i]];
+                var topRight = vertices[outline[i + 1]];
+
+                if (Random.value < torches.frequency)
+                {
+                    var normal = Vector3.Cross((topRight - topLeft), Vector3.up).normalized;
+                    var pos = Vector3.Lerp(topLeft, topRight, 0.5f) - Vector3.up * wallHeight * torches.heightFactor +
+                              normal * torches.normalShiftFactor;
+                    Instantiate(torches.prefab, pos, Quaternion.LookRotation(normal), torches.holder);
+                }
+            }
+        }
+    }
+
+    [ContextMenu("Add stones")]
+    public void AddStones()
+    {
+        for (int i = 0; i < stones.holder.childCount; i++)
+        {
+            DestroyImmediate(stones.holder.GetChild(i).gameObject);
+        }
+
+        Random.InitState(stones.seed.GetHashCode());
+        foreach (List<int> outline in outlines)
+        {
+            for (int i = 0; i < outline.Count - 1; i++)
+            {
+                var topLeft = vertices[outline[i]];
+                var topRight = vertices[outline[i + 1]];
+
+                if (Random.value < stones.frequency)
+                {
+                    var normal = Vector3.Cross((topRight - topLeft), Vector3.up).normalized;
+                    var pos = Vector3.Lerp(topLeft, topRight, 0.5f) - Vector3.up * wallHeight * stones.heightFactor +
+                              normal * stones.normalShiftFactor;
+                    Instantiate(stones.prefab, pos, Quaternion.LookRotation(normal), stones.holder)
+                        .transform.localScale *= 1 + Random.Range(-0.2f, 0.3f);
+                }
+            }
+        }
+    }
+
+    [ContextMenu("Add jugs")]
+    public void AddJugs()
+    {
+        for (int i = 0; i < lootableJugs.holder.childCount; i++)
+        {
+            DestroyImmediate(lootableJugs.holder.GetChild(i).gameObject);
+        }
+
+        Random.InitState(lootableJugs.seed.GetHashCode());
+        foreach (List<int> outline in outlines)
+        {
+            for (int i = 0; i < outline.Count - 1; i++)
+            {
+                var topLeft = vertices[outline[i]];
+                var topRight = vertices[outline[i + 1]];
+
+                if (Random.value < lootableJugs.frequency)
+                {
+                    var normal = Vector3.Cross((topRight - topLeft), Vector3.up).normalized;
+                    var pos = Vector3.Lerp(topLeft, topRight, 0.5f) -
+                              Vector3.up * wallHeight * lootableJugs.heightFactor +
+                              normal * lootableJugs.normalShiftFactor;
+                    Instantiate(lootableJugs.prefab, pos, Quaternion.LookRotation(normal), lootableJugs.holder);
+                }
+            }
+        }
     }
 
     void CreateWallMesh()
@@ -64,10 +153,12 @@ public class MeshGenerator : MonoBehaviour
             for (int i = 0; i < outline.Count - 1; i++)
             {
                 int startIndex = wallVertices.Count;
-                wallVertices.Add(vertices[outline[i]]); // left
-                wallVertices.Add(vertices[outline[i + 1]]); // right
-                wallVertices.Add(vertices[outline[i]] - Vector3.up * wallHeight); // bottom left
-                wallVertices.Add(vertices[outline[i + 1]] - Vector3.up * wallHeight); // bottom right
+                var topLeft = vertices[outline[i]];
+                var topRight = vertices[outline[i + 1]];
+                wallVertices.Add(topLeft); // left
+                wallVertices.Add(topRight); // right
+                wallVertices.Add(topLeft - Vector3.up * wallHeight); // bottom left
+                wallVertices.Add(topRight - Vector3.up * wallHeight); // bottom right
 
                 wallTriangles.Add(startIndex + 0);
                 wallTriangles.Add(startIndex + 2);
@@ -410,4 +501,23 @@ public class MeshGenerator : MonoBehaviour
             right = new Node(position + Vector3.right * squareSize / 2f);
         }
     }
+}
+
+
+[Serializable]
+public class ExtraPropsData
+{
+    [FormerlySerializedAs("torch")] public GameObject prefab;
+    [FormerlySerializedAs("torchSeed")] public string seed;
+
+    [FormerlySerializedAs("torchFrequency")] [Range(0, 1f)]
+    public float frequency;
+
+    [FormerlySerializedAs("torchHeightFactor")]
+    public float heightFactor;
+
+    [FormerlySerializedAs("torchNormalShiftFactor")]
+    public float normalShiftFactor;
+
+    [FormerlySerializedAs("lightParent")] public Transform holder;
 }

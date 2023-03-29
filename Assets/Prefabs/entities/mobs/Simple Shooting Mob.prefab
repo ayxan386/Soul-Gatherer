@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8985237877491208977}
   - component: {fileID: 2397695782613980107}
   - component: {fileID: 814460131635519262}
+  - component: {fileID: 392156375125830553}
   m_Layer: 6
   m_Name: item-loot
   m_TagString: Untagged
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionBehaviors:
   - {fileID: 2397695782613980107}
+  - {fileID: 392156375125830553}
 --- !u!114 &2397695782613980107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,22 +114,10 @@ MonoBehaviour:
   lootTable: {fileID: 11400000, guid: e0d77f9971acee0498c38554c5fe40f7, type: 2}
   numberOfItems: 9
   useRange: 1
-  countRange: {x: 1, y: 5}
+  countRange: {x: 1, y: 3}
   afterLootAction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8985237877491208977}
-        m_TargetAssemblyTypeName: InteractableItem, Assembly-CSharp
-        m_MethodName: SelfDestruct
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 9132878360110504266}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &814460131635519262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +150,22 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isAttachedToPlayer: 0
+--- !u!114 &392156375125830553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456547585021170074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571979393549758419f82895334d09a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBefore: 0
+  DelayAfter: 0
+  Complete: 0
+  target: {fileID: 9132878360110504266}
 --- !u!1 &9132878358711565983
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,8 +326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70199629546b8a048bbbfb67d778de2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSeeDistance: 15
-  playerReachDistance: 5
+  playerSeeDistance: 17
+  playerReachDistance: 8
   playerDetectionLayer:
     serializedVersion: 2
     m_Bits: 904
@@ -411,10 +417,12 @@ MonoBehaviour:
     type: 3}
   currentNumberOfSlots: 0
   soulShards: []
+  canBeModified: 0
   icon: {fileID: 0}
   description: 
   details:
     damage: 1
+    tickDamage: 0
     lifespan: 3
     force: {x: 0, y: 0, z: 0}
     canAffectPlayer: 0

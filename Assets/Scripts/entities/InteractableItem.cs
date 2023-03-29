@@ -2,26 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableItem : MonoBehaviour
+public class InteractableItem : MonoBehaviour, ILoadableEntity
 {
     [SerializeField] protected List<ItemInteractionBehavior> interactionBehaviors;
     public bool Interactable { get; set; } = true;
     protected bool wasInteracted;
     private bool inProgress;
+    [SerializeField] private StringIdHolder assignedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     [ContextMenu("Interact")]
     public void Interact()
     {
+        print("Interacted");
         if (!Interactable) return;
         if (inProgress) return;
         inProgress = true;
         StartCoroutine(Interaction(new InteractionPassData(wasInteracted)));
         wasInteracted = true;
-    }
-
-    public void SelfDestruct(GameObject target)
-    {
-        Destroy(target);
     }
 
     private IEnumerator Interaction(InteractionPassData data)
@@ -35,6 +37,38 @@ public class InteractableItem : MonoBehaviour
         }
 
         inProgress = false;
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        wasInteracted = data.wasInteracted;
+        Interactable = data.interactable;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var res = new LoadableEntityData();
+        res.wasInteracted = wasInteracted;
+        res.interactable = Interactable;
+        res.instanceId = GetId();
+        return res;
+    }
+
+    public void SetId(string id)
+    {
+        print("Set id called");
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
+    }
+
+    public string GetId()
+    {
+        return assignedId.id + GetType().Name;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
 

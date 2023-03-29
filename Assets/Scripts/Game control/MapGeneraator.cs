@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MapGeneraator : MonoBehaviour
@@ -9,8 +11,12 @@ public class MapGeneraator : MonoBehaviour
     [SerializeField] private bool useRandomSeed;
     [SerializeField] [Range(0, 9)] private int thresholdValue;
     [SerializeField] private int smoothingIterationCount = 5;
+    [SerializeField] private string fileName;
+    [SerializeField] private string dirPath;
+    [SerializeField] private int[,] borderedMap;
 
     private int[,] map;
+    private int borderSize;
 
     void Start()
     {
@@ -35,8 +41,8 @@ public class MapGeneraator : MonoBehaviour
             SmoothMap();
         }
 
-        int borderSize = 1;
-        int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
+        borderSize = 1;
+        borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
 
         for (int x = 0; x < borderedMap.GetLength(0); x++)
         {
@@ -52,7 +58,50 @@ public class MapGeneraator : MonoBehaviour
                 }
             }
         }
+    }
 
+    [ContextMenu("Save to texture map")]
+    public void SaveToTextureMap()
+    {
+        var colorMap = new List<Color>();
+        {
+            for (int y = 0; y < borderedMap.GetLength(1); y++)
+            {
+                for (int x = 0; x < borderedMap.GetLength(0); x++)
+                    colorMap.Add(borderedMap[x, y] == 1 ? Color.black : Color.white);
+            }
+        }
+
+        var newTexture = new Texture2D(borderedMap.GetLength(0), borderedMap.GetLength(1));
+        newTexture.SetPixels(colorMap.ToArray());
+
+        var bytes = newTexture.EncodeToPNG();
+        var filePath = Path.Combine(dirPath, fileName + ".png");
+        print("Saving to : " + filePath);
+        File.WriteAllBytes(filePath, bytes);
+    }
+
+    [ContextMenu("Load from texture")]
+    public void LoadFromPng()
+    {
+        var filePath = Path.Combine(dirPath, fileName + ".png");
+        var bytes = File.ReadAllBytes(filePath);
+        borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
+        var loadedTexture = new Texture2D(borderedMap.GetLength(0), borderedMap.GetLength(1));
+        loadedTexture.LoadImage(bytes);
+        var colorMap = loadedTexture.GetPixels();
+        for (int x = 0; x < borderedMap.GetLength(0); x++)
+        {
+            for (int y = 0; y < borderedMap.GetLength(1); y++)
+            {
+                borderedMap[x, y] = colorMap[x + y * borderedMap.GetLength(0)].r > 0.3f ? 0 : 1;
+            }
+        }
+    }
+
+    [ContextMenu("Generate mesh")]
+    public void GenerateMesh()
+    {
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
     }

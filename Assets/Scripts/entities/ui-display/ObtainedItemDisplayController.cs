@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ObtainedItemDisplayController : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
     private List<string> currentDisplayerIds;
     private string attachedId;
 
-    void OnEnable()
+    private void Start()
     {
         EventStore.Instance.OnEntityObtainedDisplay += OnOnEntityObtainedDisplay;
         EventStore.Instance.OnEntityObtainedClick += OnOnEntityObtainedClick;
@@ -37,7 +36,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
         }
         else
         {
-            SelectionController.Instance.FindNextSelectable(); 
+            SelectionController.Instance.FindNextSelectable();
         }
     }
 
@@ -49,6 +48,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private void OnOnEntityObtainedDisplay(object sender, ObtainedEntity entity)
     {
+        print("Display event received");
         if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf || entity.attachedId != attachedId)
         {
             GlobalStateManager.Instance.PausedGame(PauseLockName);

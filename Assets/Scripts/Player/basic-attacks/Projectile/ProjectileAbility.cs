@@ -1,12 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-public class ProjectileAbility : BaseAbility
+public class ProjectileAbility : BaseAbility, IModifiableEntityAbility
 {
+    [SerializeField] private bool mobAttached;
     [SerializeField] private ProjectileParams details;
+
 
     public override void CastAbility(Transform centerPoint)
     {
+        details.casterSpeed = PlayerMovement.Instance.CurrentSpeed;
         Instantiate(abilityPrefab, centerPoint.position, Quaternion.LookRotation(centerPoint.forward))
             .ApplyParams(details);
     }
@@ -71,6 +74,23 @@ public class ProjectileAbility : BaseAbility
 
         base.RemoveSoulShard(soulShard);
     }
+
+    public void IncreaseDamage(float mult)
+    {
+        if (mobAttached) details.damage *= mult;
+    }
+
+    public override string GetDescription()
+    {
+        var res = Desc + "\n";
+        res += $"Damage : {details.damage:N1}\n";
+        res += $"Lifespan : {details.lifespan:N1}\n";
+        res += $"Speed  : {details.speed:N1} u/s\n";
+        res += $"Size   : {details.radius:N1} u\n";
+        res += $"Force  : {details.force:N1}\n";
+        res += $"Explosive: {details.explosionRadius:N1}\n";
+        return res;
+    }
 }
 
 [Serializable]
@@ -82,4 +102,5 @@ public class ProjectileParams : AbilityParam
     public float explosionRadius;
     public float explosionForce;
     public LayerMask collisionMask;
+    public float casterSpeed;
 }

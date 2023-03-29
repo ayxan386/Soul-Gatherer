@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class OneTimeHealingEffect : OneTimeRelicEffect
@@ -6,14 +5,13 @@ public class OneTimeHealingEffect : OneTimeRelicEffect
     [SerializeField] private float healAmount;
     [SerializeField] private bool fraction;
 
-    public override void ApplyEffect()
+    public override void ObtainedEffect()
     {
-        EventStore.Instance.PublishPlayerHealingApplied(healAmount, fraction);
     }
 
-    public override void RelicDestroyed()
+    public override void UsedEffect()
     {
-        throw new NotImplementedException();
+        EventStore.Instance.PublishPlayerHealingApplied(healAmount, fraction);
     }
 
     public override string GetDescription()

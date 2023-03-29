@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EventStore : MonoBehaviour
 {
-    public static EventStore Instance;
+    public static EventStore Instance { get; private set; }
 
     public event EventHandler<ObtainedEntity> OnEntityObtainedDisplay;
 
@@ -23,13 +23,23 @@ public class EventStore : MonoBehaviour
     public event Action<int> OnPlayerLevelUp;
 
     public event Action<BaseRelic> OnRelicObtained;
+    public event Action<BaseRelic> OnRelicDestroyed;
 
     public event Action<float, bool> OnPlayerHealingApplied;
     public event Action<float, bool> OnPlayerMaxHealthChange;
+
+    public event Action<float> OnPlayerMaxSpeedChange;
     public event Action OnPauseMenu;
+
+    public event Action OnRelicInventoryUpdate;
+
+    public event Action<PlayerWorldData> OnPlayerDataSave;
+
+    public event Action<PlayerWorldData> OnPlayerDataLoad;
 
     private void Awake()
     {
+        print("Event store awake");
         Instance = this;
     }
 
@@ -103,9 +113,36 @@ public class EventStore : MonoBehaviour
         OnPauseMenu?.Invoke();
     }
 
+    public void PublishPlayerMaxSpeedChange(float changePercentage)
+    {
+        OnPlayerMaxSpeedChange?.Invoke(changePercentage);
+    }
+
+    public void PublishPlayerWorldDataPrepared(PlayerWorldData data)
+    {
+        OnPlayerDataSave?.Invoke(data);
+    }
+
+    public void PublishPlayerWorldDataLoaded(PlayerWorldData playerWorldData)
+    {
+        OnPlayerDataLoad?.Invoke(playerWorldData);
+    }
+
+    public void PublishRelicDestroyed(BaseRelic destroyedRelic)
+    {
+        OnRelicDestroyed?.Invoke(destroyedRelic);
+    }
+
+    public void PublishRelicInventoryUpdated()
+    {
+        OnRelicInventoryUpdate?.Invoke();
+    }
+
     public delegate void AbilityPassingEvent(BaseAbility ability);
 
     public delegate void AbilityParamPassingEvent(AbilityParam ability);
 
     public delegate void ShardPassingEvent(SoulShard soulShard);
+
+    public delegate float FloatPassingEvent();
 }

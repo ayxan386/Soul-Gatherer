@@ -6,10 +6,18 @@ using Random = UnityEngine.Random;
 public class LevelLoader : MonoBehaviour
 {
     private const string CampaignKey = "campaign";
+    private const string CampaignId = "campaign_id";
     private const string CurrentLevel = "CurrentLevel";
     [SerializeField] private List<string> levelNames;
     [SerializeField] private int length;
+    [SerializeField] private float difficultyIncrement;
     public static LevelLoader Instance { get; private set; }
+
+    public float DifficultyIncrement
+    {
+        get => difficultyIncrement;
+        set => difficultyIncrement = value;
+    }
 
     private void Awake()
     {
@@ -33,6 +41,7 @@ public class LevelLoader : MonoBehaviour
             var index = Random.Range(0, levelNames.Count);
             var campaignData = new CampaignData();
             campaignData.levelName = levelNames[index];
+            campaignData.order = i;
             campaignData.difficulty = i + 1;
             campaignData.isLast = false;
             campaignDatas.Add(campaignData);
@@ -43,6 +52,7 @@ public class LevelLoader : MonoBehaviour
         var campaignDataWrapper = new CampaignDataWrapper();
         campaignDataWrapper.campaignDatas = campaignDatas;
         var json = JsonUtility.ToJson(campaignDataWrapper);
+        PlayerPrefs.SetString(CampaignId, Guid.NewGuid().ToString());
         PlayerPrefs.SetString(CampaignKey, json);
         PlayerPrefs.SetInt(CurrentLevel, 0);
         PlayerPrefs.Save();
@@ -76,11 +86,22 @@ public class LevelLoader : MonoBehaviour
     {
         PlayerPrefs.DeleteKey(CurrentLevel);
         PlayerPrefs.DeleteKey(CampaignKey);
+        PlayerPrefs.DeleteKey(CampaignId);
+    }
+
+    public string GetCampaignId()
+    {
+        return PlayerPrefs.GetString(CampaignId);
     }
 
     public void LevelComplete()
     {
         PlayerPrefs.SetInt(CurrentLevel, PlayerPrefs.GetInt(CurrentLevel) + 1);
+    }
+
+    public float CalculateDifficulty()
+    {
+        return Mathf.Pow(DifficultyIncrement, GetCurrentLevel().difficulty);
     }
 }
 
@@ -88,6 +109,7 @@ public class LevelLoader : MonoBehaviour
 public class CampaignData
 {
     public string levelName;
+    public int order;
     public float difficulty;
     public bool isLast;
 }

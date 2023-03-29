@@ -99,6 +99,12 @@ public class AdjustableMobController : MonoBehaviour
         if (agent.enabled)
             agent.destination = lastSawPosition;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(centerPoint.position, maxWanderDistance);
+    }
 }
 
 public enum MobStates

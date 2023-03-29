@@ -1,11 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChestController : ItemInteractionBehavior
+public class ChestController : ItemInteractionBehavior, ILoadableEntity
 {
     [SerializeField] private Transform lidTransform;
     [SerializeField] private float speed;
     [SerializeField] private float maxAngle;
+    private StringIdHolder assignedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     public override void Interact(InteractionPassData data)
     {
@@ -24,5 +30,34 @@ public class ChestController : ItemInteractionBehavior
         }
 
         Complete = true;
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        lidTransform.rotation = data.rotation;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var entityData = new LoadableEntityData();
+        entityData.rotation = lidTransform.rotation;
+        entityData.instanceId = GetId();
+        return entityData;
+    }
+
+    public void SetId(string id)
+    {
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
+    }
+
+    public string GetId()
+    {
+        return assignedId.id + GetType().Name;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

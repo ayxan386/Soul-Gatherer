@@ -42,7 +42,7 @@ public class ProjectileController : BaseParamAcceptingEntity
             return;
         }
 
-        AbilityAffectedEntity entity;
+        IAbilityAffected entity;
         if (collider.TryGetComponent(out entity)
             || (collider.transform.parent != null && collider.transform.parent.TryGetComponent(out entity)))
         {
@@ -54,7 +54,8 @@ public class ProjectileController : BaseParamAcceptingEntity
     {
         this.details = generalParam as ProjectileParams;
         transform.localScale *= (details.radius / 0.5f);
-        startSpeed = details.speed;
+        startSpeed = details.speed + details.casterSpeed;
+        details.casterSpeed = 0;
         Destroy(gameObject, details.lifespan);
     }
 

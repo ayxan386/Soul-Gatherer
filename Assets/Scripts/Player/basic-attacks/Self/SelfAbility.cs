@@ -45,6 +45,15 @@ public class SelfAbility : BaseAbility
 
         base.RemoveSoulShard(soulShard);
     }
+
+    public override string GetDescription()
+    {
+        var res = Desc + "\n";
+        res += $"Damage : {details.damage:N1}\n";
+        res += $"Lifespan : {details.lifespan:N1}\n";
+        res += $"Force  : {details.force:N1}\n";
+        return res;
+    }
 }
 
 [Serializable]

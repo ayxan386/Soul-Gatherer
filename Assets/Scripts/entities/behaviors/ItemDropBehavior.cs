@@ -4,16 +4,22 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class ItemDropBehavior : ItemInteractionBehavior
+public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
 {
     [SerializeField] private LootTable lootTable;
     [SerializeField] private int numberOfItems;
     [SerializeField] private bool useRange;
     [SerializeField] private Vector2Int countRange;
     [SerializeField] private UnityEvent afterLootAction;
+    private StringIdHolder assignedId;
 
     private List<ObtainedEntity> obtainedEntities;
     private string attachedId;
+
+    private void Awake()
+    {
+        assignedId = GetComponent<StringIdHolder>();
+    }
 
     private void OnDisable()
     {
@@ -32,7 +38,7 @@ public class ItemDropBehavior : ItemInteractionBehavior
         if (obtainedEntities.Count <= 0)
         {
             afterLootAction?.Invoke();
-            Destroy(this);
+            Complete = true;
         }
     }
 
@@ -45,7 +51,6 @@ public class ItemDropBehavior : ItemInteractionBehavior
 
         DisplayItems();
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
-        Complete = true;
     }
 
     private void DisplayItems()
@@ -72,11 +77,43 @@ public class ItemDropBehavior : ItemInteractionBehavior
         {
             var item = lootTable.GetItem(Random.value);
             var obtainedEntity = new ObtainedEntity(item);
+            print("Generated new item: " + obtainedEntity.data.name);
             obtainedEntity.attachedId = attachedId;
             obtainedEntities.Add(obtainedEntity);
         }
 
         lootTable.ResetTable();
+    }
+
+    public void LoadData(LoadableEntityData data)
+    {
+        attachedId = data.attachedId;
+        obtainedEntities = data.obtainedEntities;
+    }
+
+    public LoadableEntityData GetData()
+    {
+        var entityData = new LoadableEntityData();
+        entityData.instanceId = GetId();
+        entityData.attachedId = attachedId;
+        entityData.obtainedEntities = obtainedEntities;
+        return entityData;
+    }
+
+    public void SetId(string id)
+    {
+        assignedId = gameObject.AddComponent<StringIdHolder>();
+        assignedId.id = id;
+    }
+
+    public string GetId()
+    {
+        return assignedId.id + GetType().Name;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
 
