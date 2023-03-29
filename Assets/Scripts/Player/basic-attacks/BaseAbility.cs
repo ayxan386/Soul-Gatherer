@@ -43,15 +43,20 @@ public abstract class BaseAbility : MonoBehaviour
     {
         if (soulShards.Count + 1 > currentNumberOfSlots) return;
         soulShards.Add(soulShard);
-        soulShard.attachedAbility = this;
+        print("Attaching soul shard: " + soulShard);
+        soulShard.attached = true;
+        soulShard.abilityId = Id;
         EventStore.Instance.PublishPlayerAbilityModified(this);
     }
 
     public virtual void RemoveSoulShard(SoulShard soulShard)
     {
         if (soulShards.Count == 0) return;
+        print("BaseAbility.remove before : " + soulShard);
         soulShards.Remove(soulShard);
-        soulShard.attachedAbility = null;
+        soulShard.attached = false;
+        soulShard.abilityId = "not attached";
+        print("BaseAbility.remove after: " + soulShard);
         EventStore.Instance.PublishPlayerAbilityModified(this);
     }
 
@@ -105,14 +110,17 @@ public abstract class BaseAbility : MonoBehaviour
         id = data.id;
         canBeModified = data.canBeModified;
         currentNumberOfSlots = data.slots;
-        foreach (var soulShard in data.soulShards)
-        {
-            ApplySoulShard(soulShard);
-        }
+    }
+
+    public virtual string GetDescription()
+    {
+        var res = Desc + "\n";
+        return res;
     }
 }
 
 
+[Serializable]
 public class AbilityParam
 {
     public float damage;
@@ -132,14 +140,47 @@ public abstract class BaseParamAcceptingEntity : MonoBehaviour
 [Serializable]
 public class SoulShard
 {
-    public BaseAbility attachedAbility;
+    public string id;
+    public string abilityId;
     public Sprite icon;
     public SoulShardType type;
     public SoulShardEffectRule effectRule;
+    public bool attached;
     public string description;
     public Vector3 force;
     public float value;
     public bool explosive;
+
+    public SoulShard()
+    {
+        id = Guid.NewGuid().ToString();
+    }
+
+    public SoulShard(SoulShard source)
+    {
+        id = source.id;
+        abilityId = source.abilityId;
+        icon = source.icon;
+        type = source.type;
+        effectRule = source.effectRule;
+        attached = source.attached;
+        description = source.description;
+        force = source.force;
+        value = source.value;
+        explosive = source.explosive;
+    }
+
+    public override string ToString()
+    {
+        return $"{type.ToString()} x {value} x {attached} => {abilityId}";
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is not SoulShard) return false;
+        var casted = obj as SoulShard;
+        return casted.id == id;
+    }
 }
 
 public enum SoulShardType

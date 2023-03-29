@@ -63,6 +63,18 @@ public class AOEAbility : BaseAbility, IModifiableEntityAbility
     {
         if (mobAttached) details.damage *= mult;
     }
+
+    public override string GetDescription()
+    {
+        var res = Desc + "\n";
+        res += $"Damage : {details.damage:N1}\n";
+        res += $"Lifespan : {details.lifespan:N1}\n";
+        res += $"Thickness  : {details.thickness:N1} u\n";
+        res += $"Height   : {details.height:N1} u\n";
+        res += $"Force  : {details.force:N1}\n";
+        res += $"Coverage: {details.converageFraction * 100:N1}%\n";
+        return res;
+    }
 }
 
 [Serializable]

@@ -332,7 +332,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellHolder: {fileID: 0}
   goldCounter: {fileID: 0}
-  ownedShards: []
   gold: 0
   possibleShards:
   - {fileID: 11400000, guid: aeddc14b914105f4d8493c8fce2009fd, type: 2}
@@ -341,6 +340,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94a6ea2fe7c74034bb0b096198ebcee8, type: 2}
   - {fileID: 11400000, guid: 2a92c5fe3339ed24799dd78c2a49849c, type: 2}
   - {fileID: 11400000, guid: 831e9c9870c81e945b10935e8ca04563, type: 2}
+  ownedShards: []
 --- !u!1 &1461802914
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,10 +389,12 @@ MonoBehaviour:
   commonRelics:
   - {fileID: 2439144649232021202, guid: b6d095a9cb27b864897a131ba3c6fecc, type: 3}
   - {fileID: 1023107207952113751, guid: 6ac341f988a80804c96253c636a499a4, type: 3}
+  - {fileID: 1208636845463646167, guid: 3f8da03650c47a249abdd6059eae8bf2, type: 3}
   rareRelics:
   - {fileID: 1960645285605323441, guid: 0382454ab3df33b4e92bad7f2fb5d10b, type: 3}
   epicRelics:
   - {fileID: 729096581209400565, guid: b67439cedb30f71459829d6a211441d8, type: 3}
+  inventorySize: 21
 --- !u!1 &2079661734
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000d7b541f861824f99599c2bcfa3c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  startSpeed: 3
   playerEffectSource: {fileID: 0}
   footSteps: {fileID: 0}
   stepFrequency: 0
@@ -904,7 +906,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 60
+  far clip plane: 28
   field of view: 80
   orthographic: 0
   orthographic size: 5
@@ -1232,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: currentNumberOfSlots
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}

@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNames:
   - SampleScene
+  - Level1
   length: 3
   difficultyIncrement: 1.2

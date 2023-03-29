@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class RelicDisplayer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
-    ISubmitHandler
+    ISubmitHandler, ISelectHandler
 {
     [SerializeField] private Image icon;
     private TextMeshProUGUI description;
@@ -22,6 +22,7 @@ public class RelicDisplayer : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        description.text = attachedRelic.GetDescription();
         description.alpha = 1;
     }
 
@@ -39,11 +40,18 @@ public class RelicDisplayer : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnSubmit(BaseEventData eventData)
     {
         ApplyRelicEffect();
+        SelectionController.Instance.FindNextSelectable();
     }
 
     private void ApplyRelicEffect()
     {
         description.alpha = 0;
         attachedRelic.RelicUsed();
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        description.text = attachedRelic.GetDescription();
+        description.alpha = 1;
     }
 }

@@ -1,11 +1,14 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHandler
+public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHandler, IPointerEnterHandler,
+    ISelectHandler
 {
     public string id;
     public AbilityDisplayType type;
+    public TextMeshProUGUI descText;
     [SerializeField] private Image icon;
     [SerializeField] private Selectable selfSelection;
 
@@ -30,6 +33,27 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
     public void OnSubmit(BaseEventData eventData)
     {
         EventStore.Instance.PublishPlayerAbilityDisplayerClick(this);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        DescribeAbility();
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        DescribeAbility();
+    }
+
+    private void DescribeAbility()
+    {
+        if (descText.transform.parent)
+        {
+            descText.transform.parent.gameObject.SetActive(true);
+        }
+
+        descText.alpha = 1;
+        descText.text = PlayerAbilityReferenceKeeper.PlayerAbilities[id].GetDescription();
     }
 }
 

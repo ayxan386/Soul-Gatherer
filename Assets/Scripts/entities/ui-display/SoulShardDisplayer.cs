@@ -36,7 +36,8 @@ public class SoulShardDisplayer : MonoBehaviour, IPointerClickHandler, IPointerE
 
     private void CellSubmit()
     {
-        if (soulShard != null && soulShard.attachedAbility != null) return;
+        if (soulShard == null) return;
+
         if (inventoryCell)
         {
             EventStore.Instance.PublishShardAdd(soulShard);

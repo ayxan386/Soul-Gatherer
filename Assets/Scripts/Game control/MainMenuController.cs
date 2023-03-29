@@ -39,6 +39,7 @@ public class MainMenuController : MonoBehaviour
     public void ChangeHelpMenuState(bool state)
     {
         helpMenu.SetActive(state);
+        SelectionController.Instance.FindNextSelectable();
     }
 
     private void StartGame()

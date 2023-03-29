@@ -8,11 +8,11 @@ public class ShardInventoryController : MonoBehaviour
 {
     [SerializeField] private Transform cellHolder;
     [SerializeField] private TextMeshProUGUI goldCounter;
-    [SerializeField] private List<SoulShard> ownedShards;
     [SerializeField] private int gold;
 
     [SerializeField] private List<ShardDropData> possibleShards;
 
+    [SerializeField] private List<SoulShard> ownedShards;
     private SoulShardDisplayer[] cells;
     private BaseAbility currentSelectedAbility;
 
@@ -76,24 +76,30 @@ public class ShardInventoryController : MonoBehaviour
         obj.ownedShards = ownedShards;
     }
 
-    private void OnPlayerDataLoad(PlayerWorldData obj)
+    private void OnPlayerDataLoad(PlayerWorldData savedData)
     {
-        if (obj.abilities == null) return;
-        ownedShards = obj.ownedShards;
+        if (savedData.abilities == null) return;
+        ownedShards = new List<SoulShard>(savedData.ownedShards);
 
-        foreach (var abilityData in obj.abilities)
+        foreach (var ownedShard in ownedShards)
+        {
+            if (ownedShard.attached && !string.IsNullOrEmpty(ownedShard.abilityId))
+            {
+                var playerAbility = PlayerAbilityReferenceKeeper.PlayerAbilities[ownedShard.abilityId];
+                var savedPlayerAbility =
+                    savedData.abilities.Find((savedAbility) => savedAbility.id == ownedShard.abilityId);
+                if (savedPlayerAbility != null)
+                {
+                    playerAbility.ApplyData(savedPlayerAbility);
+                    playerAbility.ApplySoulShard(ownedShard);
+                }
+            }
+        }
+
+        foreach (var abilityData in savedData.abilities)
         {
             var playerAbility = PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.id];
             playerAbility.ApplyData(abilityData);
-            foreach (var soulShard in abilityData.soulShards)
-            {
-                if (soulShard != null && currentSelectedAbility != null
-                                      && currentSelectedAbility.CanBeModified
-                                      && currentSelectedAbility.CanApplySoulShard(soulShard))
-                {
-                    playerAbility.ApplySoulShard(soulShard);
-                }
-            }
         }
 
 
@@ -118,9 +124,12 @@ public class ShardInventoryController : MonoBehaviour
 
     private void OnShardRemove(SoulShard soulShard)
     {
+        print("Remove event received");
         if (soulShard != null && currentSelectedAbility != null)
         {
+            print("Remove event received");
             currentSelectedAbility.RemoveSoulShard(soulShard);
+            soulShard.attached = false;
             DisplayOwnedShards();
         }
     }
@@ -148,7 +157,12 @@ public class ShardInventoryController : MonoBehaviour
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            if (i < ownedShards.Count && ownedShards[i].attachedAbility == null)
+            if (i < ownedShards.Count)
+            {
+                print("Updated ui for : " + ownedShards[i]);
+            }
+
+            if (i < ownedShards.Count && !ownedShards[i].attached)
             {
                 cells[i].DisplaySoulShard(ownedShards[i]);
             }
