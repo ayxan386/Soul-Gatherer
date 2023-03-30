@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a951e127a993fa643aa1366370e7c58c, type: 3}
   m_Name: AOE_SolidHealthShard
   m_EditorClassIdentifier: 
-  icon: {fileID: -1133757121, guid: 489eafc03ad7469479507d3217cbdf0f, type: 3}
+  icon: {fileID: -870064917, guid: 489eafc03ad7469479507d3217cbdf0f, type: 3}
   type: 7
   effectRuleRandom: 0
   effectRule: 0

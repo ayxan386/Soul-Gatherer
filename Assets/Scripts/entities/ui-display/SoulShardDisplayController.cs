@@ -23,7 +23,7 @@ public class SoulShardDisplayController : MonoBehaviour
         if (currentSelectedAbility != null && currentSelectedAbility.Id == ability.Id)
         {
             UpdateCells(ability);
-            SelectionController.Instance.FindNextSelectable();
+            SelectionController.FindNextSelectable();
         }
     }
 
