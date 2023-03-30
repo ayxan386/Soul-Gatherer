@@ -127,7 +127,6 @@ public class ShardInventoryController : MonoBehaviour
         print("Remove event received");
         if (soulShard != null && currentSelectedAbility != null)
         {
-            print("Remove event received");
             currentSelectedAbility.RemoveSoulShard(soulShard);
             soulShard.attached = false;
             DisplayOwnedShards();
@@ -145,8 +144,6 @@ public class ShardInventoryController : MonoBehaviour
         }
 
         var soulShardType = (SoulShardType)range;
-
-        soulShardType = SoulShardType.AOE_Coverage;
 
         var shardDropData = possibleShards.Find(data => data.type == soulShardType);
         if (shardDropData == null) throw new ArgumentException("Type not found");
