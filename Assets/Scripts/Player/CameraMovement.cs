@@ -9,7 +9,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Vector2 shakingFactor;
 
     private float verticalRotation;
-    private int dir = 1;
     private float randomness;
     private Vector2 inputVector;
 

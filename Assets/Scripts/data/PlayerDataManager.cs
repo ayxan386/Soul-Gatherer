@@ -29,8 +29,6 @@ public static class PlayerDataManager
 
     private static void SaveEntityData()
     {
-        //Entities
-
         var loadableEntities = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ILoadableEntity>();
         var data = new LoadableEntityWrapper();
         data.datas = new List<LoadableEntityData>();
@@ -70,26 +68,23 @@ public static class PlayerDataManager
     private static void LoadEntityData()
     {
         var path = Path.Combine(Application.persistentDataPath, entitySaveFileName);
-        if (File.Exists(path))
+        if (!File.Exists(path)) return;
+        var json = File.ReadAllText(path);
+        var entityWrapper = JsonUtility.FromJson<LoadableEntityWrapper>(json);
+        if (entityWrapper.campaignId != LevelLoader.Instance.GetCampaignId()
+            || entityWrapper.level != LevelLoader.Instance.GetCurrentLevel().order) return;
+
+        var loadableEntities = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ILoadableEntity>();
+        foreach (var loadableEntity in loadableEntities)
         {
-            var json = File.ReadAllText(path);
-            var entityWrapper = JsonUtility.FromJson<LoadableEntityWrapper>(json);
-            if (entityWrapper.campaignId == LevelLoader.Instance.GetCampaignId()
-                && entityWrapper.level == LevelLoader.Instance.GetCurrentLevel().order)
+            var res = entityWrapper.datas.Find(data => data.instanceId == loadableEntity.GetId());
+            if (res != null)
             {
-                var loadableEntities = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<ILoadableEntity>();
-                foreach (var loadableEntity in loadableEntities)
-                {
-                    var res = entityWrapper.datas.Find(data => data.instanceId == loadableEntity.GetId());
-                    if (res != null)
-                    {
-                        loadableEntity.LoadData(res);
-                    }
-                    else
-                    {
-                        loadableEntity.Destroy();
-                    }
-                }
+                loadableEntity.LoadData(res);
+            }
+            else
+            {
+                loadableEntity.Destroy();
             }
         }
     }

@@ -95,6 +95,16 @@ public abstract class BaseAbility : MonoBehaviour
         par -= decrement;
     }
 
+    protected int CheckForNumberOfShardOfType(SoulShardType passedType)
+    {
+        int res = 0;
+        foreach (var soulShard in soulShards)
+        {
+            if (soulShard.type == passedType) res++;
+        }
+        return res;
+    }
+
     public PlayerAbilityData GetData()
     {
         var res = new PlayerAbilityData();
@@ -191,7 +201,9 @@ public enum SoulShardType
     Speed,
     ExplosiveRadius,
     Damage,
-    AOE_Coverage
+    AOE_Coverage,
+    AOE_Solid_Health,
+    AOE_Height
 }
 
 public enum SoulShardEffectRule
@@ -203,4 +215,9 @@ public enum SoulShardEffectRule
 public interface IAbilityAffected
 {
     public void ApplyAbility(AbilityParam details);
+
+    public bool ShouldDestroyAbility(AbilityParam passedParam)
+    {
+        return true;
+    }
 }

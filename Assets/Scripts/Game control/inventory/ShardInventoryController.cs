@@ -146,6 +146,8 @@ public class ShardInventoryController : MonoBehaviour
 
         var soulShardType = (SoulShardType)range;
 
+        soulShardType = SoulShardType.AOE_Coverage;
+
         var shardDropData = possibleShards.Find(data => data.type == soulShardType);
         if (shardDropData == null) throw new ArgumentException("Type not found");
         shardDropData.ApplyTo(res);
