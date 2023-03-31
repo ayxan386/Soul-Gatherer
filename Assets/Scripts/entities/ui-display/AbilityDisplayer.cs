@@ -47,6 +47,7 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
 
     private void DescribeAbility()
     {
+        if (descText == null) return;
         if (descText.transform.parent)
         {
             descText.transform.parent.gameObject.SetActive(true);

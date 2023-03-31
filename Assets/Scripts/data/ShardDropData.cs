@@ -36,7 +36,7 @@ public class ShardDropData : ScriptableObject
                 break;
             default:
                 shard.value = Random.Range(floatRange.x, floatRange.y);
-                shard.explosive = type == SoulShardType.Explosive;
+                shard.explosive = type == SoulShardType.ExplosiveRadius;
                 changeVal = shard.value.ToString("N1");
                 break;
         }

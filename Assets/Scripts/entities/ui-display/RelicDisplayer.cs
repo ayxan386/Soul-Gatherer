@@ -40,7 +40,7 @@ public class RelicDisplayer : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnSubmit(BaseEventData eventData)
     {
         ApplyRelicEffect();
-        SelectionController.Instance.FindNextSelectable();
+        SelectionController.FindNextSelectable();
     }
 
     private void ApplyRelicEffect()

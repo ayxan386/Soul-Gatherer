@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a951e127a993fa643aa1366370e7c58c, type: 3}
+  m_Name: CoverageShard
+  m_EditorClassIdentifier: 
+  icon: {fileID: -408262088, guid: 489eafc03ad7469479507d3217cbdf0f, type: 3}
+  type: 6
+  effectRuleRandom: 1
+  effectRule: 1
+  floatRange: {x: 1.05, y: 1.25}
+  vectorMin: {x: 0, y: 0, z: 0}
+  vectorMax: {x: 0, y: 0, z: 0}
+  desc: Increase AOE coverage

@@ -39,7 +39,7 @@ public class MainMenuController : MonoBehaviour
     public void ChangeHelpMenuState(bool state)
     {
         helpMenu.SetActive(state);
-        SelectionController.Instance.FindNextSelectable();
+        SelectionController.FindNextSelectable();
     }
 
     private void StartGame()
@@ -73,6 +73,7 @@ public class MainMenuController : MonoBehaviour
     {
         levelLoader.AbandonRun();
         CheckForActiveCampaign();
+        SelectionController.FindNextSelectable();
     }
 
     private void CheckForActiveCampaign()

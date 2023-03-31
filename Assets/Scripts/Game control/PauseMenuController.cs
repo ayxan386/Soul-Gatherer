@@ -57,7 +57,7 @@ public class PauseMenuController : MonoBehaviour
         playerHealthUI.SetActive(false);
         pauseMenuRef.SetActive(true);
         GlobalStateManager.Instance.PausedGame("PauseMenu");
-        SelectionController.Instance.FindNextSelectable();
+        SelectionController.FindNextSelectable();
     }
 
     public void SettingsMenu()
@@ -68,7 +68,7 @@ public class PauseMenuController : MonoBehaviour
     public void CloseSettingsMenu()
     {
         settingsMenu.SetActive(false);
-        SelectionController.Instance.FindNextSelectable();
+        SelectionController.FindNextSelectable();
     }
 
     public void MainMenu()

@@ -16,7 +16,7 @@ public class ProjectileAbility : BaseAbility, IModifiableEntityAbility
 
     public override bool CanApplySoulShard(SoulShard soulShard)
     {
-        return soulShard.type != SoulShardType.Explosive;
+        return soulShard.type != SoulShardType.AOE_Coverage;
     }
 
     public override void ApplySoulShard(SoulShard soulShard)
@@ -65,7 +65,7 @@ public class ProjectileAbility : BaseAbility, IModifiableEntityAbility
                 break;
             case SoulShardType.ExplosiveRadius:
                 RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.explosionRadius);
-                details.isExplosive = false; // TODO Add check for other shards
+                details.isExplosive = CheckForNumberOfShardOfType(SoulShardType.ExplosiveRadius) > 1;
                 break;
             case SoulShardType.Damage:
                 RemoveFromFloat(soulShard.value, soulShard.effectRule, ref details.damage);

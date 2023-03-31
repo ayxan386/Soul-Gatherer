@@ -120,7 +120,7 @@ TextureImporter:
       name: shard-icons_0
       rect:
         serializedVersion: 2
-        x: 6
+        x: 7
         y: 266
         width: 59
         height: 47
@@ -141,7 +141,7 @@ TextureImporter:
       name: shard-icons_1
       rect:
         serializedVersion: 2
-        x: 74
+        x: 75
         y: 269
         width: 38
         height: 35
@@ -162,7 +162,7 @@ TextureImporter:
       name: shard-icons_2
       rect:
         serializedVersion: 2
-        x: 136
+        x: 137
         y: 261
         width: 55
         height: 55
@@ -183,7 +183,7 @@ TextureImporter:
       name: shard-icons_3
       rect:
         serializedVersion: 2
-        x: 201
+        x: 202
         y: 261
         width: 48
         height: 47
@@ -204,7 +204,7 @@ TextureImporter:
       name: shard-icons_4
       rect:
         serializedVersion: 2
-        x: 254
+        x: 255
         y: 254
         width: 64
         height: 64
@@ -221,6 +221,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: shard-icons_5
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 180
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 719eebe7734a01742a42af7a9c0e32d0
+      internalID: -1133757121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shard-icons_6
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 203
+        width: 51
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d467ae8ab61384db5f374175507757
+      internalID: -870064917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shard-icons_11
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 186
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be80725d58f42c4ea11153f84c2a9b6
+      internalID: -408262088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -232,11 +295,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      shard-icons_5: -1133757121
       shard-icons_0: 934977674
       shard-icons_4: 1801017146
+      shard-icons_9: -1551298295
       shard-icons_1: 1163166708
+      shard-icons_8: -2036087181
+      shard-icons_6: -870064917
+      shard-icons_11: -408262088
+      shard-icons_10: -1376399258
       shard-icons_2: -1721277962
       shard-icons_3: -1467000470
+      shard-icons_7: -651460782
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

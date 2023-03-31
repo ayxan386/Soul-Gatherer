@@ -25,7 +25,7 @@ public class GlobalStateManager : MonoBehaviour
         }
         else
         {
-            SelectionController.Instance.FindNextSelectable();
+            SelectionController.FindNextSelectable();
         }
     }
 
