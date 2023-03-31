@@ -20,9 +20,14 @@ public class AdjustableMobController : MonoBehaviour
     [Header("Patrol Params")] [SerializeField]
     private Transform centerPoint;
 
+    [SerializeField] private float patrollingSpeed;
+    [SerializeField] private float chasingSpeed;
+    [SerializeField] private float defaultSpeed;
+
     [SerializeField] private float maxWanderDistance;
 
     [SerializeField] private List<StateActions> behaviors;
+    [SerializeField] private Animator animator;
 
     private Vector3 lastSelectedPatrolPoint = Vector3.zero;
     private MobStates currentState = MobStates.Idle;
@@ -100,10 +105,38 @@ public class AdjustableMobController : MonoBehaviour
             agent.destination = lastSawPosition;
     }
 
+    public void SetSpeed(string speedName)
+    {
+        animator.SetBool("walking", true);
+        animator.SetBool("running", false);
+        if (speedName == "Chase")
+        {
+            agent.speed = chasingSpeed;
+            animator.SetBool("running", true);
+        }
+        else if (speedName == "Patrol")
+        {
+            agent.speed = patrollingSpeed;
+        }
+        else
+        {
+            agent.speed = defaultSpeed;
+        }
+    }
+
+    public void SetDead()
+    {
+        animator.SetBool("dead", true);
+        // transform.Translate(0, -1, 0);
+    }
+
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(centerPoint.position, maxWanderDistance);
+        if (centerPoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(centerPoint.position, maxWanderDistance);
+        }
     }
 }
 

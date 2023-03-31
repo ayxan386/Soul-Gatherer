@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableEntity
 {
@@ -26,6 +27,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     [SerializeField] private ParticleSystem bloodParticles;
     [Header("Death")] [SerializeField] private InteractableItem afterDeathInteraction;
     [SerializeField] private Behaviour[] toDisableOnDeath;
+    [SerializeField] private UnityEvent[] afterDeathAction;
     private StringIdHolder assignedId;
 
     private Rigidbody rb;
@@ -126,6 +128,11 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
         foreach (var comp in toDisableOnDeath)
         {
             comp.enabled = false;
+        }
+
+        foreach (var deathEvents in afterDeathAction)
+        {
+            deathEvents?.Invoke();
         }
 
         afterDeathInteraction.Interactable = true;
