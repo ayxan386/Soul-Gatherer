@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _REFLECTIONS_ROUGHNESS_MAP:
-        m_Texture: {fileID: 2800000, guid: 3550c1ce4d5ec3141b160a2b47ac6298, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TRANSPARENCY_MAP:
@@ -93,7 +93,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _REFLECTIONS_IOR: 1.52
-    - _REFLECTIONS_ROUGHNESS: 0
+    - _REFLECTIONS_ROUGHNESS: 1
     - _REFLECTIONS_WEIGHT: -0.04
     - _ReceiveShadows: 1
     - _Smoothness: 0
