@@ -2,6 +2,7 @@
 
 public class ProjectileController : BaseParamAcceptingEntity
 {
+    [SerializeField] private GameObject destructionParticles;
     private ProjectileParams details;
 
     private float startSpeed;
@@ -32,7 +33,10 @@ public class ProjectileController : BaseParamAcceptingEntity
         }
 
         if (shouldDestroy)
+        {
+            DeathParticles();
             Destroy(gameObject);
+        }
     }
 
     private bool CheckForAffectedEntityAndApply(Collider collider)
@@ -61,6 +65,12 @@ public class ProjectileController : BaseParamAcceptingEntity
         startSpeed = details.speed + details.casterSpeed;
         details.casterSpeed = 0;
         Destroy(gameObject, details.lifespan);
+        Invoke("DeathParticles", details.lifespan * 0.98f);
+    }
+
+    private void DeathParticles()
+    {
+        Instantiate(destructionParticles, transform.position, Quaternion.identity);
     }
 
     public override AbilityParam GetParams()
