@@ -1384,6 +1384,22 @@ PrefabInstance:
       propertyPath: id
       value: west_ability
       objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 2016320746, guid: ad45ebf4b44d6f14690da73019ee81bc,
+        type: 3}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: description
+      value: West ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: details.force.x
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
       propertyPath: m_Name
@@ -1475,6 +1491,22 @@ PrefabInstance:
         type: 3}
       propertyPath: id
       value: south_ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 2005294956, guid: ad45ebf4b44d6f14690da73019ee81bc,
+        type: 3}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: description
+      value: South ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: details.force.z
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
@@ -1568,6 +1600,22 @@ PrefabInstance:
       propertyPath: id
       value: north_ability
       objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: -1314622050, guid: ad45ebf4b44d6f14690da73019ee81bc,
+        type: 3}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: description
+      value: North ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: details.force.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
       propertyPath: m_Name
@@ -1659,6 +1707,22 @@ PrefabInstance:
         type: 3}
       propertyPath: id
       value: east_ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 2068190640, guid: ad45ebf4b44d6f14690da73019ee81bc,
+        type: 3}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: description
+      value: East ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
+        type: 3}
+      propertyPath: details.force.x
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
