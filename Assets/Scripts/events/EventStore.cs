@@ -29,6 +29,8 @@ public class EventStore : MonoBehaviour
     public event Action<float, bool> OnPlayerMaxHealthChange;
 
     public event Action<float> OnPlayerMaxSpeedChange;
+    
+    public event Action<float> OnExpBoostFraction;
     public event Action OnPauseMenu;
 
     public event Action OnRelicInventoryUpdate;
@@ -143,6 +145,11 @@ public class EventStore : MonoBehaviour
     public void PublishShopOpen(ShopDisplayData shopDisplayData)
     {
         OnShopOpen?.Invoke(shopDisplayData);
+    }
+
+    public void PublishExpBoostFraction(float experienceBoostFraction)
+    {
+        OnExpBoostFraction?.Invoke(experienceBoostFraction);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

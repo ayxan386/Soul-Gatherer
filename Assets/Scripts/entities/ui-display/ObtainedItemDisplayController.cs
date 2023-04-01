@@ -20,7 +20,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private void OnOnEntityObtainedClick(object sender, ObtainedEntity e)
     {
-        if (e.attachedId != attachedId) return;
+        if (e.attachedId != attachedId || string.IsNullOrEmpty(e.attachedId)) return;
 
         var findIndex = currentDisplayerIds.FindIndex((temp) => temp == e.data.id);
         if (findIndex >= 0)
