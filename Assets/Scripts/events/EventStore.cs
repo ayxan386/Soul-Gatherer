@@ -37,6 +37,8 @@ public class EventStore : MonoBehaviour
 
     public event Action<PlayerWorldData> OnPlayerDataLoad;
 
+    public event Action<ShopDisplayData> OnShopOpen;
+
     private void Awake()
     {
         print("Event store awake");
@@ -136,6 +138,11 @@ public class EventStore : MonoBehaviour
     public void PublishRelicInventoryUpdated()
     {
         OnRelicInventoryUpdate?.Invoke();
+    }
+
+    public void PublishShopOpen(ShopDisplayData shopDisplayData)
+    {
+        OnShopOpen?.Invoke(shopDisplayData);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);

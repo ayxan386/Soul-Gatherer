@@ -9,8 +9,12 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
     public string id;
     public AbilityDisplayType type;
     public TextMeshProUGUI descText;
+    public int price;
     [SerializeField] private Image icon;
     [SerializeField] private Selectable selfSelection;
+    [SerializeField] private bool hasPrice;
+    [SerializeField] private GameObject priceWrapper;
+    [SerializeField] private TextMeshProUGUI priceText;
 
     private void Start()
     {
@@ -23,6 +27,12 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
         if (playerAbility == null) return;
         id = playerAbility.Id;
         icon.sprite = playerAbility.Icon;
+
+        priceWrapper.SetActive(hasPrice);
+        if (hasPrice)
+        {
+            priceText.text = $"{price} G";
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -61,5 +71,6 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
 public enum AbilityDisplayType
 {
     ModificationMenu,
-    RewardMenu
+    RewardMenu,
+    ShopMenu
 }
