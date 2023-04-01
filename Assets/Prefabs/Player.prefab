@@ -336,6 +336,7 @@ MonoBehaviour:
   - {fileID: 1208636845463646167, guid: 3f8da03650c47a249abdd6059eae8bf2, type: 3}
   rareRelics:
   - {fileID: 1960645285605323441, guid: 0382454ab3df33b4e92bad7f2fb5d10b, type: 3}
+  - {fileID: 1208636845463646167, guid: 6cce9e795020b884687b46a10e108a6d, type: 3}
   epicRelics:
   - {fileID: 729096581209400565, guid: b67439cedb30f71459829d6a211441d8, type: 3}
   inventorySize: 21
@@ -1398,7 +1399,7 @@ PrefabInstance:
     - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
       propertyPath: details.force.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
@@ -1506,7 +1507,7 @@ PrefabInstance:
     - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
       propertyPath: details.force.z
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
@@ -1614,7 +1615,7 @@ PrefabInstance:
     - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
       propertyPath: details.force.z
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
@@ -1722,7 +1723,7 @@ PrefabInstance:
     - target: {fileID: 8418305284078061239, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}
       propertyPath: details.force.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8418305284078061240, guid: 40f3a403ba51c2943911d91ef4772d0d,
         type: 3}

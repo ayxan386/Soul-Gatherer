@@ -2596,6 +2596,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Relics UI
       objectReference: {fileID: 0}
+    - target: {fileID: 8977539876260421653, guid: 3dc2d6048dd383940afaff49fdf475f1,
+        type: 3}
+      propertyPath: m_Spacing.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977539876260421653, guid: 3dc2d6048dd383940afaff49fdf475f1,
+        type: 3}
+      propertyPath: m_ConstraintCount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8977539876260421654, guid: 3dc2d6048dd383940afaff49fdf475f1,
         type: 3}
       propertyPath: m_SizeDelta.x

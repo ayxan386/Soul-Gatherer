@@ -10,21 +10,28 @@ public class PlayerLevelManager : MonoBehaviour
 
     private float currentExp;
     private int currentLevel;
+    private float expFactor = 1;
 
     private void Start()
     {
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtained;
         EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
         EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
+        EventStore.Instance.OnExpBoostFraction += OnExpBoostFraction;
         AddExp(0);
     }
 
+    private void OnExpBoostFraction(float fractionalIncrement)
+    {
+        expFactor += fractionalIncrement;
+    }
 
     private void OnDestroy()
     {
         EventStore.Instance.OnEntityObtainedClick -= OnEntityObtained;
         EventStore.Instance.OnPlayerDataSave -= OnPlayerDataSave;
         EventStore.Instance.OnPlayerDataLoad -= OnPlayerDataLoad;
+        EventStore.Instance.OnExpBoostFraction -= OnExpBoostFraction;
     }
 
     private void OnPlayerDataLoad(PlayerWorldData obj)
@@ -50,7 +57,7 @@ public class PlayerLevelManager : MonoBehaviour
 
     private void AddExp(int expIncrement)
     {
-        currentExp += expIncrement;
+        currentExp += expFactor * expIncrement;
         while (currentExp >= GetRequiredExp())
         {
             currentExp -= GetRequiredExp();

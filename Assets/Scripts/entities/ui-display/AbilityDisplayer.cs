@@ -18,7 +18,7 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
         selfSelection.Select();
     }
 
-    private void DisplayAbility(BaseAbility playerAbility)
+    public void DisplayAbility(BaseAbility playerAbility)
     {
         if (playerAbility == null) return;
         id = playerAbility.Id;

@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class DebugHelper : MonoBehaviour
 {
+    [SerializeField] private EntityData relic;
     private int count;
     private float total;
 
@@ -22,5 +23,10 @@ public class DebugHelper : MonoBehaviour
             count = 0;
             total = 0;
         }
+    }
+
+    public void GiveRelic()
+    {
+        EventStore.Instance.PublishEntityObtainedClick(new ObtainedEntity(relic, 1));
     }
 }
