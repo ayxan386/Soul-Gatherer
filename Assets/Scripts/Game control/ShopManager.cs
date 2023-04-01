@@ -6,6 +6,7 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] private Transform abilityHolder;
     [SerializeField] private Transform relicHolder;
+    [SerializeField] private GameObject shopUi;
     private AbilityDisplayer[] abilitySlots;
 
     void Start()
@@ -19,18 +20,21 @@ public class ShopManager : MonoBehaviour
         EventStore.Instance.OnShopOpen -= OnShopOpen;
     }
 
-    private void OnShopOpen(ShopDisplayData obj)
+    private void OnShopOpen(ShopDisplayData shopData)
     {
-        for (int dataIndex = 0; dataIndex < obj.abilities.Count; dataIndex++)
+        GlobalStateManager.Instance.PausedGame("Shop");
+        shopUi.SetActive(true);
+        var slotIndex = 0;
+        foreach (var abilityData in shopData.abilities)
         {
-            if (dataIndex < abilitySlots.Length)
+            if (slotIndex < abilitySlots.Length)
             {
+                var abilityDisplayer = abilitySlots[slotIndex];
+                slotIndex++;
+                abilityDisplayer.DisplayAbility(PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.Key]);
+                abilityDisplayer.price = abilityData.Value.price;
             }
         }
-    }
-
-    void Update()
-    {
     }
 }
 
