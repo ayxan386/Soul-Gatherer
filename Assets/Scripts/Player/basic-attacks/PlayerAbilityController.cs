@@ -55,9 +55,33 @@ public class PlayerAbilityController : MonoBehaviour
         }
     }
 
-    void OnSelf()
+    void OnNorth()
     {
-        if (bindingName == AbilityBinding.Self)
+        if (bindingName == AbilityBinding.North)
+        {
+            UseAbility();
+        }
+    }
+
+    void OnSouth()
+    {
+        if (bindingName == AbilityBinding.South)
+        {
+            UseAbility();
+        }
+    }
+
+    void OnEast()
+    {
+        if (bindingName == AbilityBinding.East)
+        {
+            UseAbility();
+        }
+    }
+
+    void OnWest()
+    {
+        if (bindingName == AbilityBinding.West)
         {
             UseAbility();
         }
@@ -68,7 +92,8 @@ public enum AbilityBinding
 {
     Projectile,
     AOE,
-    Self,
-    RightDash,
-    LeftDash
+    North,
+    South,
+    East,
+    West
 }

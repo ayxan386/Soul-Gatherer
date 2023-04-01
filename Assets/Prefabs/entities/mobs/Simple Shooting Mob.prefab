@@ -468,7 +468,7 @@ MonoBehaviour:
   canBeModified: 0
   icon: {fileID: 0}
   description: 
-  mobAttached: 0
+  mobAttached: 1
   details:
     damage: 1
     tickDamage: 0

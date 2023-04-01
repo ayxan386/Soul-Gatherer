@@ -25,21 +25,35 @@ public class PlayerLevelUpSlotExpansion : MonoBehaviour
     private void OnPlayerLevelUp(int obj)
     {
         leftRewards++;
-        ShowRewards();
+        if (leftRewards == 1)
+        {
+            Time.timeScale = 0;
+            GlobalStateManager.Instance.PausedGame(PauseLockName);
+            ShowRewards();
+        }
     }
 
     private void ShowRewards()
     {
         wrapper.SetActive(true);
-        GlobalStateManager.Instance.PausedGame(PauseLockName);
-        Time.timeScale = 0;
         var playerAbilities = PlayerAbilityReferenceKeeper.PlayerAbilities.Values;
+        int childIndex = 0;
         foreach (var playerAbility in playerAbilities)
         {
-            if (playerAbility.CanBeModified)
+            if (!playerAbility.CanBeModified) continue;
+
+            if (childIndex < uiHolder.childCount)
             {
+                var currentAbility = uiHolder.GetChild(childIndex++).GetComponent<AbilityDisplayer>();
+                currentAbility.gameObject.SetActive(true);
+                currentAbility.DisplayAbility(playerAbility);
+                currentAbility.type = AbilityDisplayType.RewardMenu;
+            }
+            else
+            {
+                childIndex++;
                 var displayer = Instantiate(abilityDisplayer, uiHolder);
-                displayer.id = playerAbility.Id;
+                displayer.DisplayAbility(playerAbility);
                 displayer.type = AbilityDisplayType.RewardMenu;
             }
         }
@@ -65,7 +79,7 @@ public class PlayerLevelUpSlotExpansion : MonoBehaviour
     {
         for (int i = 0; i < uiHolder.childCount; i++)
         {
-            Destroy(uiHolder.GetChild(i).gameObject);
+            uiHolder.GetChild(i).gameObject.SetActive(false);
         }
 
         wrapper.SetActive(false);

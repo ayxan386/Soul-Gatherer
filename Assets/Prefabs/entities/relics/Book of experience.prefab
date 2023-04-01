@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1208636845463646161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208636845463646166}
+  - component: {fileID: 1208636845463646167}
+  - component: {fileID: -1969489164760098437}
+  m_Layer: 0
+  m_Name: Book of experience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1208636845463646166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208636845463646161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.316252, y: 0.32934856, z: 23.680763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1208636845463646167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208636845463646161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187f94ade7d5d504692308345c44c1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Book of experince
+  canHaveMultiple: 1
+  tickBasedRelicEffects: []
+  oneTimeRelicEffects:
+  - {fileID: -1969489164760098437}
+  icon: {fileID: 21300000, guid: 880628f1c47810743ac30d251c49f7a2, type: 3}
+  dropChance: 0.4
+--- !u!114 &-1969489164760098437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208636845463646161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5db83467a408e4c8fc132fd60ce12a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experienceAwardAmountRange: {x: 0, y: 500}
+  experienceBoostFractionRange: {x: 0.1, y: 0.4}
+  expDrop: {fileID: 11400000, guid: 9c5d9d854aae9234eb06111dc0a79164, type: 2}
