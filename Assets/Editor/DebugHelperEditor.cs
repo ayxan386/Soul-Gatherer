@@ -13,5 +13,10 @@ public class DebugHelperEditor : Editor
         {
             myScript.GiveRelic();
         }
+
+        if (GUILayout.Button("Give gold"))
+        {
+            myScript.GiveGold();
+        }
     }
 }

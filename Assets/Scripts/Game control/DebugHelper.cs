@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class DebugHelper : MonoBehaviour
 {
     [SerializeField] private EntityData relic;
+    [SerializeField] private int goldAmount;
     private int count;
     private float total;
 
@@ -28,5 +29,10 @@ public class DebugHelper : MonoBehaviour
     public void GiveRelic()
     {
         EventStore.Instance.PublishEntityObtainedClick(new ObtainedEntity(relic, 1));
+    }
+
+    public void GiveGold()
+    {
+        EventStore.Instance.PublishGoldSpent(-goldAmount);
     }
 }
