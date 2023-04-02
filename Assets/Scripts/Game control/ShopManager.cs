@@ -9,32 +9,61 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject shopUi;
     private AbilityDisplayer[] abilitySlots;
 
+    private ShopDisplayData currentData;
+
     void Start()
     {
         abilitySlots = abilityHolder.GetComponentsInChildren<AbilityDisplayer>();
         EventStore.Instance.OnShopOpen += OnShopOpen;
+        EventStore.Instance.OnPlayerAbilityDisplayerClick += OnPlayerAbilityDisplayerClick;
+        EventStore.Instance.OnGoldChanged += OnGoldChanged;
     }
 
     private void OnDestroy()
     {
         EventStore.Instance.OnShopOpen -= OnShopOpen;
+        EventStore.Instance.OnPlayerAbilityDisplayerClick -= OnPlayerAbilityDisplayerClick;
+        EventStore.Instance.OnGoldChanged -= OnGoldChanged;
     }
 
     private void OnShopOpen(ShopDisplayData shopData)
     {
         GlobalStateManager.Instance.PausedGame("Shop");
         shopUi.SetActive(true);
+        currentData = shopData;
+
+        UpdateCurrentUi();
+    }
+
+    private void UpdateCurrentUi()
+    {
         var slotIndex = 0;
-        foreach (var abilityData in shopData.abilities)
+        foreach (var abilityData in currentData.abilities)
         {
             if (slotIndex < abilitySlots.Length)
             {
                 var abilityDisplayer = abilitySlots[slotIndex];
                 slotIndex++;
-                abilityDisplayer.DisplayAbility(PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.Key]);
                 abilityDisplayer.price = abilityData.Value.price;
+                abilityDisplayer.DisplayAbility(PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.Key]);
             }
         }
+    }
+
+    private void OnPlayerAbilityDisplayerClick(AbilityDisplayer clickedAbility)
+    {
+        if (clickedAbility.type != AbilityDisplayType.ShopMenu) return;
+
+        if (EventStore.Instance.GetCurrentGoldFromInventory().GetValueOrDefault(0) >= clickedAbility.price)
+        {
+            EventStore.Instance.PublishGoldSpent(clickedAbility.price);
+        }
+    }
+
+
+    private void OnGoldChanged(int totalGold)
+    {
+        UpdateCurrentUi();
     }
 }
 

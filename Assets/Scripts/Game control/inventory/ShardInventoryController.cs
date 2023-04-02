@@ -24,6 +24,8 @@ public class ShardInventoryController : MonoBehaviour
         EventStore.Instance.OnShardRemove += OnShardRemove;
         EventStore.Instance.OnPlayerDataLoad += OnPlayerDataLoad;
         EventStore.Instance.OnPlayerDataSave += OnPlayerDataSave;
+        EventStore.Instance.GetCurrentGold += () => gold;
+        EventStore.Instance.OnGoldSpent += OnGoldSpent;
 
         if (ownedShards == null) ownedShards = new List<SoulShard>();
         cells = cellHolder.GetComponentsInChildren<SoulShardDisplayer>();
@@ -109,6 +111,16 @@ public class ShardInventoryController : MonoBehaviour
     private void UpdateGoldCounter()
     {
         goldCounter.text = "Gold: " + gold;
+    }
+
+    private void OnGoldSpent(int amount)
+    {
+        if (gold >= amount)
+        {
+            gold -= amount;
+            UpdateGoldCounter();
+            EventStore.Instance.PublishGoldChanged(gold);
+        }
     }
 
     private void OnShardAdd(SoulShard soulShard)

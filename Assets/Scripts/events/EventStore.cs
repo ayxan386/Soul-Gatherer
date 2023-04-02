@@ -29,7 +29,7 @@ public class EventStore : MonoBehaviour
     public event Action<float, bool> OnPlayerMaxHealthChange;
 
     public event Action<float> OnPlayerMaxSpeedChange;
-    
+
     public event Action<float> OnExpBoostFraction;
     public event Action OnPauseMenu;
 
@@ -40,6 +40,11 @@ public class EventStore : MonoBehaviour
     public event Action<PlayerWorldData> OnPlayerDataLoad;
 
     public event Action<ShopDisplayData> OnShopOpen;
+
+    public event IntReturningEvent GetCurrentGold;
+
+    public event Action<int> OnGoldSpent;
+    public event Action<int> OnGoldChanged;
 
     private void Awake()
     {
@@ -152,11 +157,26 @@ public class EventStore : MonoBehaviour
         OnExpBoostFraction?.Invoke(experienceBoostFraction);
     }
 
+    public int? GetCurrentGoldFromInventory()
+    {
+        return GetCurrentGold?.Invoke();
+    }
+
+    public void PublishGoldSpent(int spentAmount)
+    {
+        OnGoldSpent?.Invoke(spentAmount);
+    }
+
+    public void PublishGoldChanged(int totalGold)
+    {
+        OnGoldChanged?.Invoke(totalGold);
+    }
+
     public delegate void AbilityPassingEvent(BaseAbility ability);
 
     public delegate void AbilityParamPassingEvent(AbilityParam ability);
 
     public delegate void ShardPassingEvent(SoulShard soulShard);
 
-    public delegate float FloatPassingEvent();
+    public delegate int IntReturningEvent();
 }

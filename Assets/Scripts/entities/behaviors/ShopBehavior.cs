@@ -11,7 +11,7 @@ public class ShopBehavior : ItemInteractionBehavior
             if (keyValuePair.Value.CanBeModified) continue;
 
             var shopAbilityData = new ShopAbilityData();
-            shopAbilityData.price = keyValuePair.Value.AvailableSlots * 5;
+            shopAbilityData.price = (keyValuePair.Value.AvailableSlots + 1) * 5;
             shopData.abilities.Add(keyValuePair.Key, shopAbilityData);
         }
 
