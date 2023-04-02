@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -7,9 +8,11 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Transform abilityHolder;
     [SerializeField] private Transform relicHolder;
     [SerializeField] private GameObject shopUi;
+    [SerializeField] private TextMeshProUGUI goldText;
     private AbilityDisplayer[] abilitySlots;
 
     private ShopDisplayData currentData;
+    private int gold;
 
     void Start()
     {
@@ -37,6 +40,7 @@ public class ShopManager : MonoBehaviour
 
     private void UpdateCurrentUi()
     {
+        gold = EventStore.Instance.GetCurrentGoldFromInventory().GetValueOrDefault(0);
         var slotIndex = 0;
         foreach (var abilityData in currentData.abilities)
         {
@@ -48,13 +52,15 @@ public class ShopManager : MonoBehaviour
                 abilityDisplayer.DisplayAbility(PlayerAbilityReferenceKeeper.PlayerAbilities[abilityData.Key]);
             }
         }
+
+        goldText.text = $"Gold : {gold} G";
     }
 
     private void OnPlayerAbilityDisplayerClick(AbilityDisplayer clickedAbility)
     {
         if (clickedAbility.type != AbilityDisplayType.ShopMenu) return;
 
-        if (EventStore.Instance.GetCurrentGoldFromInventory().GetValueOrDefault(0) >= clickedAbility.price)
+        if (gold >= clickedAbility.price)
         {
             EventStore.Instance.PublishGoldSpent(clickedAbility.price);
         }
