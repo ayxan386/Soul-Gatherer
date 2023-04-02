@@ -9,7 +9,8 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
     public string id;
     public AbilityDisplayType type;
     public TextMeshProUGUI descText;
-    public int price;
+    public string price;
+    public Color priceTextColor;
     [SerializeField] private Image icon;
     [SerializeField] private Selectable selfSelection;
     [SerializeField] private bool hasPrice;
@@ -32,7 +33,8 @@ public class AbilityDisplayer : MonoBehaviour, IPointerClickHandler, ISubmitHand
         priceWrapper.SetActive(hasPrice);
         if (hasPrice)
         {
-            priceText.text = $"{price} G";
+            priceText.text = price;
+            priceText.color = priceTextColor;
         }
     }
 

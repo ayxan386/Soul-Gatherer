@@ -75,6 +75,7 @@ public class ShardInventoryController : MonoBehaviour
             obj.abilities.Add(abilitiesValue.GetData());
         }
 
+        obj.currentGold = gold;
         obj.ownedShards = ownedShards;
     }
 
@@ -82,7 +83,7 @@ public class ShardInventoryController : MonoBehaviour
     {
         if (savedData.abilities == null) return;
         ownedShards = new List<SoulShard>(savedData.ownedShards);
-
+        gold = savedData.currentGold;
         foreach (var ownedShard in ownedShards)
         {
             if (ownedShard.attached && !string.IsNullOrEmpty(ownedShard.abilityId))

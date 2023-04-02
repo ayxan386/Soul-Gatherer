@@ -70,6 +70,7 @@ public static class PlayerDataManager
         var path = Path.Combine(Application.persistentDataPath, entitySaveFileName);
         if (!File.Exists(path)) return;
         var json = File.ReadAllText(path);
+        if (string.IsNullOrEmpty(json)) return;
         var entityWrapper = JsonUtility.FromJson<LoadableEntityWrapper>(json);
         if (entityWrapper.campaignId != LevelLoader.Instance.GetCampaignId()
             || entityWrapper.level != LevelLoader.Instance.GetCurrentLevel().order) return;
@@ -101,6 +102,7 @@ public class PlayerWorldData
     public float currentHealth;
     public float maxHealth;
     public int currentLevel;
+    public int currentGold;
     public float currentExp;
     public List<PlayerAbilityData> abilities;
     public List<SoulShard> ownedShards;
@@ -139,6 +141,7 @@ public class LoadableEntityData
     public Vector3 position;
     public Quaternion rotation;
     public float health;
+    public ShopDisplayData shopData;
 }
 
 [Serializable]
