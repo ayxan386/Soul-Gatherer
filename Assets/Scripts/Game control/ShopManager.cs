@@ -36,6 +36,7 @@ public class ShopManager : MonoBehaviour
     {
         GlobalStateManager.Instance.PausedGame("Shop");
         shopUi.SetActive(true);
+        SelectionController.FindNextSelectable();
         currentData = shopData;
 
         UpdateCurrentUi();

@@ -47,5 +47,5 @@ MonoBehaviour:
   levelNames:
   - SampleScene
   - Level1
-  length: 3
-  difficultyIncrement: 1.2
+  length: 5
+  difficultyIncrement: 1.4
