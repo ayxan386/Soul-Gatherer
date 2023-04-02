@@ -23,14 +23,14 @@ public class ProjectileController : BaseParamAcceptingEntity
                 Physics.OverlapSphere(transform.position, details.explosionRadius, details.collisionMask);
             foreach (var entity in affectedEnt)
             {
-                shouldDestroy = shouldDestroy || CheckForAffectedEntityAndApply(entity);
+                shouldDestroy = CheckForAffectedEntityAndApply(entity) || shouldDestroy;
             }
         }
         else
         {
             foreach (var collider in colliders)
             {
-                shouldDestroy = shouldDestroy || CheckForAffectedEntityAndApply(collider);
+                shouldDestroy = CheckForAffectedEntityAndApply(collider) || shouldDestroy;
                 if (shouldDestroy)
                 {
                     particePosition = collider.ClosestPointOnBounds(transform.position);
