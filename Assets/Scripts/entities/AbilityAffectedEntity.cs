@@ -33,6 +33,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     private Rigidbody rb;
     private NavMeshAgent agent;
     private bool hurtEffects;
+    private bool isDead;
 
     private void Awake()
     {
@@ -116,7 +117,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
             scaleBasedHealth.localScale = new Vector3(Mathf.Clamp01(currentHealth / maxHealth), 1, 1);
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
             ApplyDeathEffects();
         }
@@ -124,10 +125,11 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
 
     private void ApplyDeathEffects()
     {
-        agent.enabled = false;
+        isDead = true;
         foreach (var comp in toDisableOnDeath)
         {
             comp.enabled = false;
+            Destroy(comp);
         }
 
         foreach (var deathEvents in afterDeathAction)

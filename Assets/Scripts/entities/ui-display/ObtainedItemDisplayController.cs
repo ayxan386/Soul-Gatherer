@@ -10,7 +10,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private List<ObtainedItemDisplayer> currentDisplayers;
     private List<string> currentDisplayerIds;
-    private string attachedId;
+    private string itemId;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class ObtainedItemDisplayController : MonoBehaviour
 
     private void OnOnEntityObtainedClick(object sender, ObtainedEntity e)
     {
-        if (e.attachedId != attachedId || string.IsNullOrEmpty(e.attachedId)) return;
+        if (e.attachedId != itemId || string.IsNullOrEmpty(e.attachedId)) return;
 
         var findIndex = currentDisplayerIds.FindIndex((temp) => temp == e.data.id);
         if (findIndex >= 0)
@@ -44,16 +44,17 @@ public class ObtainedItemDisplayController : MonoBehaviour
     {
         obtainedMenu.SetActive(false);
         GlobalStateManager.Instance.RunningGame(PauseLockName);
+        EventStore.Instance.PublishItemInteractionCancelled(itemId);
     }
 
     private void OnOnEntityObtainedDisplay(object sender, ObtainedEntity entity)
     {
         print("Display event received");
-        if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf || entity.attachedId != attachedId)
+        if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf || entity.attachedId != itemId)
         {
             GlobalStateManager.Instance.PausedGame(PauseLockName);
             obtainedMenu.SetActive(true);
-            attachedId = entity.attachedId;
+            itemId = entity.attachedId;
             currentDisplayers = new List<ObtainedItemDisplayer>();
             currentDisplayerIds = new List<string>();
             for (int i = 0; i < displayParent.childCount; i++)

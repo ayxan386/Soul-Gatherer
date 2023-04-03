@@ -18,7 +18,7 @@ public class ItemInteraction : MonoBehaviour
 
 
     public AudioSource ItemInteractionSound => itemInteractionSound;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -32,7 +32,7 @@ public class ItemInteraction : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out item))
             {
-                interactableDisplay.SetActive(true);
+                interactableDisplay.SetActive(item.Interactable);
             }
         }
         else
@@ -44,7 +44,8 @@ public class ItemInteraction : MonoBehaviour
 
     private void OnInteract()
     {
-        if (GlobalStateManager.Instance.CurrentState != GameState.Running) return;
+        if (GlobalStateManager.Instance.CurrentState != GameState.Running
+            || item == null || !item.Interactable) return;
         item?.Interact();
     }
 }

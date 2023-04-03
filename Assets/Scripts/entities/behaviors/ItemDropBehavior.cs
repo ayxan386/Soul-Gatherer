@@ -14,7 +14,6 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
     private StringIdHolder assignedId;
 
     private List<ObtainedEntity> obtainedEntities;
-    private string attachedId;
 
     private void Awake()
     {
@@ -28,7 +27,7 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
 
     private void OnEntityObtainedClick(object sender, ObtainedEntity e)
     {
-        if (obtainedEntities == null || obtainedEntities.Count == 0 || e.attachedId != attachedId) return;
+        if (obtainedEntities == null || obtainedEntities.Count == 0 || e.attachedId != assignedId.id) return;
 
         var index = obtainedEntities.FindIndex((temp) =>
             temp.data.id == e.data.id && temp.count == e.count);
@@ -37,15 +36,15 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
 
         if (obtainedEntities.Count <= 0)
         {
-            afterLootAction?.Invoke();
             Complete = true;
+            afterLootAction?.Invoke();
         }
     }
 
     [ContextMenu("Get items")]
     public override void Interact(InteractionPassData data)
     {
-        Complete = false;
+        print("Item drop interaction");
         if (!data.WasInteractedBefore)
             GenerateItemFromLootTable();
 
@@ -72,13 +71,12 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
 
         obtainedEntities = new List<ObtainedEntity>(count);
 
-        attachedId = Time.time.ToString();
         for (int i = 0; i < count; i++)
         {
             var item = lootTable.GetItem(Random.value);
             var obtainedEntity = new ObtainedEntity(item);
             print("Generated new item: " + obtainedEntity.data.name);
-            obtainedEntity.attachedId = attachedId;
+            obtainedEntity.attachedId = assignedId.id;
             obtainedEntities.Add(obtainedEntity);
         }
 
@@ -87,7 +85,6 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
 
     public void LoadData(LoadableEntityData data)
     {
-        attachedId = data.attachedId;
         obtainedEntities = data.obtainedEntities;
     }
 
@@ -95,7 +92,6 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
     {
         var entityData = new LoadableEntityData();
         entityData.instanceId = GetId();
-        entityData.attachedId = attachedId;
         entityData.obtainedEntities = obtainedEntities;
         return entityData;
     }

@@ -9,7 +9,12 @@ public class SoundBehavior : ItemInteractionBehavior
 
     public override void Interact(InteractionPassData data)
     {
-        if (data.WasInteractedBefore) return;
+        if (data.WasInteractedBefore)
+        {
+            Complete = true;
+            return;
+        }
+
         if (useClip)
         {
             if (useItemInteractionSource)

@@ -22,14 +22,24 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
         if (!Interactable) return;
         if (inProgress) return;
         inProgress = true;
+        EventStore.Instance.OnItemInteractionCancelled += OnItemInteractionCancelled;
         StartCoroutine(Interaction(new InteractionPassData(wasInteracted)));
         wasInteracted = true;
+    }
+
+    private void OnItemInteractionCancelled(string passedId)
+    {
+        if (assignedId != null && assignedId.id == passedId)
+        {
+            inProgress = false;
+        }
     }
 
     private IEnumerator Interaction(InteractionPassData data)
     {
         foreach (var behavior in interactionBehaviors)
         {
+            print("Interacting with " + behavior.GetType().Name);
             yield return new WaitForSeconds(behavior.DelayBefore);
             behavior.Interact(data);
             yield return new WaitUntil(() => behavior.Complete);

@@ -107,6 +107,7 @@ public class ShopDisplayData
     public HashSet<ShopAbilityData> abilities;
     public List<ShopAbilityData> serializedAbilities;
     public List<ShopRelicData> relics;
+    public bool isGenerated = false;
 }
 
 [Serializable]
