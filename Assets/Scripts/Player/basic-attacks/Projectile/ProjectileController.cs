@@ -61,7 +61,7 @@ public class ProjectileController : BaseParamAcceptingEntity
             return entity.ShouldDestroyAbility(GetParams());
         }
 
-        return true;
+        return false;
     }
 
     public override void ApplyParams(AbilityParam generalParam)

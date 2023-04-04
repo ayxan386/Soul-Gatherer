@@ -7,6 +7,7 @@ public class DebugHelper : MonoBehaviour
     [SerializeField] private int goldAmount;
     private int count;
     private float total;
+    [SerializeField] [Range(0, 1f)] private float brit;
 
     void Update()
     {
@@ -34,5 +35,10 @@ public class DebugHelper : MonoBehaviour
     public void GiveGold()
     {
         EventStore.Instance.PublishGoldSpent(-goldAmount);
+    }
+
+    public void ChangeBrightness()
+    {
+        Screen.brightness = brit;
     }
 }

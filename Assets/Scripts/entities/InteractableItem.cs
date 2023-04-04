@@ -37,6 +37,7 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
 
     private IEnumerator Interaction(InteractionPassData data)
     {
+        data.reference = this;
         foreach (var behavior in interactionBehaviors)
         {
             print("Interacting with " + behavior.GetType().Name);
@@ -95,6 +96,7 @@ public abstract class ItemInteractionBehavior : MonoBehaviour
 public class InteractionPassData
 {
     public bool WasInteractedBefore;
+    public InteractableItem reference;
 
     public InteractionPassData(bool wasInteractedBefore)
     {

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2984720307238597411}
   - component: {fileID: 8612128009328085805}
   - component: {fileID: 7833849556084997791}
+  - component: {fileID: -7322900290132214688}
   m_Layer: 6
   m_Name: Tressure mud
   m_TagString: Untagged
@@ -114,6 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionBehaviors:
   - {fileID: 7833849556084997791}
+  - {fileID: -7322900290132214688}
+  assignedId: {fileID: 0}
 --- !u!114 &7833849556084997791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +139,18 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-7322900290132214688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657666794928851681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c174d61518c974caebcc7a76480742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBefore: 0
+  DelayAfter: 0
+  Complete: 0
