@@ -77,18 +77,18 @@ public class PolygonMeshGenerator : MonoBehaviour
             var upperNeig = neighbourIndex + upperConversion;
             var upperInner = upper + numberOfSides;
 
-            triangleList.Add(upperInner);
+            // triangleList.Add(upperInner);
+            // triangleList.Add(upper);
+            // triangleList.Add(upperNeig);
+            //
+            // triangleList.Add(numberOfSides + upperNeig);
+            // triangleList.Add(upperInner);
+            // triangleList.Add(upperNeig);
+
             triangleList.Add(upper);
-            triangleList.Add(upperNeig);
-
-            triangleList.Add(numberOfSides + upperNeig);
             triangleList.Add(upperInner);
             triangleList.Add(upperNeig);
-
-            triangleList.Add(upper);
-            triangleList.Add(upperInner);
-            triangleList.Add(upperNeig);
-
+            
             triangleList.Add(upperInner);
             triangleList.Add(numberOfSides + upperNeig);
             triangleList.Add(upperNeig);
