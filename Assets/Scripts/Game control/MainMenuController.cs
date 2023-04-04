@@ -39,8 +39,8 @@ public class MainMenuController : MonoBehaviour
     public void ChangeHelpMenuState(bool state)
     {
         helpMenu.SetActive(state);
-        if (!state)
-            SelectionController.FindNextSelectable();
+        helpButton.interactable = !state;
+        if (helpButton.interactable) helpButton.Select();
     }
 
     private void StartGame()
@@ -49,7 +49,6 @@ public class MainMenuController : MonoBehaviour
         {
             levelLoader.GenerateCampaign();
         }
-
 
         var currentLevel = levelLoader.GetCurrentLevel();
         SceneManager.LoadScene(currentLevel.levelName);
@@ -63,11 +62,14 @@ public class MainMenuController : MonoBehaviour
     private void SettingsMenu()
     {
         settingsMenu.SetActive(true);
+        settingsButton.interactable = false;
     }
 
     public void CloseSettingsMenu()
     {
         settingsMenu.SetActive(false);
+        settingsButton.interactable = true;
+        settingsButton.Select();
     }
 
     private void AbandonCampaign()
@@ -82,6 +84,7 @@ public class MainMenuController : MonoBehaviour
         if (levelLoader.HasActiveCampaign())
         {
             startText.text = "Continue";
+            startButton.Select();
             abandonButtonHolder.SetActive(true);
         }
         else
