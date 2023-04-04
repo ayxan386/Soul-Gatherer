@@ -27,6 +27,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     [SerializeField] private ParticleSystem bloodParticles;
     [Header("Death")] [SerializeField] private InteractableItem afterDeathInteraction;
     [SerializeField] private Behaviour[] toDisableOnDeath;
+    [SerializeField] private Component[] toDestroyOnDeath;
     [SerializeField] private UnityEvent[] afterDeathAction;
     private StringIdHolder assignedId;
 
@@ -129,7 +130,16 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
         foreach (var comp in toDisableOnDeath)
         {
             comp.enabled = false;
-            Destroy(comp);
+        }
+
+        foreach (var obj in toDestroyOnDeath)
+        {
+            if (obj is Transform)
+            {
+                Destroy(obj.gameObject);
+            }
+            else
+                Destroy(obj);
         }
 
         foreach (var deathEvents in afterDeathAction)
