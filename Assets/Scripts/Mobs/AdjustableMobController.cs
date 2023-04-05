@@ -148,6 +148,11 @@ public class AdjustableMobController : MonoBehaviour
             Gizmos.DrawWireSphere(centerPoint.position, maxWanderDistance);
         }
     }
+
+    public void SetCenterPoint(Transform point)
+    {
+        centerPoint = point;
+    }
 }
 
 public enum MobStates
