@@ -19,10 +19,12 @@ public class PauseMenuController : MonoBehaviour
         }
 
         loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(1);
+        GlobalStateManager.Instance.PausedGame("Loading");
+        yield return new WaitForSeconds(0.3f);
         PlayerDataManager.LoadData();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         loadingScreen.SetActive(false);
+        GlobalStateManager.Instance.RunningGame("Loading");
     }
 
     private void OnDisable()
