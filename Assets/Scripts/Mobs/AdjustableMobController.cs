@@ -20,6 +20,7 @@ public class AdjustableMobController : MonoBehaviour
     [Header("Patrol Params")] [SerializeField]
     private Transform centerPoint;
 
+    [SerializeField] private float patrollingDuration;
     [SerializeField] private float patrollingSpeed;
     [SerializeField] private float chasingSpeed;
     [SerializeField] private float defaultSpeed;
@@ -28,15 +29,22 @@ public class AdjustableMobController : MonoBehaviour
 
     [SerializeField] private List<StateActions> behaviors;
     [SerializeField] private Animator animator;
+    [SerializeField] private bool isHoldingWeapon;
 
     private Vector3 lastSelectedPatrolPoint = Vector3.zero;
     private MobStates currentState = MobStates.Idle;
     private NavMeshAgent agent;
     private Vector3 lastSawPosition;
+    private float patrolStart;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        if (isHoldingWeapon)
+        {
+            animator.SetLayerWeight(1, 1);
+        }
     }
 
     private void Update()
@@ -89,8 +97,10 @@ public class AdjustableMobController : MonoBehaviour
     public void Patrol()
     {
         if (lastSelectedPatrolPoint == Vector3.zero
-            || Vector3.Distance(transform.position, lastSelectedPatrolPoint) < 1f)
+            || Vector3.Distance(transform.position, lastSelectedPatrolPoint) < 1f
+            || patrolStart + patrollingDuration <= Time.time)
         {
+            patrolStart = Time.time;
             lastSelectedPatrolPoint = centerPoint.position +
                                       new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * maxWanderDistance;
         }
@@ -137,6 +147,11 @@ public class AdjustableMobController : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(centerPoint.position, maxWanderDistance);
         }
+    }
+
+    public void SetCenterPoint(Transform point)
+    {
+        centerPoint = point;
     }
 }
 

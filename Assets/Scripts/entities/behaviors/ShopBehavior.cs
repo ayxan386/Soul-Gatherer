@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ShopBehavior : ItemInteractionBehavior, ILoadableEntity
 {
-    [SerializeField]
-    private ShopDisplayData shopData;
+    [SerializeField] private ShopDisplayData shopData;
     private StringIdHolder assignedId;
 
     private void Awake()
@@ -36,14 +35,21 @@ public class ShopBehavior : ItemInteractionBehavior, ILoadableEntity
 
     public void LoadData(LoadableEntityData data)
     {
+        if (data == null || !data.shopData.isGenerated) return;
         shopData = data.shopData;
         shopData.abilities = new HashSet<ShopAbilityData>(shopData.serializedAbilities);
     }
 
     public LoadableEntityData GetData()
     {
+        if (shopData == null) return null;
         var entityData = new LoadableEntityData();
-        shopData.serializedAbilities = shopData.abilities.ToList();
+        if (shopData.abilities != null)
+        {
+            shopData.serializedAbilities = shopData.abilities.ToList();
+            shopData.isGenerated = true;
+        }
+
         entityData.shopData = shopData;
         entityData.instanceId = GetId();
         return entityData;

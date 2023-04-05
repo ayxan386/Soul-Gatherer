@@ -6,6 +6,7 @@ public class SelfDestructBehavior : ItemInteractionBehavior
 
     public override void Interact(InteractionPassData data)
     {
+        Complete = true;
         Destroy(target);
     }
 }

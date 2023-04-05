@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 464667723665119346}
   - component: {fileID: 464667723665119345}
   - component: {fileID: 5738113157325422310}
+  - component: {fileID: 5739113006757468394}
   m_Layer: 6
   m_Name: RelicDroppingChest
   m_TagString: Untagged
@@ -67,6 +68,8 @@ MonoBehaviour:
   - {fileID: 464667723665119345}
   - {fileID: 5738113157049028127}
   - {fileID: 5738113157325422310}
+  - {fileID: 5739113006757468394}
+  assignedId: {fileID: 0}
 --- !u!114 &5738113157049028127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +229,7 @@ MonoBehaviour:
   audioSource: {fileID: 464667723665119346}
   audioClip: {fileID: 0}
   useClip: 0
+  useItemInteractionSource: 0
 --- !u!114 &5738113157325422310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +252,21 @@ MonoBehaviour:
   afterLootAction:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5739113006757468394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5738113157049028122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c174d61518c974caebcc7a76480742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBefore: 0
+  DelayAfter: 0
+  Complete: 0
 --- !u!1001 &1283623532985246458
 PrefabInstance:
   m_ObjectHideFlags: 0

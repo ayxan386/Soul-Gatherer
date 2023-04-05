@@ -18,5 +18,10 @@ public class DebugHelperEditor : Editor
         {
             myScript.GiveGold();
         }
+
+        if (GUILayout.Button("Update brightness"))
+        {
+            myScript.ChangeBrightness();
+        }
     }
 }

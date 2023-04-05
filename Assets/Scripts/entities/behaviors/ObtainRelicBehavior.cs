@@ -7,7 +7,12 @@ public class ObtainRelicBehavior : ItemInteractionBehavior
 
     public override void Interact(InteractionPassData data)
     {
-        if (data.WasInteractedBefore) return;
+        if (data.WasInteractedBefore)
+        {
+            Complete = true;
+            return;
+        }
+
         var newRelic = Instantiate(relic);
         EventStore.Instance.PublishRelicObtained(newRelic);
         Complete = true;

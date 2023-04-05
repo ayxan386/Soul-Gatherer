@@ -15,7 +15,12 @@ public class ChestController : ItemInteractionBehavior, ILoadableEntity
 
     public override void Interact(InteractionPassData data)
     {
-        if (data.WasInteractedBefore) return;
+        if (data.WasInteractedBefore)
+        {
+            Complete = true;
+            return;
+        }
+
         StartCoroutine(OpenLid());
     }
 

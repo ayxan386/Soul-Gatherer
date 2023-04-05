@@ -27,12 +27,14 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
     [SerializeField] private ParticleSystem bloodParticles;
     [Header("Death")] [SerializeField] private InteractableItem afterDeathInteraction;
     [SerializeField] private Behaviour[] toDisableOnDeath;
+    [SerializeField] private Component[] toDestroyOnDeath;
     [SerializeField] private UnityEvent[] afterDeathAction;
     private StringIdHolder assignedId;
 
     private Rigidbody rb;
     private NavMeshAgent agent;
     private bool hurtEffects;
+    private bool isDead;
 
     private void Awake()
     {
@@ -116,7 +118,7 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
             scaleBasedHealth.localScale = new Vector3(Mathf.Clamp01(currentHealth / maxHealth), 1, 1);
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
             ApplyDeathEffects();
         }
@@ -124,10 +126,20 @@ public class AbilityAffectedEntity : MonoBehaviour, IAbilityAffected, ILoadableE
 
     private void ApplyDeathEffects()
     {
-        agent.enabled = false;
+        isDead = true;
         foreach (var comp in toDisableOnDeath)
         {
             comp.enabled = false;
+        }
+
+        foreach (var obj in toDestroyOnDeath)
+        {
+            if (obj is Transform)
+            {
+                Destroy(obj.gameObject);
+            }
+            else
+                Destroy(obj);
         }
 
         foreach (var deathEvents in afterDeathAction)

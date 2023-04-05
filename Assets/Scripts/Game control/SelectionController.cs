@@ -1,15 +1,25 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SelectionController : MonoBehaviour
 {
-    // private void SelectionChanged()
-    // {
-    //     if (Selection.activeGameObject == null || !Selection.activeGameObject.activeSelf)
-    //     {
-    //         FindNextSelectable();
-    //     }
-    // }
+    private IEnumerator Start()
+    {
+        Application.focusChanged += ApplicationOnfocusChanged;
+        while (true)
+        {
+            yield return new WaitUntil(() => EventSystem.current.currentSelectedGameObject == null);
+            FindNextSelectable();
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private void ApplicationOnfocusChanged(bool obj)
+    {
+        if (obj) FindNextSelectable();
+    }
 
 
     public static void FindNextSelectable()

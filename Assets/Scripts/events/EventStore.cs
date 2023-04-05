@@ -45,6 +45,8 @@ public class EventStore : MonoBehaviour
 
     public event Action<int> OnGoldSpent;
     public event Action<int> OnGoldChanged;
+    
+    public event Action<string> OnItemInteractionCancelled;
 
     private void Awake()
     {
@@ -170,6 +172,11 @@ public class EventStore : MonoBehaviour
     public void PublishGoldChanged(int totalGold)
     {
         OnGoldChanged?.Invoke(totalGold);
+    }
+    
+    public void PublishItemInteractionCancelled(string id)
+    {
+        OnItemInteractionCancelled?.Invoke(id);
     }
 
     public delegate void AbilityPassingEvent(BaseAbility ability);
