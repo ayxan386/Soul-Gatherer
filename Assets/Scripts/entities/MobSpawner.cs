@@ -32,6 +32,8 @@ public class MobSpawner : MonoBehaviour, ILoadableEntity
             var mobPrefab = mobPrefabs[Random.Range(0, mobPrefabs.Length)];
             Instantiate(mobPrefab, pos, Quaternion.identity, transform).SetCenterPoint(transform);
         }
+        
+        IdAssigner.Instance.AssignIds();
     }
 
     private void OnDrawGizmosSelected()
