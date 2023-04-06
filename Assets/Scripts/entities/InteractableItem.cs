@@ -74,6 +74,7 @@ public class InteractableItem : MonoBehaviour, ILoadableEntity
 
     public string GetId()
     {
+        print("Gameobject " + gameObject.name);
         return assignedId.id + GetType().Name;
     }
 

@@ -1,8 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class IdAssigner : MonoBehaviour
 {
     [SerializeField] private int lastId;
+    public static IdAssigner Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     [ContextMenu("Assign ids")]
     public void AssignIds()
@@ -12,7 +19,7 @@ public class IdAssigner : MonoBehaviour
         {
             if (obj is ILoadableEntity && !obj.TryGetComponent(out StringIdHolder idHolder))
             {
-                var id = "" + lastId++;
+                var id = Guid.NewGuid().ToString() + lastId++;
                 (obj as ILoadableEntity).SetId(id);
                 print(id);
             }
