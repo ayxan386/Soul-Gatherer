@@ -192,6 +192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenuUi: {fileID: 1370759091}
+  audioMixer: {fileID: 24100000, guid: ceab2125c4cc6b845814b5ff59ccc480, type: 2}
+  musicGroupName: backgroundVolume
+  sfxGroupName: foregroundVolume
 --- !u!1 &43090956
 GameObject:
   m_ObjectHideFlags: 0

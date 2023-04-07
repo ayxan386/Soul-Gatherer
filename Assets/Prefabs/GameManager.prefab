@@ -107,4 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6d990065130f743a319ca427817ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowToggle: {fileID: 0}
+  settingsMenuUi: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: ceab2125c4cc6b845814b5ff59ccc480, type: 2}
+  musicGroupName: backgroundVolume
+  sfxGroupName: foregroundVolume
