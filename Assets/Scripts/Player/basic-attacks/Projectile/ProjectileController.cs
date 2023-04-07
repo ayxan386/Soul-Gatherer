@@ -6,7 +6,6 @@ public class ProjectileController : BaseParamAcceptingEntity
     private ProjectileParams details;
 
     private float startSpeed;
-    private Vector3 particePosition;
 
     private void LateUpdate()
     {
@@ -16,7 +15,6 @@ public class ProjectileController : BaseParamAcceptingEntity
         if (colliders.Length <= 0) return;
 
         var shouldDestroy = false;
-        particePosition = transform.position;
         if (details.isExplosive)
         {
             var affectedEnt =
@@ -31,10 +29,6 @@ public class ProjectileController : BaseParamAcceptingEntity
             foreach (var collider in colliders)
             {
                 shouldDestroy = CheckForAffectedEntityAndApply(collider) || shouldDestroy;
-                if (shouldDestroy)
-                {
-                    particePosition = collider.ClosestPointOnBounds(transform.position);
-                }
             }
         }
 
@@ -76,7 +70,7 @@ public class ProjectileController : BaseParamAcceptingEntity
 
     private void DeathParticles()
     {
-        Instantiate(destructionParticles, particePosition, Quaternion.identity);
+        Instantiate(destructionParticles, transform.position, Quaternion.identity);
     }
 
     public override AbilityParam GetParams()
