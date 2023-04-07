@@ -1,9 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObtainedItemDisplayController : MonoBehaviour
 {
-    private const string PauseLockName = "Obtained-Display";
     [SerializeField] private GameObject obtainedMenu;
     [SerializeField] private ObtainedItemDisplayer itemDisplayPrefab;
     [SerializeField] private Transform displayParent;
@@ -30,21 +30,10 @@ public class ObtainedItemDisplayController : MonoBehaviour
             currentDisplayerIds.RemoveAt(findIndex);
         }
 
-        if (currentDisplayerIds.Count == 0)
+        if (currentDisplayers.Count == 0)
         {
-            CloseObtainedMenu();
+            obtainedMenu.SetActive(false);
         }
-        else
-        {
-            SelectionController.FindNextSelectable();
-        }
-    }
-
-    public void CloseObtainedMenu()
-    {
-        obtainedMenu.SetActive(false);
-        GlobalStateManager.Instance.RunningGame(PauseLockName);
-        EventStore.Instance.PublishItemInteractionCancelled(itemId);
     }
 
     private void OnOnEntityObtainedDisplay(object sender, ObtainedEntity entity)
@@ -52,22 +41,23 @@ public class ObtainedItemDisplayController : MonoBehaviour
         print("Display event received");
         if (!obtainedMenu.activeInHierarchy || !obtainedMenu.activeSelf || entity.attachedId != itemId)
         {
-            GlobalStateManager.Instance.PausedGame(PauseLockName);
             obtainedMenu.SetActive(true);
             itemId = entity.attachedId;
             currentDisplayers = new List<ObtainedItemDisplayer>();
             currentDisplayerIds = new List<string>();
-            for (int i = 0; i < displayParent.childCount; i++)
-            {
-                Destroy(displayParent.GetChild(i).gameObject);
-            }
         }
 
         ObtainedItemDisplayer obtainedItemDisplayer = Instantiate(itemDisplayPrefab, displayParent);
         obtainedItemDisplayer.Display(entity);
-        obtainedItemDisplayer.Select();
+        StartCoroutine(ObtainAfterDelay(entity));
         currentDisplayers.Add(obtainedItemDisplayer);
         currentDisplayerIds.Add(entity.data.id);
+    }
+
+    private IEnumerator ObtainAfterDelay(ObtainedEntity obtainedEntity)
+    {
+        yield return new WaitForSeconds(1.2f);
+        EventStore.Instance.PublishEntityObtainedClick(obtainedEntity);
     }
 
     private void OnDisable()
