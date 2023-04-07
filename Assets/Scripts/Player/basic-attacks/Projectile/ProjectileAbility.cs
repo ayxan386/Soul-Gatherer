@@ -16,7 +16,8 @@ public class ProjectileAbility : BaseAbility, IModifiableEntityAbility
 
     public override bool CanApplySoulShard(SoulShard soulShard)
     {
-        return soulShard.type != SoulShardType.AOE_Coverage;
+        return soulShard.type != SoulShardType.AOE_Coverage
+               && soulShard.type != SoulShardType.AOE_Height && soulShard.type != SoulShardType.AOE_Solid_Health;
     }
 
     public override void ApplySoulShard(SoulShard soulShard)

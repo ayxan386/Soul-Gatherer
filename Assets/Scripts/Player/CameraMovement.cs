@@ -12,6 +12,8 @@ public class CameraMovement : MonoBehaviour
     private float randomness;
     private Vector2 inputVector;
 
+    public float GamepadSensitivityMult { get; set; }
+
     private void Start()
     {
         GlobalStateManager.Instance.PausedGame();
@@ -24,7 +26,7 @@ public class CameraMovement : MonoBehaviour
         var sensitivity = mouseSensetivity;
         if (GlobalStateManager.Instance.CurrentScheme == ControlSchemes.Gamepad)
         {
-            sensitivity = gamePadSensitivity;
+            sensitivity = gamePadSensitivity * GamepadSensitivityMult;
         }
 
         transform.parent.Rotate(0, sensitivity.x * inputVector.x * Time.deltaTime, 0);

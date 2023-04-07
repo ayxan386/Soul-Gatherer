@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
@@ -10,7 +9,6 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
     [SerializeField] private int numberOfItems;
     [SerializeField] private bool useRange;
     [SerializeField] private Vector2Int countRange;
-    [SerializeField] private UnityEvent afterLootAction;
     private StringIdHolder assignedId;
 
     private List<ObtainedEntity> obtainedEntities;
@@ -33,12 +31,6 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
             temp.data.id == e.data.id && temp.count == e.count);
         if (index >= 0)
             obtainedEntities.RemoveAt(index);
-
-        if (obtainedEntities.Count <= 0)
-        {
-            Complete = true;
-            afterLootAction?.Invoke();
-        }
     }
 
     [ContextMenu("Get items")]
@@ -48,11 +40,12 @@ public class ItemDropBehavior : ItemInteractionBehavior, ILoadableEntity
         if (!data.WasInteractedBefore)
             GenerateItemFromLootTable();
 
-        DisplayItems();
+        ObtainItems();
+        Complete = true;
         EventStore.Instance.OnEntityObtainedClick += OnEntityObtainedClick;
     }
 
-    private void DisplayItems()
+    private void ObtainItems()
     {
         foreach (var entity in obtainedEntities)
         {

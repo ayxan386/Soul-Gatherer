@@ -10,7 +10,7 @@ public class SelectableElement : MonoBehaviour
         TryGetComponent(out selfRef);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         selfRef.Select();
     }
