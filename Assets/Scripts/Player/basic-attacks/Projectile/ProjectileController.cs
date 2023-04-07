@@ -60,7 +60,7 @@ public class ProjectileController : BaseParamAcceptingEntity
 
     public override void ApplyParams(AbilityParam generalParam)
     {
-        this.details = generalParam as ProjectileParams;
+        details = generalParam as ProjectileParams;
         transform.localScale *= (details.radius / 0.5f);
         startSpeed = details.speed + details.casterSpeed;
         details.casterSpeed = 0;
