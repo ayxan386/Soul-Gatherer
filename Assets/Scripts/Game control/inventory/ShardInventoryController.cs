@@ -48,8 +48,9 @@ public class ShardInventoryController : MonoBehaviour
     {
         if (displayer.type != AbilityDisplayType.ModificationMenu)
             return;
-        var ability = PlayerAbilityReferenceKeeper.PlayerAbilities[displayer.id];
-        currentSelectedAbility = ability;
+        print("Updated current ability selection");
+        currentSelectedAbility = PlayerAbilityReferenceKeeper.PlayerAbilities[displayer.id];
+        DisplayOwnedShards();
     }
 
     private void OnEntityObtained(object sender, ObtainedEntity e)
@@ -167,12 +168,9 @@ public class ShardInventoryController : MonoBehaviour
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            if (i < ownedShards.Count)
-            {
-                print("Updated ui for : " + ownedShards[i]);
-            }
-
-            if (i < ownedShards.Count && !ownedShards[i].attached)
+            if (i < ownedShards.Count && !ownedShards[i].attached
+                                      && (currentSelectedAbility == null
+                                          || currentSelectedAbility.CanApplySoulShard(ownedShards[i])))
             {
                 cells[i].DisplaySoulShard(ownedShards[i]);
             }
