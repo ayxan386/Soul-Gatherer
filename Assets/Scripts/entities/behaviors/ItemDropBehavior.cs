@@ -113,12 +113,14 @@ public class ObtainedEntity
     public int count;
     public bool consumed;
     public string attachedId;
+    public Guid id;
 
     public ObtainedEntity(EntityData data, int count)
     {
         this.data = data;
         this.count = count;
         consumed = false;
+        id = Guid.NewGuid();
     }
 
     public ObtainedEntity(LootableItem item) : this(item.entity, item.quantity)
