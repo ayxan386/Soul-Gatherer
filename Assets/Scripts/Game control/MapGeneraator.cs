@@ -13,7 +13,7 @@ public class MapGeneraator : MonoBehaviour
     [SerializeField] private int smoothingIterationCount = 5;
     [SerializeField] private string fileName;
     [SerializeField] private string dirPath;
-    [SerializeField] private int[,] borderedMap;
+    private int[,] borderedMap;
 
     private int[,] map;
     private int borderSize;
