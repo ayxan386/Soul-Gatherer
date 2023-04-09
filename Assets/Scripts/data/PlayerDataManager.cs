@@ -47,8 +47,8 @@ public static class PlayerDataManager
 
     public static void LoadData()
     {
-        // LoadPlayerData();
-        // LoadEntityData();
+        LoadPlayerData();
+        LoadEntityData();
     }
 
     private static void LoadPlayerData()

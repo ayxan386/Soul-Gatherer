@@ -5,8 +5,6 @@ public class DebugHelper : MonoBehaviour
 {
     [SerializeField] private EntityData relic;
     [SerializeField] private int goldAmount;
-    private int count;
-    private float total;
     [SerializeField] [Range(0, 1f)] private float brit;
 
     void Update()
@@ -14,16 +12,6 @@ public class DebugHelper : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-        total += 1f / Time.deltaTime;
-        count++;
-        // print("FPS: " + total / count);
-
-        if (count >= 10000)
-        {
-            count = 0;
-            total = 0;
         }
     }
 

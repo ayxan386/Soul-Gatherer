@@ -170,17 +170,4 @@ public class MapGeneraator : MonoBehaviour
         }
     }
 
-    // private void OnDrawGizmosSelected()
-    // {
-    //     GenerateMap();
-    //     for (int x = 0; x < width; x++)
-    //     {
-    //         for (int y = 0; y < height; y++)
-    //         {
-    //             Gizmos.color = map[x, y] == 1 ? Color.black : Color.white;
-    //             var pos = new Vector3(x - width / 2, 0, y - height / 2);
-    //             Gizmos.DrawCube(pos, Vector3.one);
-    //         }
-    //     }
-    // }
 }
