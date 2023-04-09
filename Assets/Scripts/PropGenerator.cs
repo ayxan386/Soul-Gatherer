@@ -23,6 +23,7 @@ public class PropGenerator : MonoBehaviour
     [SerializeField] private bool randomRotationAroundY;
     private Vector3 origin;
     [SerializeField] private Vector3 position;
+    [SerializeField] private List<Vector3> normals;
 
     [ContextMenu("Generate position")]
     public void GeneratePositions()
@@ -47,6 +48,7 @@ public class PropGenerator : MonoBehaviour
                         if (!Physics.CheckSphere(hit.point, size, forbiddenLayers))
                         {
                             positions.Add(hit.point);
+                            normals.Add(hit.normal);
                         }
                     }
                 }
@@ -60,14 +62,20 @@ public class PropGenerator : MonoBehaviour
     {
         Random.InitState(randomSeed.GetHashCode());
         var temp = new List<Vector3>();
+        var normalTemp = new List<Vector3>();
+        var index = 0;
         foreach (var position in positions)
         {
             if (Random.value <= selectionThreshold)
             {
                 temp.Add(position);
+                normalTemp.Add(normals[index]);
             }
+
+            index++;
         }
 
+        normals = normalTemp;
         positions = temp;
     }
 
@@ -75,15 +83,17 @@ public class PropGenerator : MonoBehaviour
     [ContextMenu("Place prefabs")]
     public void PlacePrefabs()
     {
+        var index = 0;
         foreach (var position in positions)
         {
             var gameObject =
- PrefabUtility.InstantiatePrefab(prefab[Random.Range(0,prefab.Length)], holder) as GameObject;
+                PrefabUtility.InstantiatePrefab(prefab[Random.Range(0, prefab.Length)], holder) as GameObject;
             gameObject.transform.position = position;
-            gameObject.transform.rotation = Quaternion.identity;
-            if(randomRotationAroundY)
+            gameObject.transform.rotation = Quaternion.LookRotation(normals[index]);
+            if (randomRotationAroundY)
                 gameObject.transform.Rotate(0, Random.Range(-90, 90), 0);
             gameObject.transform.localScale *= Random.Range(scaleFactor.x, scaleFactor.y);
+            index++;
         }
     }
 #endif
@@ -93,11 +103,14 @@ public class PropGenerator : MonoBehaviour
         if (!draw) return;
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(origin, 1f);
-        Gizmos.color = Color.green;
 
-        foreach (var dir in positions)
+        for (int i = 0; i < positions.Count; i++)
         {
-            Gizmos.DrawSphere(dir, size);
+            var pos = positions[i];
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(pos, size);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(pos, normals[i] * size * 1.3f);
         }
     }
 

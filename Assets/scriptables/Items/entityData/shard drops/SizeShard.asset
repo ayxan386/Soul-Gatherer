@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 1
   effectRuleRandom: 0
   effectRule: 1
-  floatRange: {x: 1, y: 1.4}
+  floatRange: {x: 1.1, y: 1.7}
   vectorMin: {x: 0, y: 0, z: 0}
   vectorMax: {x: 0, y: 0, z: 0}
   desc: Modifies size of spell

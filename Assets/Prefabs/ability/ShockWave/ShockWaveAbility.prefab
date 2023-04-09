@@ -50,14 +50,18 @@ MonoBehaviour:
     type: 3}
   currentNumberOfSlots: 1
   soulShards: []
+  canBeModified: 0
   icon: {fileID: 21300000, guid: 14a0f66a7be165c4ba476e3d7c40e390, type: 3}
   description: Send wave of destruction
+  mobAttached: 0
   details:
     damage: 0.5
     tickDamage: 1
     lifespan: 4
     force: {x: 0, y: 0, z: 0}
     canAffectPlayer: 0
-    thickness: 7
-    height: 0.4
+    thickness: 4
+    height: 0.7
     converageFraction: 0.3
+    isSolid: 0
+    solidHealth: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: -408262088, guid: 489eafc03ad7469479507d3217cbdf0f, type: 3}
   type: 6
-  effectRuleRandom: 1
+  effectRuleRandom: 0
   effectRule: 1
   floatRange: {x: 1.05, y: 1.25}
   vectorMin: {x: 0, y: 0, z: 0}
