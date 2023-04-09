@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 7
   effectRuleRandom: 0
   effectRule: 0
-  floatRange: {x: 1, y: 3}
+  floatRange: {x: 3, y: 6}
   vectorMin: {x: 0, y: 0, z: 0}
   vectorMax: {x: 0, y: 0, z: 0}
   desc: Prevent projectiles from passing through
