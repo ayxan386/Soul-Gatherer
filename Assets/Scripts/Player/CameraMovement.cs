@@ -7,10 +7,14 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Vector2 mouseSensetivity;
     [SerializeField] private Vector2 gamePadSensitivity;
     [SerializeField] private Vector2 shakingFactor;
+    [SerializeField] private float shakingIncrement;
 
     private float verticalRotation;
     private float randomness;
     private Vector2 inputVector;
+    private bool isMoving;
+    private Vector3 initialPos;
+    private float offset;
 
     public float GamepadSensitivityMult { get; set; }
 
@@ -18,6 +22,7 @@ public class CameraMovement : MonoBehaviour
     {
         GlobalStateManager.Instance.PausedGame();
         GlobalStateManager.Instance.RunningGame();
+        initialPos = transform.localPosition;
     }
 
     void Update()
@@ -37,10 +42,27 @@ public class CameraMovement : MonoBehaviour
         var eulerAngles = transform.localEulerAngles;
         eulerAngles.x = verticalRotation;
         transform.localEulerAngles = eulerAngles;
+
+        if (isMoving)
+        {
+            offset += Time.deltaTime * shakingIncrement;
+            transform.localPosition = new Vector3(initialPos.x + Mathf.Cos(offset) * shakingFactor.x,
+                initialPos.y + Mathf.Sin(offset) * shakingFactor.y,
+                initialPos.z);
+        }
+        else
+        {
+            transform.localPosition = initialPos;
+        }
     }
 
     private void OnRotate(InputValue inputValue)
     {
         inputVector = inputValue.Get<Vector2>();
+    }
+
+    private void OnMove(InputValue val)
+    {
+        isMoving = val.Get<Vector2>().magnitude > 0;
     }
 }

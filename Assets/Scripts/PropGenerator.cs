@@ -31,17 +31,12 @@ public class PropGenerator : MonoBehaviour
         origin = position;
         origin.y += height;
         positions = new List<Vector3>();
-        // while (positions.Count < desiredNumber)
-        // {
         for (float currentX = -1; currentX < 1; currentX += step)
         {
-            // var xVector = Vector3.Lerp(Vector3.left, Vector3.right, currentX);
             for (float currentY = -1; currentY < 0; currentY += step)
             {
-                // var yVector = Vector3.Lerp(Vector3.back, Vector3.forward, currentY);
                 for (float currentZ = -1; currentZ < 1; currentZ += step)
                 {
-                    // var dir = Vector3.Lerp(xVector, yVector, currentZ);
                     var dir = new Vector3(currentX, currentY, currentZ).normalized;
                     if (Physics.Raycast(origin, dir, out RaycastHit hit, 200, ground))
                     {
@@ -53,7 +48,6 @@ public class PropGenerator : MonoBehaviour
                     }
                 }
             }
-            // }
         }
     }
 
@@ -114,5 +108,4 @@ public class PropGenerator : MonoBehaviour
         }
     }
 
-// #endif
 }

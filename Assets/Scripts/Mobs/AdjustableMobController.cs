@@ -137,7 +137,6 @@ public class AdjustableMobController : MonoBehaviour
     public void SetDead()
     {
         animator.SetBool("dead", true);
-        // transform.Translate(0, -1, 0);
     }
 
     private void OnDrawGizmosSelected()

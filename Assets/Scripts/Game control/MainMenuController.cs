@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button helpButton;
     [SerializeField] private GameObject helpMenu;
 
+    [Header("Background slides")] [SerializeField]
+    private Image backgroundImage;
+
+    [SerializeField] private Sprite[] backgroundSprites;
+    [SerializeField] private float rate;
+    private int currentSprite = 0;
+
     void Start()
     {
         startButton.onClick.AddListener(() => StartGame());
@@ -23,6 +31,8 @@ public class MainMenuController : MonoBehaviour
         quitButton.onClick.AddListener(() => QuitGame());
         abandonButton.onClick.AddListener(() => AbandonCampaign());
         helpButton.onClick.AddListener(() => ChangeHelpMenuState(true));
+
+        StartCoroutine(SlideShow());
 
         if (LevelLoader.Instance == null)
         {
@@ -34,6 +44,16 @@ public class MainMenuController : MonoBehaviour
         }
 
         CheckForActiveCampaign();
+    }
+
+    private IEnumerator SlideShow()
+    {
+        while (true)
+        {
+            backgroundImage.sprite = backgroundSprites[currentSprite++];
+            currentSprite %= backgroundSprites.Length;
+            yield return new WaitForSeconds(rate);
+        }
     }
 
     public void ChangeHelpMenuState(bool state)

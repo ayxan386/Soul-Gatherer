@@ -12,8 +12,6 @@ public class ObtainedItemDisplayController : MonoBehaviour
     private List<ObtainedItemDisplayer> currentDisplayers;
 
     private List<Guid> currentDisplayerIds;
-    // private string itemId;
-
     private void Start()
     {
         EventStore.Instance.OnEntityObtainedDisplay += OnOnEntityObtainedDisplay;

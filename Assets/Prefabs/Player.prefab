@@ -933,7 +933,8 @@ MonoBehaviour:
   verticalLimits: {x: -60, y: 60}
   mouseSensetivity: {x: 45, y: 45}
   gamePadSensitivity: {x: 120, y: 120}
-  shakingFactor: {x: 0, y: 0}
+  shakingFactor: {x: 0.2, y: -0.2}
+  shakingIncrement: 10
 --- !u!114 &3386393979156441046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,12 +1201,12 @@ PrefabInstance:
         type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: 21300000, guid: cdec13907ffc75749ab2ed436bec6b14,
+      objectReference: {fileID: 21300000, guid: 2bccd332882fcd14b9e4c377e432c587,
         type: 3}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
       propertyPath: description
-      value: Simple attack
+      value: Ball of Mana
       objectReference: {fileID: 0}
     - target: {fileID: 8364417548328763774, guid: ffbb259f2c63f844c9695d2a94be1957,
         type: 3}
